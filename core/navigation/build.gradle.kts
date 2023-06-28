@@ -32,5 +32,5 @@ android {
 }
 
 dependencies {
-    implementation(libs.core.ktx)
+    api(project(":core:android"))
 }

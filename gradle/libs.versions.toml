@@ -8,10 +8,14 @@ compose-bom = "2023.06.01"
 coroutines = "1.7.1"
 javax-inject = "1"
 firebase-bom = "32.1.1"
-gmsPlugin = "4.3.14"
+gms = "4.3.14"
 hilt = "2.44.2"
 datastore = "1.0.0"
-room = "2.5.0"
+room = "2.5.2"
+okhttp = "4.11.0"
+kotlinx-serialization = "1.5.1"
+retrofit = "2.9.0"
+retrofit-kotlinxserialization = "1.0.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -36,16 +40,21 @@ datastore = { group = "androidx.datastore", name = "datastore", version.ref = "d
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+okhttp-bom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-kotlinx-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-kotlinxserialization" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-javaLibrary = { id = "java-library" }
 kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-googleServices = { id = "com.google.gms.google-services", version.ref = "gmsPlugin" }
+googleServices = { id = "com.google.gms.google-services", version.ref = "gms" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 [bundles]
