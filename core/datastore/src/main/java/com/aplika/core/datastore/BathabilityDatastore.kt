@@ -23,19 +23,19 @@ class BathabilityDatastore @Inject constructor(
 
     private val Context.dataStore by preferencesDataStore(name = DATA_STORE_NAME)
 
-    fun <T> get(key: VestibularioDataStoreKey<T>): Flow<T?> =
+    fun <T> get(key: BathabilityDatastoreKey<T>): Flow<T?> =
         context.dataStore.data
             .flowOn(ioDispatcher)
             .map { it[key.key] }
             .flowOn(defaultDispatcher)
 
-    suspend fun <T> put(key: VestibularioDataStoreKey<T>, value: T) {
+    suspend fun <T> put(key: BathabilityDatastoreKey<T>, value: T) {
         withContext(ioDispatcher) {
             context.dataStore.edit { it[key.key] = value }
         }
     }
 
-    suspend fun <T> remove(key: VestibularioDataStoreKey<T>) {
+    suspend fun <T> remove(key: BathabilityDatastoreKey<T>) {
         withContext(ioDispatcher) {
             context.dataStore.edit { it.remove(key.key) }
         }

@@ -22,7 +22,7 @@ internal class RetrofitModule {
         json: Json
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("") // TODO: add base url
+            .baseUrl("https://balneabilidade.ima.sc.gov.br/")
             .client(okHttpClient)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
