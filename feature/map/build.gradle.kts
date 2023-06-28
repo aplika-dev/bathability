@@ -1,10 +1,12 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlinKapt)
 }
 
 android {
-    namespace = "com.aplika.features.map"
+    namespace = "com.aplika.feature.map"
     compileSdk = 33
 
     defaultConfig {
@@ -32,5 +34,8 @@ android {
 }
 
 dependencies {
-    implementation(libs.core.ktx)
+    api(project(":core:ui"))
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

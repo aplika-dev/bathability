@@ -14,7 +14,9 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Bathability"
+
 include(":app")
+
 include(":core:network")
 include(":core:database")
 include(":core:data")
@@ -24,4 +26,6 @@ include(":core:android")
 include(":core:kotlin")
 include(":core:navigation")
 include(":core:datastore")
-include(":features:map")
+include(":core:ui")
+
+include(":feature:map")
