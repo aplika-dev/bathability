@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.core.data"
+    namespace = "com.aplika.core.datastore"
     compileSdk = 33
 
     defaultConfig {
@@ -22,6 +22,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -36,8 +37,7 @@ dependencies {
     api(project(":core:android"))
     api(project(":core:domain"))
 
-    api(project(":core:network"))
-    api(project(":core:datastore"))
+    implementation(libs.datastore)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

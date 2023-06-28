@@ -10,6 +10,7 @@ javax-inject = "1"
 firebase-bom = "32.1.1"
 gmsPlugin = "4.3.14"
 hilt = "2.44.2"
+datastore = "1.0.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -37,6 +38,8 @@ firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashly
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+
+datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
