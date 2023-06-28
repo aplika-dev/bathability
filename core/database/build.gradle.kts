@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
@@ -32,5 +35,13 @@ android {
 }
 
 dependencies {
-    implementation(libs.core.ktx)
+    api(project(":core:android"))
+    api(project(":core:domain"))
+
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+    implementation(libs.room.ktx)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }
