@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlinKapt)
 }
 
 android {
@@ -32,5 +34,16 @@ android {
 }
 
 dependencies {
-    implementation(libs.core.ktx)
+    api(project(":core:kotlin"))
+
+    api(platform(libs.firebase.bom))
+
+    implementation(libs.firebase.crashlytics)
+    api(libs.coroutines.android)
+
+    api(libs.lifecycle.viewmodel.compose)
+    api(libs.lifecycle.runtime)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }
