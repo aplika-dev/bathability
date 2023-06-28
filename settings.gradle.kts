@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "Bathability"
 include(":app")
 include(":core:network")
+include(":core:database")
