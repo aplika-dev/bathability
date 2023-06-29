@@ -6,5 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface CityRepository {
 
     fun get(): Flow<List<City>>
+    fun getRemote(): Flow<List<City>>
+    fun insertAll(cityList: List<City>): Flow<Unit>
 
 }
