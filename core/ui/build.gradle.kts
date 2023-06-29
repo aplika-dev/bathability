@@ -44,8 +44,11 @@ dependencies {
     api(libs.compose.runtime.livedata)
     api(libs.compose.material3)
     api(libs.compose.ui.tooling)
+    api(libs.compose.ui.graphics)
+    api(libs.compose.ui)
     api(libs.androidx.hilt.navigation.compose)
     api(libs.navigation.compose)
 
     api(libs.lifecycle.viewmodel.compose)
+    api(libs.lifecycle.runtime.compose)
 }

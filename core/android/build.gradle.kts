@@ -41,7 +41,6 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     api(libs.coroutines.android)
 
-    api(libs.lifecycle.viewmodel.compose)
     api(libs.lifecycle.runtime)
 
     implementation(libs.hilt.android)
