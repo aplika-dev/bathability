@@ -19,6 +19,11 @@ retrofit-kotlinxserialization = "1.0.0"
 firebase-crashlytics-plugin = "2.9.2"
 androidx-hilt-navigation-compose = "1.0.0"
 navigation = "2.6.0"
+maps-secrets-gradle-plugin = "2.0.1"
+play-services-maps = "18.1.0"
+play-services-location = "21.0.1"
+maps-compose = "2.8.0"
+maps-ktx = "3.2.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -52,6 +57,11 @@ okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-i
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-kotlinx-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-kotlinxserialization" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "play-services-maps" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "play-services-location" }
+maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "maps-compose" }
+maps-ktx = { group = "com.google.maps.android", name = "maps-ktx", version.ref = "maps-ktx" }
+maps-utils-ktx = { group = "com.google.maps.android", name = "maps-utils-ktx", version.ref = "maps-ktx" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -63,6 +73,7 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 googleServices = { id = "com.google.gms.google-services", version.ref = "gms" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 firebaseCrashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
+mapsSecretsGradlePlugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "maps-secrets-gradle-plugin" }
 
 [bundles]
 

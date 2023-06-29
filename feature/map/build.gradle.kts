@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.mapsSecretsGradlePlugin)
 }
 
 android {
