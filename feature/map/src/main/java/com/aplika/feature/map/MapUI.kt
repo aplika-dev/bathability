@@ -36,19 +36,18 @@ fun MapUI(
             properties = mapProperties,
             cameraPositionState = cameraPositionState
         ) {
-            // NOTE: Some features of the MarkerInfoWindow don't work currently. See docs:
-            // https://github.com/googlemaps/android-maps-compose#obtaining-access-to-the-raw-googlemap-experimental
-            // So you can use clusters as an alternative to markers.
-            MarkerInfoWindow(
-                state = rememberMarkerState(position = LatLng(49.1, -122.5)),
-                snippet = "Some stuff",
-                onClick = {
-                    // This won't work :(
-                    println("Mitchs_: Cannot be clicked")
-                    true
-                },
-                draggable = true
-            )
+            mapUiState.locationList.forEach {
+                MarkerInfoWindow(
+                    state = rememberMarkerState(position = LatLng(it.latitude, it.longitude)),
+                    snippet = "Some stuff",
+                    onClick = {
+                        // This won't work :(
+                        println("Mitchs_: Cannot be clicked")
+                        true
+                    },
+                    draggable = true
+                )
+            }
         }
     }
 //    // Center camera to include all the Zones.
