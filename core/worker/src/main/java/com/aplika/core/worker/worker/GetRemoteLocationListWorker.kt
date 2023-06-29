@@ -16,7 +16,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.withContext
@@ -32,15 +31,16 @@ internal class GetRemoteLocationListWorker @AssistedInject constructor(
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
-        withContext(defaultDispatcher) {
-            val cityList = cityRepository.getRemote().first()
-            cityRepository.insertAll(cityList = cityList).launchIn(this)
-            syncBeachList(cityList = cityList)
+        return try {
+            withContext(defaultDispatcher) {
+                val cityList = cityRepository.getRemote().first()
+                cityRepository.insertAll(cityList = cityList).launchIn(this)
+                syncBeachList(cityList = cityList)
+            }
+            Result.success()
+        } catch (exception: Exception) {
+            Result.failure()
         }
-
-        // TODO: verify catch
-
-        return Result.success()
     }
 
     private suspend fun syncLocationList(beachList: List<Beach>) {
