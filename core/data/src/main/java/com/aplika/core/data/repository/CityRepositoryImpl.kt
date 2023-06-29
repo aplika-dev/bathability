@@ -19,7 +19,7 @@ class CityRepositoryImpl @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : CityRepository {
 
-    override fun getAll(): Flow<List<City>> {
+    override fun get(): Flow<List<City>> {
         return localDataSource.getAll()
     }
 

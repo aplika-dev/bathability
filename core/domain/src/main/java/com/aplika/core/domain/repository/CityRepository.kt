@@ -5,6 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface CityRepository {
 
-    fun getAll(): Flow<List<City>>
+    fun get(): Flow<List<City>>
 
 }

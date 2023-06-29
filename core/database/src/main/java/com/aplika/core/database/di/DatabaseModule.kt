@@ -2,7 +2,9 @@ package com.aplika.core.database.di
 
 import android.content.Context
 import androidx.room.Room
+import com.aplika.core.database.dao.BeachDao
 import com.aplika.core.database.dao.CityDao
+import com.aplika.core.database.dao.LocationDao
 import com.aplika.core.database.database.BathabilityDatabase
 import dagger.Module
 import dagger.Provides
@@ -33,6 +35,22 @@ internal class DatabaseModule {
         database: BathabilityDatabase
     ): CityDao {
         return database.cityDao()
+    }
+
+    @Singleton
+    @Provides
+    fun providesBeachDao(
+        database: BathabilityDatabase
+    ): BeachDao {
+        return database.beachDao()
+    }
+
+    @Singleton
+    @Provides
+    fun providesLocationDao(
+        database: BathabilityDatabase
+    ): LocationDao {
+        return database.locationDao()
     }
 
     companion object {
