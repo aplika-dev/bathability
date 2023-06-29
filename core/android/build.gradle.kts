@@ -38,7 +38,7 @@ dependencies {
 
     api(platform(libs.firebase.bom))
 
-    implementation(libs.firebase.crashlytics)
+    api(libs.firebase.crashlytics)
     api(libs.coroutines.android)
 
     api(libs.lifecycle.runtime)
