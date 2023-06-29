@@ -32,10 +32,24 @@ android {
     kotlin {
         jvmToolchain(17)
     }
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.3"
+    }
 }
 
 dependencies {
     api(project(":core:ui"))
+
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.maps.compose)
+    implementation(libs.maps.ktx)
+    implementation(libs.maps.utils.ktx)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
