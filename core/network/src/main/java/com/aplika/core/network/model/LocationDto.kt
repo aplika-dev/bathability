@@ -5,20 +5,20 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LocationDto(
-    @SerialName("codigo")
+    @SerialName("CODIGO")
     val id: String,
-    @SerialName("nome")
+    @SerialName("NOME")
     val name: String,
-    @SerialName("ocultar")
+    @SerialName("OCULTAR")
     val shouldHide: String,
-    @SerialName("local_id")
+    @SerialName("LOCAL_ID")
     val beachId: String,
-    @SerialName("localizacao")
+    @SerialName("LOCALIZACAO")
     val description: String,
-    @SerialName("latitude")
+    @SerialName("LATITUDE")
     val latitude: String,
-    @SerialName("longitude")
+    @SerialName("LONGITUDE")
     val longitude: String,
-    @SerialName("condicao")
+    @SerialName("CONDICAO")
     val situation: String
 )

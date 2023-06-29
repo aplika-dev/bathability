@@ -5,12 +5,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CityDto(
-    @SerialName("codigo")
+    @SerialName("CODIGO")
     val id: String,
-    @SerialName("descricao")
+    @SerialName("DESCRICAO")
     val name: String,
-    @SerialName("email")
+    @SerialName("EMAIL")
     val emails: String,
-    @SerialName("ibge")
+    @SerialName("IBGE")
     val ibgeId: String
 )

@@ -13,7 +13,7 @@ class BeachDtoToBeachMapper @Inject constructor() : Mapper<Pair<BeachDto, String
             id = input.first.id,
             name = input.first.name,
             cityId = input.second,
-            shouldHide = input.first.shouldHide == "N",
+            shouldHide = input.first.shouldHide != "N",
             latitude = input.first.latitude.toDouble(),
             longitude = input.first.longitude.toDouble()
         )

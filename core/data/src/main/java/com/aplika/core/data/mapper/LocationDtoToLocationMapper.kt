@@ -15,7 +15,7 @@ class LocationDtoToLocationMapper @Inject constructor() : Mapper<LocationDto, Lo
             id = input.id,
             name = input.name,
             beachId = input.beachId,
-            shouldHide = input.shouldHide == "N",
+            shouldHide = input.shouldHide != "N",
             latitude = input.latitude.toDouble(),
             longitude = input.longitude.toDouble(),
             isBathable = input.situation == "PRÓPRIO",

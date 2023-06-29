@@ -5,16 +5,16 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BeachDto(
-    @SerialName("codigo")
+    @SerialName("CODIGO")
     val id: String,
-    @SerialName("balneario")
+    @SerialName("BALNEARIO")
     val name: String,
-    @SerialName("municipio")
+    @SerialName("MUNICIPIO")
     val city: String,
-    @SerialName("oculto")
+    @SerialName("OCULTO")
     val shouldHide: String,
-    @SerialName("latitude")
+    @SerialName("LATITUDE")
     val latitude: String,
-    @SerialName("longitude")
+    @SerialName("LONGITUDE")
     val longitude: String
 )

@@ -4,7 +4,6 @@ import com.aplika.core.android.di.DefaultDispatcher
 import com.aplika.core.android.di.IoDispatcher
 import com.aplika.core.data.mapper.LocationDtoToLocationMapper
 import com.aplika.core.domain.model.Location
-import com.aplika.core.network.model.GetLocationsBodyDto
 import com.aplika.core.network.service.BathabilityService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -21,11 +20,7 @@ class LocationRemoteDataSource @Inject constructor(
 
     suspend fun getByBeachId(beachId: String): List<Location> {
         val beachListDto = withContext(ioDispatcher) {
-            bathabilityService.getLocations(
-                body = GetLocationsBodyDto(
-                    beachId = beachId
-                )
-            )
+            bathabilityService.getLocations(beachId = beachId.toInt())
         }
 
         return withContext(defaultDispatcher) {

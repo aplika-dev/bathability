@@ -2,25 +2,27 @@ package com.aplika.core.network.service
 
 import com.aplika.core.network.model.BeachDto
 import com.aplika.core.network.model.CityDto
-import com.aplika.core.network.model.GetBeachesBodyDto
-import com.aplika.core.network.model.GetLocationsBodyDto
 import com.aplika.core.network.model.LocationDto
-import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 interface BathabilityService {
 
-    @POST("municipio/getMunicipios")
+    @GET("municipio/getMunicipios")
     suspend fun getCities(): List<CityDto>
 
+    @Multipart
     @POST("local/getLocaisByMunicipio")
     suspend fun getBeaches(
-        @Body body: GetBeachesBodyDto
+        @Part("municipioID") cityId: Int
     ): List<BeachDto>
 
-    @POST("local/getLocaisByMunicipio")
+    @Multipart
+    @POST("pontoColeta/getPontosByLocal")
     suspend fun getLocations(
-        @Body body: GetLocationsBodyDto
+        @Part("localID") beachId: Int
     ): List<LocationDto>
 
 }

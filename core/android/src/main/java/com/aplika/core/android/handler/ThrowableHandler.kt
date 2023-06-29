@@ -7,6 +7,7 @@ class ThrowableHandler(
 ) {
 
     fun handle(throwable: Throwable) {
+        throwable.printStackTrace()
         firebaseCrashlytics.recordException(throwable)
     }
 
