@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BeachDao {
 
-    @Query("SELECT * FROM `beach` WHERE city = :city")
-    fun getByCity(city: String): Flow<List<BeachEntity>>
+    @Query("SELECT * FROM `beach` WHERE city_id = :cityId")
+    fun getByCityId(cityId: String): Flow<List<BeachEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(list: List<BeachEntity>)

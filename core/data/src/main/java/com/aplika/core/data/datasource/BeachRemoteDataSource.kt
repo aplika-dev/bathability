@@ -20,7 +20,7 @@ class BeachRemoteDataSource @Inject constructor(
             body = GetBeachesBodyDto(
                 cityId = cityId
             )
-        ).map { beachDtoToBeachMapper.map(input = it) }
+        ).map { beachDtoToBeachMapper.map(input = it to cityId) }
     }
 
 }

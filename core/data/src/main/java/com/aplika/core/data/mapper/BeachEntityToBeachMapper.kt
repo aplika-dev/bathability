@@ -12,7 +12,7 @@ class BeachEntityToBeachMapper @Inject constructor() : Mapper<BeachEntity, Beach
         return Beach(
             id = input.id,
             name = input.name,
-            city = input.city,
+            cityId = input.cityId,
             shouldHide = input.shouldHide,
             latitude = input.latitude,
             longitude = input.longitude

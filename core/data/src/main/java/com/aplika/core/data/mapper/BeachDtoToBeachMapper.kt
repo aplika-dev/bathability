@@ -7,15 +7,15 @@ import com.aplika.core.network.model.BeachDto
 import com.aplika.core.network.model.CityDto
 import javax.inject.Inject
 
-class BeachDtoToBeachMapper @Inject constructor() : Mapper<BeachDto, Beach> {
-    override fun map(input: BeachDto): Beach {
+class BeachDtoToBeachMapper @Inject constructor() : Mapper<Pair<BeachDto, String>, Beach> {
+    override fun map(input: Pair<BeachDto, String>): Beach {
         return Beach(
-            id = input.id,
-            name = input.name,
-            city = input.city,
-            shouldHide = input.shouldHide == "N",
-            latitude = input.latitude.toDouble(),
-            longitude = input.longitude.toDouble()
+            id = input.first.id,
+            name = input.first.name,
+            cityId = input.second,
+            shouldHide = input.first.shouldHide == "N",
+            latitude = input.first.latitude.toDouble(),
+            longitude = input.first.longitude.toDouble()
         )
     }
 }

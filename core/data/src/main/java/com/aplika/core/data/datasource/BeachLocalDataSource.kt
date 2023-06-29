@@ -21,8 +21,8 @@ class BeachLocalDataSource @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
-    fun getByCity(city: String): Flow<List<Beach>> {
-        return beachDao.getByCity(city = city)
+    fun getByCityId(cityId: String): Flow<List<Beach>> {
+        return beachDao.getByCityId(cityId = cityId)
             .flowOn(ioDispatcher)
             .map { list -> list.map { beachEntityToBeachMapper.map(input = it) } }
             .flowOn(defaultDispatcher)

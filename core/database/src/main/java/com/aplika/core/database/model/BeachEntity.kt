@@ -10,8 +10,8 @@ data class BeachEntity(
     val id: String,
     @ColumnInfo(name = "name")
     val name: String,
-    @ColumnInfo(name = "city")
-    val city: String,
+    @ColumnInfo(name = "city_id")
+    val cityId: String,
     @ColumnInfo(name = "shouldHide")
     val shouldHide: Boolean,
     @ColumnInfo(name = "latitude")
