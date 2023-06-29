@@ -5,6 +5,7 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.aplika.core.android.di.DefaultDispatcher
+import com.aplika.core.android.handler.ThrowableHandler
 import com.aplika.core.domain.model.Beach
 import com.aplika.core.domain.model.City
 import com.aplika.core.domain.repository.BeachRepository
@@ -27,7 +28,8 @@ internal class GetRemoteLocationListWorker @AssistedInject constructor(
     private val cityRepository: CityRepository,
     private val beachRepository: BeachRepository,
     private val locationRepository: LocationRepository,
-    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher,
+    private val throwableHandler: ThrowableHandler
 ) : CoroutineWorker(context, workerParams) {
 
     override suspend fun doWork(): Result {
@@ -39,6 +41,7 @@ internal class GetRemoteLocationListWorker @AssistedInject constructor(
             }
             Result.success()
         } catch (exception: Exception) {
+            throwableHandler.handle(throwable = exception)
             Result.failure()
         }
     }
