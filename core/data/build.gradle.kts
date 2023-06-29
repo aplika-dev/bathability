@@ -38,6 +38,7 @@ dependencies {
 
     api(project(":core:network"))
     api(project(":core:datastore"))
+    api(project(":core:database"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

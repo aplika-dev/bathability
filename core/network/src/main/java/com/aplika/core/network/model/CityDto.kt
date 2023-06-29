@@ -8,7 +8,7 @@ data class CityDto(
     @SerialName("codigo")
     val id: String,
     @SerialName("descricao")
-    val description: String,
+    val name: String,
     @SerialName("email")
     val emails: String,
     @SerialName("ibge")
