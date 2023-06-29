@@ -18,6 +18,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.withContext
 
 @HiltWorker
@@ -33,7 +34,7 @@ internal class GetRemoteLocationListWorker @AssistedInject constructor(
     override suspend fun doWork(): Result {
         withContext(defaultDispatcher) {
             val cityList = cityRepository.getRemote().first()
-            cityRepository.insertAll(cityList = cityList).collect()
+            cityRepository.insertAll(cityList = cityList).launchIn(this)
             syncBeachList(cityList = cityList)
         }
 
@@ -49,7 +50,7 @@ internal class GetRemoteLocationListWorker @AssistedInject constructor(
                     async {
                         val locationList =
                             locationRepository.getRemoteByBeachId(beachId = beach.id).first()
-                        locationRepository.insertAll(locationList = locationList).collect()
+                        locationRepository.insertAll(locationList = locationList).launchIn(this)
                     }
                 )
             }
@@ -62,7 +63,7 @@ internal class GetRemoteLocationListWorker @AssistedInject constructor(
                 awaitAll(
                     async {
                         val beachList = beachRepository.getRemoteByCityId(cityId = city.id).first()
-                        beachRepository.insertAll(beachList = beachList).collect()
+                        beachRepository.insertAll(beachList = beachList).launchIn(this)
                         syncLocationList(beachList = beachList)
                     }
                 )
