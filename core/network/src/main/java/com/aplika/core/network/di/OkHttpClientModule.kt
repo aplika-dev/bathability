@@ -1,5 +1,6 @@
 package com.aplika.core.network.di
 
+import com.aplika.core.network.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +17,7 @@ internal class OkHttpClientModule {
     @Provides
     fun providesOkHttpClient(): OkHttpClient =
         OkHttpClient.Builder()
-            .apply { addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)) } // TODO: add only in debug mode
+            .apply { if (BuildConfig.DEBUG) addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)) }
             .build()
 
 }
