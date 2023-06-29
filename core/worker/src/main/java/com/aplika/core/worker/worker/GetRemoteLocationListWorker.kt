@@ -42,6 +42,7 @@ internal class GetRemoteLocationListWorker @AssistedInject constructor(
             Result.success()
         } catch (exception: Exception) {
             throwableHandler.handle(throwable = exception)
+            exception.printStackTrace()
             Result.failure()
         }
     }
