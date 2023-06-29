@@ -4,6 +4,7 @@ import com.aplika.core.android.di.DefaultDispatcher
 import com.aplika.core.android.di.IoDispatcher
 import com.aplika.core.data.mapper.BeachEntityToBeachMapper
 import com.aplika.core.data.mapper.LocationEntityToLocationMapper
+import com.aplika.core.data.mapper.LocationToLocationEntityMapper
 import com.aplika.core.database.dao.BeachDao
 import com.aplika.core.database.dao.LocationDao
 import com.aplika.core.domain.model.Beach
@@ -13,6 +14,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,6 +22,7 @@ import javax.inject.Singleton
 class LocationLocalDataSource @Inject constructor(
     private val locationDao: LocationDao,
     private val locationEntityToLocationMapper: LocationEntityToLocationMapper,
+    private val locationToLocationEntityMapper: LocationToLocationEntityMapper,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
@@ -29,6 +32,16 @@ class LocationLocalDataSource @Inject constructor(
             .flowOn(ioDispatcher)
             .map { list -> list.map { locationEntityToLocationMapper.map(input = it) } }
             .flowOn(defaultDispatcher)
+    }
+
+    suspend fun insertAll(locationList: List<Location>) {
+        val locationEntityList = withContext(defaultDispatcher) {
+            locationList.map { locationToLocationEntityMapper.map(input = it) }
+        }
+
+        withContext(ioDispatcher) {
+            locationDao.insertAll(list = locationEntityList)
+        }
     }
 
 }

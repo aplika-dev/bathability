@@ -37,7 +37,7 @@ internal class GetRemoteLocationListWorker @AssistedInject constructor(
             syncBeachList(cityList = cityList)
         }
 
-        // TODO: verify catch 
+        // TODO: verify catch
 
         return Result.success()
     }

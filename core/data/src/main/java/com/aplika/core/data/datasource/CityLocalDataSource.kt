@@ -32,12 +32,12 @@ class CityLocalDataSource @Inject constructor(
     }
 
     suspend fun insertAll(cityList: List<City>) {
-        val cities = withContext(defaultDispatcher) {
+        val cityEntityList = withContext(defaultDispatcher) {
             cityList.map { cityToCityEntityMapper.map(input = it) }
         }
 
         withContext(ioDispatcher) {
-            cityDao.insertAll(list = cities)
+            cityDao.insertAll(list = cityEntityList)
         }
     }
 

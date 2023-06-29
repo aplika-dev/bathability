@@ -10,8 +10,6 @@ data class LocationEntity(
     val id: String,
     @ColumnInfo(name = "name")
     val name: String,
-    @ColumnInfo(name = "city")
-    val city: String,
     @ColumnInfo(name = "should_hide")
     val shouldHide: Boolean,
     @ColumnInfo(name = "latitude")
