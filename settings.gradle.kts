@@ -27,5 +27,6 @@ include(":core:kotlin")
 include(":core:navigation")
 include(":core:datastore")
 include(":core:ui")
+include(":core:worker")
 
 include(":feature:map")

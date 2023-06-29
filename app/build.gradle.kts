@@ -64,6 +64,9 @@ dependencies {
         }
     }
 
+    implementation(libs.hilt.work)
+    kapt(libs.hilt.work.compiler)
+
     implementation(libs.activity.compose)
 
     implementation(libs.hilt.android)

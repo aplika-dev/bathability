@@ -24,6 +24,8 @@ play-services-maps = "18.1.0"
 play-services-location = "21.0.1"
 maps-compose = "2.8.0"
 maps-ktx = "3.2.1"
+work-manager = "2.8.1"
+hilt-work-manager = "1.0.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -47,6 +49,8 @@ firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hilt-work-manager" }
+hilt-work-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hilt-work-manager" }
 datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
@@ -62,6 +66,7 @@ play-services-location = { group = "com.google.android.gms", name = "play-servic
 maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "maps-compose" }
 maps-ktx = { group = "com.google.maps.android", name = "maps-ktx", version.ref = "maps-ktx" }
 maps-utils-ktx = { group = "com.google.maps.android", name = "maps-utils-ktx", version.ref = "maps-ktx" }
+work-manager = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "work-manager" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
