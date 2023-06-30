@@ -23,11 +23,10 @@ class MapViewModel @Inject constructor(
     val uiState: StateFlow<MapUIState> =
         getLocationListUseCase()
             .map { MapUIState(locationList = it) }
-            .onStart {  }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = MapUIState(locationList = emptyList())
+                initialValue = MapUIState()
             )
 
     init {
