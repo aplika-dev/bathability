@@ -14,7 +14,7 @@ data class BeachDto(
     @SerialName("OCULTO")
     val shouldHide: String,
     @SerialName("LATITUDE")
-    val latitude: String,
+    val latitude: String?,
     @SerialName("LONGITUDE")
-    val longitude: String
+    val longitude: String?
 )

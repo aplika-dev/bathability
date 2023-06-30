@@ -24,7 +24,7 @@ class BeachRemoteDataSource @Inject constructor(
         }
 
         return withContext(defaultDispatcher) {
-            beachListDto.map { beachDtoToBeachMapper.map(input = it to cityId) }
+            beachListDto.mapNotNull { beachDtoToBeachMapper.map(input = it to cityId) }
         }
     }
 
