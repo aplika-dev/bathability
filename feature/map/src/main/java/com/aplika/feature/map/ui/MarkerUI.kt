@@ -17,6 +17,6 @@ internal fun MarkerUI(
         state = rememberMarkerState(position = marker.position),
         icon = BitmapDescriptorFactory.defaultMarker(marker.color)
     ) {
-        MarkerWindowUI()
+        MarkerWindowUI(markerInfoPresentation = marker.info)
     }
 }

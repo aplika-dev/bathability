@@ -2,6 +2,7 @@ package com.aplika.feature.map.mapper
 
 import com.aplika.core.android.mapper.Mapper
 import com.aplika.core.domain.model.CollectPoint
+import com.aplika.feature.map.presentation.MarkerInfoPresentation
 import com.aplika.feature.map.presentation.MarkerPresentation
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -16,7 +17,11 @@ class CollectPointToMarkerPresentationMapper @Inject constructor() : Mapper<Coll
                 false -> BitmapDescriptorFactory.HUE_RED
                 null -> BitmapDescriptorFactory.HUE_CYAN
             },
-            position = LatLng(input.latitude, input.longitude)
+            position = LatLng(input.latitude, input.longitude),
+            info = MarkerInfoPresentation(
+                title = input.name,
+                description = input.description
+            )
         )
     }
 }
