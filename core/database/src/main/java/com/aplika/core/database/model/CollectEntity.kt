@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "collect")
 data class CollectEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int = -1,
+    val id: Long = 0L,
     @ColumnInfo("beach_id")
     val beachId: String,
     @ColumnInfo("date")
