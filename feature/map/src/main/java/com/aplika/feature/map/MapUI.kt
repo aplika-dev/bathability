@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.aplika.feature.map.ui.MarkerUI
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -40,15 +41,8 @@ fun MapUI(
             cameraPositionState = cameraPositionState
         ) {
             mapUiState.locationList.forEach {
-                MarkerInfoWindow(
-                    state = rememberMarkerState(position = it.position),
-                    snippet = "Some stuff",
-                    onClick = {
-                        // This won't work :(
-                        println("Mitchs_: Cannot be clicked")
-                        true
-                    },
-                    icon = BitmapDescriptorFactory.defaultMarker(it.color)
+                MarkerUI(
+                    marker = it
                 )
             }
         }
