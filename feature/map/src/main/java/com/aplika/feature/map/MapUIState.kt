@@ -1,7 +1,7 @@
 package com.aplika.feature.map
 
-import com.aplika.core.domain.model.Location
+import com.aplika.feature.map.presentation.LocationPresentation
 
 data class MapUIState(
-    val locationList: List<Location> = emptyList()
+    val locationList: List<LocationPresentation> = emptyList()
 )

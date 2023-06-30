@@ -8,12 +8,15 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
 
 @Composable
 fun MapUI(
@@ -38,14 +41,14 @@ fun MapUI(
         ) {
             mapUiState.locationList.forEach {
                 MarkerInfoWindow(
-                    state = rememberMarkerState(position = LatLng(it.latitude, it.longitude)),
+                    state = rememberMarkerState(position = it.position),
                     snippet = "Some stuff",
                     onClick = {
                         // This won't work :(
                         println("Mitchs_: Cannot be clicked")
                         true
                     },
-                    draggable = true
+                    icon = BitmapDescriptorFactory.defaultMarker(it.color)
                 )
             }
         }
