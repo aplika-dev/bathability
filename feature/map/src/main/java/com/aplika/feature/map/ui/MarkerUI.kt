@@ -17,9 +17,6 @@ internal fun MarkerUI(
         state = rememberMarkerState(position = marker.position),
         icon = BitmapDescriptorFactory.defaultMarker(marker.color)
     ) {
-        Column {
-            Text("Default Marker Title", color = Color.Red)
-            Text("Default Marker Snippet", color = Color.Red)
-        }
+        MarkerWindowUI()
     }
 }
