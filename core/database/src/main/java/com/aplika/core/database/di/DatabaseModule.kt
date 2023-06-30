@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.aplika.core.database.dao.BeachDao
 import com.aplika.core.database.dao.CityDao
-import com.aplika.core.database.dao.LocationDao
+import com.aplika.core.database.dao.CollectPointDao
 import com.aplika.core.database.database.BathabilityDatabase
 import dagger.Module
 import dagger.Provides
@@ -47,10 +47,10 @@ internal class DatabaseModule {
 
     @Singleton
     @Provides
-    fun providesLocationDao(
+    fun providesCollectPointDao(
         database: BathabilityDatabase
-    ): LocationDao {
-        return database.locationDao()
+    ): CollectPointDao {
+        return database.collectPointDao()
     }
 
     companion object {

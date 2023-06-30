@@ -1,6 +1,6 @@
 package com.aplika.core.domain.model
 
-data class Location(
+data class CollectPoint(
     val id: String,
     val name: String,
     val shouldHide: Boolean,

@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "location")
-data class LocationEntity(
+@Entity(tableName = "collect_point")
+data class CollectPointEntity(
     @PrimaryKey
     val id: String,
     @ColumnInfo(name = "name")

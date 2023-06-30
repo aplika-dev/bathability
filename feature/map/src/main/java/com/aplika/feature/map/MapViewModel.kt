@@ -2,29 +2,28 @@ package com.aplika.feature.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aplika.core.domain.usecase.GetLocationListUseCase
-import com.aplika.core.domain.usecase.SyncLocationsUseCase
+import com.aplika.core.domain.usecase.GetCollectPointListUseCase
+import com.aplika.core.domain.usecase.SyncCollectPointListUseCase
 import com.aplika.core.ui.extensions.asTaskFlow
-import com.aplika.feature.map.mapper.LocationToLocationPresentationMapper
+import com.aplika.feature.map.mapper.CollectPointToMarkerPresentationMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
-    private val getLocationListUseCase: GetLocationListUseCase,
-    private val syncLocationsUseCase: SyncLocationsUseCase,
-    private val locationToLocationPresentationMapper: LocationToLocationPresentationMapper
+    private val getCollectPointListUseCase: GetCollectPointListUseCase,
+    private val syncCollectPointListUseCase: SyncCollectPointListUseCase,
+    private val collectPointToMarkerPresentationMapper: CollectPointToMarkerPresentationMapper
 ) : ViewModel() {
 
     val uiState: StateFlow<MapUIState> =
-        getLocationListUseCase()
-            .map { locationList -> locationList.map { locationToLocationPresentationMapper.map(input = it) } }
+        getCollectPointListUseCase()
+            .map { locationList -> locationList.map { collectPointToMarkerPresentationMapper.map(input = it) } }
             .map { MapUIState(locationList = it) }
             .stateIn(
                 scope = viewModelScope,
@@ -33,7 +32,7 @@ class MapViewModel @Inject constructor(
             )
 
     init {
-        syncLocationsUseCase()
+        syncCollectPointListUseCase()
             .asTaskFlow()
             .launchIn(viewModelScope)
     }

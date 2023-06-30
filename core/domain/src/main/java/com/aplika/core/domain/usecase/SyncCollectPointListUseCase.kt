@@ -4,8 +4,7 @@ import com.aplika.core.domain.model.Beach
 import com.aplika.core.domain.model.City
 import com.aplika.core.domain.repository.BeachRepository
 import com.aplika.core.domain.repository.CityRepository
-import com.aplika.core.domain.repository.LocationRepository
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.aplika.core.domain.repository.CollectPointRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -18,10 +17,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SyncLocationsUseCase @Inject constructor(
+class SyncCollectPointListUseCase @Inject constructor(
     private val cityRepository: CityRepository,
     private val beachRepository: BeachRepository,
-    private val locationRepository: LocationRepository
+    private val collectPointRepository: CollectPointRepository
 ) {
 
     operator fun invoke(): Flow<Unit> {
@@ -51,8 +50,8 @@ class SyncLocationsUseCase @Inject constructor(
             beachList.forEach { beach ->
                 awaitAll(
                     async {
-                        locationRepository.getRemoteByBeachId(beachId = beach.id)
-                            .onEach { locationRepository.insertAll(locationList = it).collect() }
+                        collectPointRepository.getRemoteByBeachId(beachId = beach.id)
+                            .onEach { collectPointRepository.insertAll(collectPointList = it).collect() }
                             .launchIn(this)
                     }
                 )

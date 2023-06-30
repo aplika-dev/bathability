@@ -1,15 +1,13 @@
 package com.aplika.core.data.mapper
 
 import com.aplika.core.android.mapper.Mapper
-import com.aplika.core.database.model.CityEntity
-import com.aplika.core.database.model.LocationEntity
-import com.aplika.core.domain.model.City
-import com.aplika.core.domain.model.Location
+import com.aplika.core.database.model.CollectPointEntity
+import com.aplika.core.domain.model.CollectPoint
 import javax.inject.Inject
 
-class LocationEntityToLocationMapper @Inject constructor() : Mapper<LocationEntity, Location> {
-    override fun map(input: LocationEntity): Location {
-        return Location(
+class CollectPointToCollectPointEntityMapper @Inject constructor() : Mapper<CollectPoint, CollectPointEntity> {
+    override fun map(input: CollectPoint): CollectPointEntity {
+        return CollectPointEntity(
             id = input.id,
             name = input.name,
             shouldHide = input.shouldHide,
