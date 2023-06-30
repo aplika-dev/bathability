@@ -18,8 +18,8 @@ fun MarkerWindowUI(
         Column(
             modifier = Modifier.padding(all = 8.dp)
         ) {
-            Text(text = markerInfoPresentation.title, style = MaterialTheme.typography.titleLarge)
-            Text(text = markerInfoPresentation.description, style = MaterialTheme.typography.bodyMedium)
+            Text(text = markerInfoPresentation.title, style = MaterialTheme.typography.bodyMedium)
+            Text(text = markerInfoPresentation.description, style = MaterialTheme.typography.bodySmall)
         }
     }
 }

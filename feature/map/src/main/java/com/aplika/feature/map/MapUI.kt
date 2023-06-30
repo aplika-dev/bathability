@@ -26,36 +26,19 @@ fun MapUI(
 ) {
     val mapUiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    // Set properties using MapProperties which you can use to recompose the map
-    val mapProperties = MapProperties(
-        // Only enable if user has accepted location permissions.
-        isMyLocationEnabled = false,
-    )
-    val cameraPositionState = rememberCameraPositionState()
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
-            properties = mapProperties,
-            cameraPositionState = cameraPositionState
+            properties = MapProperties(
+                isMyLocationEnabled = false,
+            ),
+            cameraPositionState = rememberCameraPositionState()
         ) {
             mapUiState.locationList.forEach {
-                MarkerUI(
-                    marker = it
-                )
+                MarkerUI(marker = it)
             }
         }
     }
-//    // Center camera to include all the Zones.
-//    LaunchedEffect(state.clusterItems) {
-//        if (state.clusterItems.isNotEmpty()) {
-//            cameraPositionState.animate(
-//                update = CameraUpdateFactory.newLatLngBounds(
-//                    calculateZoneViewCenter(),
-//                    0
-//                ),
-//            )
-//        }
-//    }
 }
