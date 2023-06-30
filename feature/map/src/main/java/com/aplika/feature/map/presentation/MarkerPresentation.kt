@@ -6,5 +6,5 @@ data class MarkerPresentation(
     val id: String,
     val color: Float,
     val position: LatLng,
-    val info: MarkerInfoPresentation
+    val windowPresentation: MarkerWindowPresentation
 )
