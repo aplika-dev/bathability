@@ -2,10 +2,9 @@ package com.aplika.feature.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aplika.core.domain.usecase.GetCollectPointDetailedListUseCase
-import com.aplika.core.domain.usecase.SyncCollectPointListUseCase
+import com.aplika.core.domain.usecase.GetBeachCollectsUseCase
+import com.aplika.core.domain.usecase.SyncBeachCollectsUseCase
 import com.aplika.core.ui.extensions.asTaskFlow
-import com.aplika.feature.map.mapper.CollectPointDetailedToMarkerPresentationMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -16,15 +15,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
-    private val getCollectPointDetailedListUseCase: GetCollectPointDetailedListUseCase,
-    private val syncCollectPointListUseCase: SyncCollectPointListUseCase,
-    private val collectPointDetailedToMarkerPresentationMapper: CollectPointDetailedToMarkerPresentationMapper
+    private val getBeachCollectsUseCase: GetBeachCollectsUseCase,
+    private val syncBeachCollectsUseCase: SyncBeachCollectsUseCase
 ) : ViewModel() {
 
     val uiState: StateFlow<MapUIState> =
-        getCollectPointDetailedListUseCase()
-            .map { locationList -> locationList.map { collectPointDetailedToMarkerPresentationMapper.map(input = it) } }
-            .map { MapUIState(locationList = it) }
+        getBeachCollectsUseCase()
+            .map { MapUIState(locationList = emptyList()) }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
@@ -32,7 +29,7 @@ class MapViewModel @Inject constructor(
             )
 
     init {
-        syncCollectPointListUseCase()
+        syncBeachCollectsUseCase()
             .asTaskFlow()
             .launchIn(viewModelScope)
     }

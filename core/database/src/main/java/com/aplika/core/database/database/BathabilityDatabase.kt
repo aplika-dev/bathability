@@ -3,22 +3,21 @@ package com.aplika.core.database.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.aplika.core.database.dao.BeachDao
-import com.aplika.core.database.dao.CityDao
-import com.aplika.core.database.dao.CollectPointDao
+import com.aplika.core.database.dao.BeachWithCollectsDao
+import com.aplika.core.database.dao.CollectDao
 import com.aplika.core.database.model.BeachEntity
-import com.aplika.core.database.model.CityEntity
-import com.aplika.core.database.model.CollectPointEntity
+import com.aplika.core.database.model.CollectEntity
 
 @Database(
     entities = [
-        CityEntity::class,
         BeachEntity::class,
-        CollectPointEntity::class
+        CollectEntity::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class BathabilityDatabase : RoomDatabase() {
-    abstract fun cityDao(): CityDao
+    abstract fun beachCollectDao(): BeachWithCollectsDao
     abstract fun beachDao(): BeachDao
-    abstract fun collectPointDao(): CollectPointDao
+    abstract fun collectDao(): CollectDao
 }

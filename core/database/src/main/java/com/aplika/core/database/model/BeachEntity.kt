@@ -8,14 +8,18 @@ import androidx.room.PrimaryKey
 data class BeachEntity(
     @PrimaryKey
     val id: String,
-    @ColumnInfo(name = "name")
-    val name: String,
-    @ColumnInfo(name = "city_id")
-    val cityId: String,
-    @ColumnInfo(name = "shouldHide")
-    val shouldHide: Boolean,
-    @ColumnInfo(name = "latitude")
+    @ColumnInfo("city_ibge_id")
+    val cityIbgeId: String,
+    @ColumnInfo("city")
+    val city: String,
+    @ColumnInfo("collect_point")
+    val collectPoint: String,
+    @ColumnInfo("beach")
+    val beach: String,
+    @ColumnInfo("location")
+    val location: String,
+    @ColumnInfo("latitude")
     val latitude: Double,
-    @ColumnInfo(name = "longitude")
+    @ColumnInfo("longitude")
     val longitude: Double
 )

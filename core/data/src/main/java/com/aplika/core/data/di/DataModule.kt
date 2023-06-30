@@ -1,13 +1,7 @@
 package com.aplika.core.data.di
 
-import com.aplika.core.data.repository.BeachRepositoryImpl
-import com.aplika.core.data.repository.CityRepositoryImpl
-import com.aplika.core.data.repository.CollectPointDetailedRepositoryImpl
-import com.aplika.core.data.repository.CollectPointRepositoryImpl
-import com.aplika.core.domain.repository.BeachRepository
-import com.aplika.core.domain.repository.CityRepository
-import com.aplika.core.domain.repository.CollectPointDetailedRepository
-import com.aplika.core.domain.repository.CollectPointRepository
+import com.aplika.core.data.repository.BeachCollectRepositoryImpl
+import com.aplika.core.domain.repository.BeachCollectRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,18 +14,6 @@ abstract class DataModule {
 
     @Singleton
     @Binds
-    abstract fun cityRepository(impl: CityRepositoryImpl): CityRepository
-
-    @Singleton
-    @Binds
-    abstract fun beachRepository(impl: BeachRepositoryImpl): BeachRepository
-
-    @Singleton
-    @Binds
-    abstract fun collectPointRepository(impl: CollectPointRepositoryImpl): CollectPointRepository
-
-    @Singleton
-    @Binds
-    abstract fun collectPointDetailedRepository(impl: CollectPointDetailedRepositoryImpl): CollectPointDetailedRepository
+    abstract fun beachCollectRepository(impl: BeachCollectRepositoryImpl): BeachCollectRepository
 
 }

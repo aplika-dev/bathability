@@ -5,14 +5,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.aplika.core.database.model.BeachEntity
 import com.aplika.core.database.model.BeachWithCollectsEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface BeachDao {
+interface BeachWithCollectsDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(list: List<BeachEntity>)
+    @Transaction
+    @Query("SELECT * FROM `beach`")
+    fun getAll(): Flow<List<BeachWithCollectsEntity>>
 
 }
