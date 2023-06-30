@@ -2,14 +2,15 @@ package com.aplika.feature.map.mapper
 
 import com.aplika.core.android.mapper.Mapper
 import com.aplika.core.domain.model.CollectPoint
+import com.aplika.core.domain.model.CollectPointDetailed
 import com.aplika.feature.map.presentation.MarkerInfoPresentation
 import com.aplika.feature.map.presentation.MarkerPresentation
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
 
-class CollectPointToMarkerPresentationMapper @Inject constructor() : Mapper<CollectPoint, MarkerPresentation> {
-    override fun map(input: CollectPoint): MarkerPresentation {
+class CollectPointDetailedToMarkerPresentationMapper @Inject constructor() : Mapper<CollectPointDetailed, MarkerPresentation> {
+    override fun map(input: CollectPointDetailed): MarkerPresentation {
         return MarkerPresentation(
             id = input.id,
             color = when (input.isBathable) {
@@ -19,8 +20,8 @@ class CollectPointToMarkerPresentationMapper @Inject constructor() : Mapper<Coll
             },
             position = LatLng(input.latitude, input.longitude),
             info = MarkerInfoPresentation(
-                title = input.name,
-                description = input.description
+                title = "${input.beach.name} - ${input.city.name}",
+                description = "${input.name} - ${input.description}"
             )
         )
     }
