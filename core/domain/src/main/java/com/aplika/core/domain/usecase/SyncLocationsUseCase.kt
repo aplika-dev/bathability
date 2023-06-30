@@ -31,20 +31,6 @@ class SyncLocationsUseCase @Inject constructor(
             .map { }
     }
 
-    private suspend fun syncLocationList(beachList: List<Beach>) {
-        coroutineScope {
-            beachList.forEach { beach ->
-                awaitAll(
-                    async {
-                        locationRepository.getRemoteByBeachId(beachId = beach.id)
-                            .onEach { locationRepository.insertAll(locationList = it).collect() }
-                            .launchIn(this)
-                    }
-                )
-            }
-        }
-    }
-
     private suspend fun syncBeachList(cityList: List<City>) {
         coroutineScope {
             cityList.forEach { city ->
@@ -53,6 +39,20 @@ class SyncLocationsUseCase @Inject constructor(
                         beachRepository.getRemoteByCityId(cityId = city.id)
                             .onEach { beachRepository.insertAll(beachList = it).collect() }
                             .onEach { syncLocationList(beachList = it) }
+                            .launchIn(this)
+                    }
+                )
+            }
+        }
+    }
+
+    private suspend fun syncLocationList(beachList: List<Beach>) {
+        coroutineScope {
+            beachList.forEach { beach ->
+                awaitAll(
+                    async {
+                        locationRepository.getRemoteByBeachId(beachId = beach.id)
+                            .onEach { locationRepository.insertAll(locationList = it).collect() }
                             .launchIn(this)
                     }
                 )
