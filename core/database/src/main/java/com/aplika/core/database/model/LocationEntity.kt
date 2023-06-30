@@ -21,5 +21,5 @@ data class LocationEntity(
     @ColumnInfo(name = "description")
     val description: String,
     @ColumnInfo(name = "is_bathable")
-    val isBathable: Boolean
+    val isBathable: Boolean?
 )

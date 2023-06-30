@@ -8,5 +8,5 @@ data class Location(
     val description: String,
     val latitude: Double,
     val longitude: Double,
-    val isBathable: Boolean
+    val isBathable: Boolean?
 )
