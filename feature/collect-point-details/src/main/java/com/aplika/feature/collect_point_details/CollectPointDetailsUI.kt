@@ -1,10 +1,12 @@
 package com.aplika.feature.collect_point_details
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,11 +27,8 @@ fun CollectPointDetailsUI(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Scaffold { padding ->
-        Column(
-            modifier = Modifier
-                .padding(paddingValues = padding)
-        ) {
+    Surface {
+        Column {
             Text(
                 modifier = Modifier
                     .padding(horizontal = 24.dp)
