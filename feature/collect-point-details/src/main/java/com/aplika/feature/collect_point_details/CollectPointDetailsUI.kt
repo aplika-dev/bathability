@@ -22,7 +22,6 @@ import com.google.accompanist.placeholder.material.shimmer
 
 @Composable
 fun CollectPointDetailsUI(
-    navController: NavController,
     viewModel: CollectPointDetailsViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
