@@ -30,3 +30,4 @@ include(":core:ui")
 
 include(":feature:map")
 include(":feature:collect-point-details")
+include(":feature:menu")

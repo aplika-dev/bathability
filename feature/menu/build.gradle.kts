@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.feature.collect_point_details"
+    namespace = "com.aplika.feature.menu"
     compileSdk = 33
 
     defaultConfig {
