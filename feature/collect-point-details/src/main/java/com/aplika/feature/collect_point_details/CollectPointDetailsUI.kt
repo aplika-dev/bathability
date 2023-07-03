@@ -25,7 +25,7 @@ fun CollectPointDetailsUI(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Scaffold(modifier = Modifier.wrapContentSize()) { padding ->
+    Scaffold { padding ->
         Column(
             modifier = Modifier
                 .padding(paddingValues = padding)
