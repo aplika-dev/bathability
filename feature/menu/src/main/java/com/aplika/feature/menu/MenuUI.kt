@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.aplika.core.resources.R
 import kotlinx.coroutines.launch
 
 @Composable
@@ -30,6 +31,9 @@ fun MenuUI(
 
     ModalDrawerSheet {
         Spacer(Modifier.height(12.dp))
+
+        Text(text = stringResource(id = R.string.app_name))
+
         MenuItem.values().forEach { menuItem ->
             NavigationDrawerItem(
                 icon = {
