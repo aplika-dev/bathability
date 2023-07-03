@@ -10,6 +10,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.aplika.core.navigation.destination.CollectPointDetailsDestination
 import com.aplika.feature.map.ui.MarkerUI
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.GoogleMap
@@ -26,10 +28,9 @@ fun MapUI(
     ) {
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
-            properties = MapProperties(
-                isMyLocationEnabled = false,
-            ),
-            cameraPositionState = rememberCameraPositionState()
+            cameraPositionState = rememberCameraPositionState {
+                position = CameraPosition.fromLatLngZoom(LatLng(LATITUDE, LONGITUDE), ZOOM)
+            }
         ) {
             uiState.locationList.forEach { state ->
                 MarkerUI(state = state, onMarkerClick = {
@@ -39,3 +40,7 @@ fun MapUI(
         }
     }
 }
+
+private const val LATITUDE = -27.695045265166847
+private const val LONGITUDE = -49.0310188382864
+private const val ZOOM = 7.975901F
