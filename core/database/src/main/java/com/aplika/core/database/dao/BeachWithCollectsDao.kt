@@ -15,4 +15,8 @@ interface BeachWithCollectsDao {
     @Query("SELECT * FROM `beach`")
     fun getAll(): Flow<List<BeachWithCollectsEntity>>
 
+    @Transaction
+    @Query("SELECT * FROM `beach` WHERE id = :id")
+    fun getById(id: String): Flow<BeachWithCollectsEntity>
+
 }

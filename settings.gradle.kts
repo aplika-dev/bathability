@@ -29,4 +29,4 @@ include(":core:datastore")
 include(":core:ui")
 
 include(":feature:map")
-include(":feature:collect_point_details")
+include(":feature:collect-point-details")

@@ -36,6 +36,13 @@ class BeachCollectLocalDataSource @Inject constructor(
             .flowOn(defaultDispatcher)
     }
 
+    fun getById(id: String): Flow<BeachCollect> {
+        return beachWithCollectsDao.getById(id = id)
+            .flowOn(ioDispatcher)
+            .map { beachWithCollectsEntityToBeachCollectMapper.map(input = it) }
+            .flowOn(defaultDispatcher)
+    }
+
     suspend fun insertAll(beachCollects: List<BeachCollect>) {
         val beachEntities = withContext(defaultDispatcher) {
             beachCollects.map { beachCollectToBeachEntityMapper.map(input = it) }

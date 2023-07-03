@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.aplika.bathability.ui.theme.BathabilityTheme
 import com.aplika.core.navigation.destination.CollectPointDetailsDestination
 import com.aplika.core.navigation.destination.MapDestination
+import com.aplika.feature.collect_point_details.CollectPointDetailsUI
 import com.aplika.feature.map.MapUI
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
@@ -35,7 +36,7 @@ class MainActivity : ComponentActivity() {
                 startDestination = MapDestination.route
             ) {
                 composable(route = MapDestination.route) { MapUI(navController = navController) }
-                bottomSheet(route = CollectPointDetailsDestination.route) {  }
+                bottomSheet(route = CollectPointDetailsDestination.route) { CollectPointDetailsUI(navController = navController) }
             }
         }
 

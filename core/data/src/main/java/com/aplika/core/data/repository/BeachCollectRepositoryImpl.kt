@@ -25,6 +25,10 @@ class BeachCollectRepositoryImpl @Inject constructor(
         return localDataSource.getAll()
     }
 
+    override fun getById(id: String): Flow<BeachCollect> {
+        return localDataSource.getById(id = id)
+    }
+
     override fun sync(): Flow<Unit> {
         return flow { emit(remoteDataSource.getAll()) }
             .onEach { localDataSource.insertAll(beachCollects = it) }

@@ -8,23 +8,18 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.aplika.core.navigation.destination.CollectPointDetailsDestination
 import com.aplika.feature.map.ui.MarkerUI
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.MapProperties
-import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.rememberCameraPositionState
-import com.google.maps.android.compose.rememberMarkerState
 import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.Marker
 
 @Composable
 fun MapUI(
     navController: NavController,
     viewModel: MapViewModel = hiltViewModel()
 ) {
-    val mapUiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -36,8 +31,10 @@ fun MapUI(
             ),
             cameraPositionState = rememberCameraPositionState()
         ) {
-            mapUiState.locationList.forEach {
-                MarkerUI(marker = it)
+            uiState.locationList.forEach { state ->
+                MarkerUI(state = state, onMarkerClick = {
+                    navController.navigate(CollectPointDetailsDestination(id = it))
+                })
             }
         }
     }
