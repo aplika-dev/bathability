@@ -38,7 +38,7 @@ fun CollectPointDetailsUI(
                 visible = uiState.isLoading,
                 highlight = PlaceholderHighlight.shimmer()
             ),
-            text = uiState.title,
+            text = uiState.description,
             style = MaterialTheme.typography.bodyMedium
         )
 

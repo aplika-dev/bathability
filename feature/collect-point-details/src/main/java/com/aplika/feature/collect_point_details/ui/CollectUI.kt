@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.aplika.feature.collect_point_details.state.CollectState
 
 @Composable
@@ -22,10 +23,13 @@ internal fun CollectUI(
         ListItem(
             headlineContent = { Text(text = state.headline) },
             supportingContent = {
-                Text(text = state.supporting)
+                Text(text = stringResource(id = state.supportingResId))
             },
             leadingContent = {
-                Icon(painter = painterResource(id = state.leadingIcon), contentDescription = "")
+                Icon(
+                    painter = painterResource(id = state.leadingIcon),
+                    contentDescription = stringResource(id = state.leadingContentDescription)
+                )
             },
             trailingContent = { Text(text = state.trailing) }
         )

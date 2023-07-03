@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Bathability</string>
+    <string name="no_rain">Sem chuva</string>
+    <string name="weak_rain">Chuva fraca</string>
+    <string name="moderate_rain">Chuva moderada</string>
+    <string name="no_information">Sem informação</string>
+    <string name="ic_check_content_description">Ícone de um símbolo de correto</string>
+    <string name="ic_close_content_description">Ícone de um X</string>
+    <string name="ic_question_mark_content_description">Ícone de um ponto de interrogação</string>
 </resources>
