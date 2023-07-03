@@ -6,18 +6,19 @@ import com.aplika.core.domain.model.BeachCollect
 import com.aplika.core.domain.model.RainSituation
 import com.aplika.core.kotlin.extensions.formatToString
 import com.aplika.core.resources.R
-import com.aplika.feature.collect_point_details.CollectPointDetailsState
+import com.aplika.feature.collect_point_details.CollectPointDetailsUIState
 import com.aplika.feature.collect_point_details.state.CollectState
 import javax.inject.Inject
 
-class BeachCollectToStateMapper @Inject constructor() : Mapper<BeachCollect, CollectPointDetailsState> {
-    override fun map(input: BeachCollect): CollectPointDetailsState {
-        return CollectPointDetailsState(
+class BeachCollectToUIStateMapper @Inject constructor() : Mapper<BeachCollect, CollectPointDetailsUIState> {
+    override fun map(input: BeachCollect): CollectPointDetailsUIState {
+        return CollectPointDetailsUIState(
             isLoading = false,
             title = input.beach,
-            description = "${input.city} - ${input.location} - ${input.collectPoint}",
+            description = "${input.city}\n${input.location} (${input.collectPoint})",
             collects = input.collects.map {
                 CollectState(
+                    isLoading = false,
                     leadingIcon = when (it.bathabilitySituation) {
                         BathabilitySituation.APPROPRIATE -> R.drawable.ic_check
                         BathabilitySituation.INAPPROPRIATE -> R.drawable.ic_close
@@ -35,7 +36,7 @@ class BeachCollectToStateMapper @Inject constructor() : Mapper<BeachCollect, Col
                         RainSituation.MODERATE -> R.string.moderate_rain
                         RainSituation.UNKNOWN -> R.string.no_information
                     },
-                    trailing = it.escherichiaColiFactor.toString()
+                    trailingContent = it.escherichiaColiFactor
                 )
             }
         )

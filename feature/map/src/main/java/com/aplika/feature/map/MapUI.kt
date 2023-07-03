@@ -3,7 +3,9 @@ package com.aplika.feature.map
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -24,23 +26,23 @@ fun MapUI(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        if (uiState.isLoading) {
-            LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
-        }
-
-        GoogleMap(
-            modifier = Modifier.fillMaxSize(),
-            cameraPositionState = rememberCameraPositionState {
-                position = CameraPosition.fromLatLngZoom(LatLng(LATITUDE, LONGITUDE), ZOOM)
+    Scaffold {
+        Column(modifier = Modifier.padding(paddingValues = it)) {
+            if (uiState.isLoading) {
+                LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
             }
-        ) {
-            uiState.locationList.forEach { state ->
-                MarkerUI(state = state, onMarkerClick = {
-                    navController.navigate(CollectPointDetailsDestination(id = it))
-                })
+
+            GoogleMap(
+                modifier = Modifier.fillMaxSize(),
+                cameraPositionState = rememberCameraPositionState {
+                    position = CameraPosition.fromLatLngZoom(LatLng(LATITUDE, LONGITUDE), ZOOM)
+                }
+            ) {
+                uiState.locationList.forEach { state ->
+                    MarkerUI(state = state, onMarkerClick = {
+                        navController.navigate(CollectPointDetailsDestination(id = it))
+                    })
+                }
             }
         }
     }

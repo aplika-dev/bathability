@@ -11,9 +11,14 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import com.aplika.core.resources.R
 import com.aplika.feature.collect_point_details.state.CollectState
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.placeholder
+import com.google.accompanist.placeholder.material.shimmer
 
 @Composable
 internal fun CollectUI(
@@ -21,17 +26,43 @@ internal fun CollectUI(
 ) {
     Column {
         ListItem(
-            headlineContent = { Text(text = state.headline) },
+            headlineContent = {
+                Text(
+                    modifier = Modifier.placeholder(
+                        visible = state.isLoading,
+                        highlight = PlaceholderHighlight.shimmer()
+                    ),
+                    text = state.headline
+                )
+            },
             supportingContent = {
-                Text(text = stringResource(id = state.supportingResId))
+                Text(
+                    modifier = Modifier.placeholder(
+                        visible = state.isLoading,
+                        highlight = PlaceholderHighlight.shimmer()
+                    ),
+                    text = stringResource(id = state.supportingResId)
+                )
             },
             leadingContent = {
                 Icon(
+                    modifier = Modifier.placeholder(
+                        visible = state.isLoading,
+                        highlight = PlaceholderHighlight.shimmer()
+                    ),
                     painter = painterResource(id = state.leadingIcon),
                     contentDescription = stringResource(id = state.leadingContentDescription)
                 )
             },
-            trailingContent = { Text(text = state.trailing) }
+            trailingContent = {
+                Text(
+                    modifier = Modifier.placeholder(
+                        visible = state.isLoading,
+                        highlight = PlaceholderHighlight.shimmer()
+                    ),
+                    text = stringResource(id = R.string.escherichia_coli_factor_mask, formatArgs = arrayOf(state.trailingContent))
+                )
+            }
         )
         Divider()
     }

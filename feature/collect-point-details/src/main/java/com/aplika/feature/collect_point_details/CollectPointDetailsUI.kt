@@ -2,7 +2,9 @@ package com.aplika.feature.collect_point_details
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,27 +25,38 @@ fun CollectPointDetailsUI(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Column(modifier = Modifier.padding(all = 24.dp)) {
-        Text(
-            modifier = Modifier.placeholder(
-                visible = uiState.isLoading,
-                highlight = PlaceholderHighlight.shimmer()
-            ),
-            text = uiState.title,
-            style = MaterialTheme.typography.headlineSmall
-        )
-        Text(
-            modifier = Modifier.padding(top = 16.dp)
-                .placeholder(
-                visible = uiState.isLoading,
-                highlight = PlaceholderHighlight.shimmer()
-            ),
-            text = uiState.description,
-            style = MaterialTheme.typography.bodyMedium
-        )
+    Scaffold(modifier = Modifier.wrapContentSize()) { padding ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues = padding)
+        ) {
+            Text(
+                modifier = Modifier
+                    .padding(horizontal = 24.dp)
+                    .padding(top = 24.dp)
+                    .placeholder(
+                        visible = uiState.isLoading,
+                        highlight = PlaceholderHighlight.shimmer()
+                    ),
+                text = uiState.title,
+                style = MaterialTheme.typography.headlineSmall
+            )
+            Text(
+                modifier = Modifier
+                    .padding(vertical = 16.dp)
+                    .padding(horizontal = 24.dp)
+                    .placeholder(
+                        visible = uiState.isLoading,
+                        highlight = PlaceholderHighlight.shimmer()
+                    ),
+                text = uiState.description,
+                style = MaterialTheme.typography.bodyMedium
+            )
 
-        uiState.collects.forEach {
-            CollectUI(state = it)
+            uiState.collects.forEach {
+                CollectUI(state = it)
+            }
         }
     }
+
 }

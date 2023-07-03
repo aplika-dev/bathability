@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.aplika.core.android.di.DefaultDispatcher
 import com.aplika.core.domain.usecase.GetCollectPointDetailsUseCase
 import com.aplika.core.navigation.destination.CollectPointDetailsDestination
-import com.aplika.feature.collect_point_details.mapper.BeachCollectToStateMapper
+import com.aplika.feature.collect_point_details.mapper.BeachCollectToUIStateMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
@@ -20,18 +20,18 @@ import javax.inject.Inject
 class CollectPointDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getCollectPointDetailsUseCase: GetCollectPointDetailsUseCase,
-    private val beachCollectToStateMapper: BeachCollectToStateMapper,
+    private val beachCollectToUIStateMapper: BeachCollectToUIStateMapper,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    val uiState: StateFlow<CollectPointDetailsState> =
+    val uiState: StateFlow<CollectPointDetailsUIState> =
         getCollectPointDetailsUseCase(id = savedStateHandle.get<String?>(CollectPointDetailsDestination.Arguments.ID).orEmpty())
-            .map { beachCollectToStateMapper.map(input = it) }
+            .map { beachCollectToUIStateMapper.map(input = it) }
             .flowOn(defaultDispatcher)
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = CollectPointDetailsState()
+                initialValue = CollectPointDetailsUIState()
             )
 
 }
