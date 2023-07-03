@@ -13,7 +13,7 @@ import com.aplika.core.database.model.CollectEntity
         BeachEntity::class,
         CollectEntity::class
     ],
-    version = 2, // TODO: reduce here to 1 before launch
+    version = 3, // TODO: reduce here to 1 before launch
     exportSchema = false
 )
 abstract class BathabilityDatabase : RoomDatabase() {
