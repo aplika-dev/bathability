@@ -4,6 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -11,10 +14,14 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.aplika.core.navigation.destination.CollectPointDetailsDestination
+import com.aplika.core.resources.R
 import com.aplika.feature.map.ui.MarkerUI
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
@@ -31,6 +38,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun MapUI(
     navController: NavController,
+    drawerState: DrawerState,
     viewModel: MapViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -63,7 +71,10 @@ fun MapUI(
                             coroutineScope.launch {
                                 cameraPositionState.animate(
                                     CameraUpdateFactory.newCameraPosition(
-                                        CameraPosition.fromLatLngZoom(it.position, cameraPositionState.position.zoom)
+                                        CameraPosition.fromLatLngZoom(
+                                            it.position,
+                                            cameraPositionState.position.zoom
+                                        )
                                     )
                                 )
                             }
@@ -72,6 +83,17 @@ fun MapUI(
                 }
             }
         }
+    }
+
+    FloatingActionButton(
+        modifier = Modifier.padding(all = 16.dp),
+        onClick = { coroutineScope.launch { drawerState.open() } }
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_menu), contentDescription = stringResource(
+                id = R.string.ic_menu_content_description
+            )
+        )
     }
 
     if (!cameraPermissionState.status.isGranted) {

@@ -11,4 +11,5 @@
     <string name="ic_close_content_description">Ícone de um X</string>
     <string name="ic_question_mark_content_description">Ícone de um ponto de interrogação</string>
     <string name="ic_map_content_description">Ícone de um mapa</string>
+    <string name="ic_menu_content_description">Ícone de um menu</string>
 </resources>
