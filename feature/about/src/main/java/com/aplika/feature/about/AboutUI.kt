@@ -1,10 +1,15 @@
 package com.aplika.feature.about
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -22,29 +27,40 @@ import com.aplika.core.resources.R
 
 @Composable
 fun AboutUI() {
-    Scaffold {
-        Column(
-            modifier = Modifier.padding(paddingValues = it),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                modifier = Modifier
-                    .fillMaxWidth(fraction = 0.8f)
-                    .padding(top = 24.dp),
-                painter = painterResource(id = R.drawable.ic_aplika_white),
-                contentDescription = stringResource(id = R.string.ic_aplika_white_content_description),
-                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onBackground)
-            )
-            Text(
-                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
-                textAlign = TextAlign.Center,
-                text = stringResource(id = R.string.developed_by_aplika),
-                style = MaterialTheme.typography.titleMedium
-            )
-            val uriHandler = LocalUriHandler.current
+    val uriHandler = LocalUriHandler.current
 
-            FilledIconButton(
-                modifier = Modifier.padding(top = 16.dp),
+    Scaffold {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues = it)
+        ) {
+            Column(
+                modifier = Modifier.align(Alignment.TopCenter),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth(fraction = 0.8f)
+                        .padding(top = 24.dp),
+                    painter = painterResource(id = R.drawable.ic_aplika_white),
+                    contentDescription = stringResource(id = R.string.ic_aplika_white_content_description),
+                    colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onBackground)
+                )
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    textAlign = TextAlign.Center,
+                    text = stringResource(id = R.string.developed_by_aplika),
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+
+            FloatingActionButton(
+                modifier = Modifier
+                    .padding(all = 16.dp)
+                    .align(Alignment.BottomEnd),
                 onClick = { uriHandler.openUri(WHATSAPP_LINK) }
             ) {
                 Icon(
@@ -52,6 +68,8 @@ fun AboutUI() {
                     contentDescription = stringResource(id = R.string.ic_whatsapp_content_description)
                 )
             }
+
+
         }
     }
 }
