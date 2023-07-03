@@ -53,6 +53,7 @@ dependencies {
     api(libs.androidx.hilt.navigation.compose)
     api(libs.navigation.compose)
     api(libs.accompanist.navigation.material)
+    api(libs.accompanist.placeholder.material)
 
     api(libs.lifecycle.viewmodel.compose)
     api(libs.lifecycle.runtime.compose)

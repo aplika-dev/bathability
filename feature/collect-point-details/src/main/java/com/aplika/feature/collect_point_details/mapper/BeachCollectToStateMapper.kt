@@ -10,6 +10,7 @@ import javax.inject.Inject
 class BeachCollectToStateMapper @Inject constructor() : Mapper<BeachCollect, CollectPointDetailsState> {
     override fun map(input: BeachCollect): CollectPointDetailsState {
         return CollectPointDetailsState(
+            isLoading = false,
             title = input.beach,
             description = "${input.city} - ${input.location} - ${input.collectPoint}",
             collects = input.collects.map {

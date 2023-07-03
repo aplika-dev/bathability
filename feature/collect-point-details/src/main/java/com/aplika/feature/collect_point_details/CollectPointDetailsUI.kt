@@ -12,6 +12,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.aplika.feature.collect_point_details.ui.CollectUI
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.placeholder
+import com.google.accompanist.placeholder.material.shimmer
 
 @Composable
 fun CollectPointDetailsUI(
@@ -21,8 +24,23 @@ fun CollectPointDetailsUI(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Column(modifier = Modifier.padding(all = 24.dp)) {
-        Text(text = uiState.title, style = MaterialTheme.typography.headlineSmall)
-        Text(modifier = Modifier.padding(top = 16.dp), text = uiState.title, style = MaterialTheme.typography.bodyMedium)
+        Text(
+            modifier = Modifier.placeholder(
+                visible = uiState.isLoading,
+                highlight = PlaceholderHighlight.shimmer()
+            ),
+            text = uiState.title,
+            style = MaterialTheme.typography.headlineSmall
+        )
+        Text(
+            modifier = Modifier.padding(top = 16.dp)
+                .placeholder(
+                visible = uiState.isLoading,
+                highlight = PlaceholderHighlight.shimmer()
+            ),
+            text = uiState.title,
+            style = MaterialTheme.typography.bodyMedium
+        )
 
         uiState.collects.forEach {
             CollectUI(state = it)
