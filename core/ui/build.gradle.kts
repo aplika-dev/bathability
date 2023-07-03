@@ -54,6 +54,7 @@ dependencies {
     api(libs.navigation.compose)
     api(libs.accompanist.navigation.material)
     api(libs.accompanist.placeholder.material)
+    api(libs.accompanist.permissions)
 
     api(libs.lifecycle.viewmodel.compose)
     api(libs.lifecycle.runtime.compose)
