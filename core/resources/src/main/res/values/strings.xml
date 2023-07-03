@@ -17,4 +17,5 @@
     <string name="ic_info_content_description">Ícone de informações</string>
     <string name="ic_whatsapp_content_description">Ícone do WhatsApp</string>
     <string name="ic_aplika_white_content_description">Ícone da Aplika</string>
+    <string name="ic_arrow_back_content_description">Ícone de uma flecha para a esquerda</string>
 </resources>

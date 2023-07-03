@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(route = MapDestination.route) { MapUI(navController = navController, drawerState = drawerState) }
                         bottomSheet(route = CollectPointDetailsDestination.route) { CollectPointDetailsUI() }
-                        composable(route = AboutDestination.route) { AboutUI() }
+                        composable(route = AboutDestination.route) { AboutUI(navController = navController) }
                     }
                 }
             }

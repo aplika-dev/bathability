@@ -30,9 +30,7 @@ fun MenuUI(
     val selectedItem = rememberSaveable { mutableStateOf(MenuItem.MAP) }
 
     ModalDrawerSheet {
-        Spacer(Modifier.height(12.dp))
-
-        Text(text = stringResource(id = R.string.app_name))
+        Text(modifier = Modifier.padding(all = 16.dp), text = stringResource(id = R.string.app_name))
 
         MenuItem.values().forEach { menuItem ->
             NavigationDrawerItem(
