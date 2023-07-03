@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Balneabilidade by Aplika®</string>
+    <string name="app_name">Balneabilidade</string>
     <string name="no_rain">Sem chuva</string>
     <string name="weak_rain">Chuva fraca</string>
     <string name="moderate_rain">Chuva moderada</string>
@@ -7,6 +7,7 @@
     <string name="escherichia_coli_factor_mask">%d NMP/100mL</string>
     <string name="map">Mapa</string>
     <string name="about_the_app">Sobre o app</string>
+    <string name="developed_by_aplika">Desenvolvido com ❤ por Aplika®</string>
 
     <string name="ic_check_content_description">Ícone de um símbolo de correto</string>
     <string name="ic_close_content_description">Ícone de um X</string>
@@ -14,4 +15,6 @@
     <string name="ic_map_content_description">Ícone de um mapa</string>
     <string name="ic_menu_content_description">Ícone de um menu</string>
     <string name="ic_info_content_description">Ícone de informações</string>
+    <string name="ic_whatsapp_content_description">Ícone do WhatsApp</string>
+    <string name="ic_aplika_white_content_description">Ícone da Aplika</string>
 </resources>

@@ -11,8 +11,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aplika.bathability.ui.theme.BathabilityTheme
+import com.aplika.core.navigation.destination.AboutDestination
 import com.aplika.core.navigation.destination.CollectPointDetailsDestination
 import com.aplika.core.navigation.destination.MapDestination
+import com.aplika.feature.about.AboutUI
 import com.aplika.feature.collect_point_details.CollectPointDetailsUI
 import com.aplika.feature.map.MapUI
 import com.aplika.feature.menu.MenuUI
@@ -47,6 +49,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(route = MapDestination.route) { MapUI(navController = navController, drawerState = drawerState) }
                         bottomSheet(route = CollectPointDetailsDestination.route) { CollectPointDetailsUI() }
+                        composable(route = AboutDestination.route) { AboutUI() }
                     }
                 }
             }
