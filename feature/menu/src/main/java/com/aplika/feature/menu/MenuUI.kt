@@ -10,6 +10,7 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -18,6 +19,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.aplika.core.resources.R
 import kotlinx.coroutines.launch
 
@@ -27,7 +31,8 @@ fun MenuUI(
     drawerState: DrawerState
 ) {
     val coroutineScope = rememberCoroutineScope()
-    val selectedItem = rememberSaveable { mutableStateOf(MenuItem.MAP) }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
 
     ModalDrawerSheet {
         Text(modifier = Modifier.padding(all = 16.dp), text = stringResource(id = R.string.app_name))
@@ -41,13 +46,18 @@ fun MenuUI(
                     )
                 },
                 label = { Text(text = stringResource(id = menuItem.labelResId)) },
-                selected = menuItem == selectedItem.value,
+                selected = currentDestination?.hierarchy?.any { it.route == menuItem.destination.route } == true,
                 onClick = {
                     coroutineScope.launch {
-                        navController.navigate(menuItem.destination.route)
+                        navController.navigate(menuItem.destination.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                         drawerState.close()
                     }
-                    selectedItem.value = menuItem
                 },
                 modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
             )
