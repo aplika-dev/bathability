@@ -67,6 +67,8 @@ dependencies {
 
     implementation(libs.activity.compose)
 
+    implementation(libs.firebase.cloud.messaging)
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 }
