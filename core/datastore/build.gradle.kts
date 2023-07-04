@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.core.datastore"
+    namespace = "dev.aplika.core.datastore"
     compileSdk = 33
 
     defaultConfig {

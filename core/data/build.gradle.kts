@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.core.data"
+    namespace = "dev.aplika.core.data"
     compileSdk = 33
 
     defaultConfig {

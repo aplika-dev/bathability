@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.bathability"
+    namespace = "dev.aplika.bathability"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.aplika.bathability"
+        applicationId = "dev.aplika.bathability"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

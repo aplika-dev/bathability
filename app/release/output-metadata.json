@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.aplika.bathability",
+  "applicationId": "dev.aplika.bathability",
   "variantName": "release",
   "elements": [
     {

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.core.network"
+    namespace = "dev.aplika.core.network"
     compileSdk = 33
 
     defaultConfig {

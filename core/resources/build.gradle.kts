@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.core.resources"
+    namespace = "dev.aplika.core.resources"
     compileSdk = 33
 
     defaultConfig {

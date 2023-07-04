@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.core.navigation"
+    namespace = "dev.aplika.core.navigation"
     compileSdk = 33
 
     defaultConfig {

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.feature.map"
+    namespace = "dev.aplika.feature.map"
     compileSdk = 33
 
     defaultConfig {

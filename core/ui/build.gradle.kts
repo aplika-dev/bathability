@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.core.ui"
+    namespace = "dev.aplika.core.ui"
     compileSdk = 33
 
     defaultConfig {

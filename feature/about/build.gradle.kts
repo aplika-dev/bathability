@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.feature.about"
+    namespace = "dev.aplika.feature.about"
     compileSdk = 33
 
     defaultConfig {

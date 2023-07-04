@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.aplika.feature.menu"
+    namespace = "dev.aplika.feature.menu"
     compileSdk = 33
 
     defaultConfig {
