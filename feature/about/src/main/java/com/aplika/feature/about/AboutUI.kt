@@ -3,13 +3,10 @@ package com.aplika.feature.about
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -32,7 +29,8 @@ import com.aplika.core.resources.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutUI(
-    navController: NavController
+    navController: NavController,
+    versionName: String
 ) {
     val uriHandler = LocalUriHandler.current
 
@@ -90,7 +88,11 @@ fun AboutUI(
                 )
             }
 
-
+            Text(
+                modifier = Modifier.align(Alignment.BottomStart).padding(all = 16.dp),
+                text = stringResource(id = R.string.app_version_mask, formatArgs = arrayOf(versionName)),
+                style = MaterialTheme.typography.bodySmall
+            )
         }
     }
 }

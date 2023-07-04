@@ -8,6 +8,7 @@
     <string name="map">Mapa</string>
     <string name="about_the_app">Sobre o app</string>
     <string name="developed_by_aplika">Desenvolvido com ❤ por Aplika®</string>
+    <string name="app_version_mask">versão %s</string>
 
     <string name="ic_swim_content_description">Ícone de um nadador</string>
     <string name="ic_forbidden_content_description">Ícone de uma negação</string>
