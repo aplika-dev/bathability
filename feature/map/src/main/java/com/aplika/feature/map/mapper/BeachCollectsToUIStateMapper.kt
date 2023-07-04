@@ -19,8 +19,8 @@ class BeachCollectsToUIStateMapper @Inject constructor() : Mapper<List<BeachColl
                     iconResId = when (beachCollect.collects.firstOrNull()?.bathabilitySituation) {
                         BathabilitySituation.APPROPRIATE -> R.drawable.ic_marker_happy
                         BathabilitySituation.INAPPROPRIATE -> R.drawable.ic_marker_sad
-                        BathabilitySituation.UNDETERMINED -> R.drawable.ic_marker_happy
-                        null -> R.drawable.ic_marker_happy
+                        BathabilitySituation.UNDETERMINED -> R.drawable.ic_marker_unknown
+                        null -> R.drawable.ic_marker_unknown
                     },
                     position = LatLng(beachCollect.latitude, beachCollect.longitude)
                 )
