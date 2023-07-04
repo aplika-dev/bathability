@@ -18,7 +18,7 @@ class BeachWithCollectsEntityToBeachCollectMapper @Inject constructor(
             location = input.beach.location,
             latitude = input.beach.latitude,
             longitude = input.beach.longitude,
-            collects = input.collects.mapNotNull { collectEntityToCollectMapper.map(input = it) }
+            collects = input.collects.map { collectEntityToCollectMapper.map(input = it) }.sortedByDescending { it.date }
         )
     }
 }

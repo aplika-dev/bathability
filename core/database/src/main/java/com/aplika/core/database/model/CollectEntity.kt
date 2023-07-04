@@ -11,7 +11,7 @@ data class CollectEntity(
     @ColumnInfo("beach_id")
     val beachId: String,
     @ColumnInfo("date")
-    val date: String,
+    val date: Long,
     @ColumnInfo("bathability_situation")
     val bathabilitySituation: String?,
     @ColumnInfo("rain_situation")
