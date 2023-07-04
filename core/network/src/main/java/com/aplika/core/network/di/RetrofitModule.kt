@@ -22,9 +22,14 @@ internal class RetrofitModule {
         json: Json
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://balneabilidade.ima.sc.gov.br/")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+            .addConverterFactory(json.asConverterFactory(APPLICATION_JSON.toMediaType()))
             .build()
+
+    private companion object {
+        private const val APPLICATION_JSON = "application/json"
+        private const val BASE_URL = "https://balneabilidade.ima.sc.gov.br/"
+    }
 
 }
