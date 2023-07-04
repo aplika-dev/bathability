@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import com.aplika.core.resources.R
 import com.aplika.feature.collect_point_details.state.CollectState
 import com.google.accompanist.placeholder.PlaceholderHighlight
@@ -41,7 +42,8 @@ internal fun CollectUI(
                         visible = state.isLoading,
                         highlight = PlaceholderHighlight.shimmer()
                     ),
-                    text = stringResource(id = state.supportingResId)
+                    text = stringResource(id = state.supportingResId),
+                    fontWeight = FontWeight.Light
                 )
             },
             leadingContent = {
@@ -60,7 +62,8 @@ internal fun CollectUI(
                         visible = state.isLoading,
                         highlight = PlaceholderHighlight.shimmer()
                     ),
-                    text = stringResource(id = R.string.escherichia_coli_factor_mask, formatArgs = arrayOf(state.trailingContent))
+                    text = stringResource(id = R.string.escherichia_coli_factor_mask, formatArgs = arrayOf(state.trailingContent)),
+                    fontWeight = FontWeight.Light
                 )
             }
         )

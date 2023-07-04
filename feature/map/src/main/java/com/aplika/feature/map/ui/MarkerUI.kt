@@ -5,7 +5,6 @@ import com.aplika.feature.map.state.MarkerState
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerInfoWindow
 import com.google.maps.android.compose.rememberMarkerState
 
 @Composable

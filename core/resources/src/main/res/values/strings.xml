@@ -9,9 +9,9 @@
     <string name="about_the_app">Sobre o app</string>
     <string name="developed_by_aplika">Desenvolvido com ❤ por Aplika®</string>
 
-    <string name="ic_check_content_description">Ícone de um símbolo de correto</string>
-    <string name="ic_close_content_description">Ícone de um X</string>
-    <string name="ic_question_mark_content_description">Ícone de um ponto de interrogação</string>
+    <string name="ic_swim_content_description">Ícone de um nadador</string>
+    <string name="ic_forbidden_content_description">Ícone de uma negação</string>
+    <string name="ic_unknown_content_description">Ícone de um ponto de interrogação</string>
     <string name="ic_map_content_description">Ícone de um mapa</string>
     <string name="ic_menu_content_description">Ícone de um menu</string>
     <string name="ic_info_content_description">Ícone de informações</string>

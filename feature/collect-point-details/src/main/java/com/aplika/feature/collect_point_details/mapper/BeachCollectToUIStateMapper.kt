@@ -15,19 +15,20 @@ class BeachCollectToUIStateMapper @Inject constructor() : Mapper<BeachCollect, C
         return CollectPointDetailsUIState(
             isLoading = false,
             title = input.beach,
-            description = "${input.city}\n${input.location} (${input.collectPoint})",
+            subtitle = input.city,
+            description = "${input.location} (${input.collectPoint})",
             collects = input.collects.map {
                 CollectState(
                     isLoading = false,
                     leadingIcon = when (it.bathabilitySituation) {
-                        BathabilitySituation.APPROPRIATE -> R.drawable.ic_check
-                        BathabilitySituation.INAPPROPRIATE -> R.drawable.ic_close
-                        BathabilitySituation.UNDETERMINED -> R.drawable.ic_question_mark
+                        BathabilitySituation.APPROPRIATE -> R.drawable.ic_swim
+                        BathabilitySituation.INAPPROPRIATE -> R.drawable.ic_forbidden
+                        BathabilitySituation.UNDETERMINED -> R.drawable.ic_unknown
                     },
                     leadingContentDescription = when (it.bathabilitySituation) {
-                        BathabilitySituation.APPROPRIATE -> R.string.ic_check_content_description
-                        BathabilitySituation.INAPPROPRIATE -> R.string.ic_close_content_description
-                        BathabilitySituation.UNDETERMINED -> R.string.ic_question_mark_content_description
+                        BathabilitySituation.APPROPRIATE -> R.string.ic_swim_content_description
+                        BathabilitySituation.INAPPROPRIATE -> R.string.ic_forbidden_content_description
+                        BathabilitySituation.UNDETERMINED -> R.string.ic_unknown_content_description
                     },
                     headline = it.date.formatToString(format = "dd/MM/yyyy"),
                     supportingResId = when (it.rainSituation) {
