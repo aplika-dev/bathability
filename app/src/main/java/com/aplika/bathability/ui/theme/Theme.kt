@@ -15,27 +15,78 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+private val LightColorScheme = lightColorScheme(
+    primary = PrimaryLight,
+    onPrimary = OnPrimaryLight,
+    primaryContainer = PrimaryContainerLight,
+    onPrimaryContainer = OnPrimaryContainerLight,
+    secondary = SecondaryLight,
+    onSecondary = OnSecondaryLight,
+    secondaryContainer = SecondaryContainerLight,
+    onSecondaryContainer = OnSecondaryContainerLight,
+    tertiary = TertiaryLight,
+    onTertiary = OnTertiaryLight,
+    tertiaryContainer = TertiaryContainerLight,
+    onTertiaryContainer = OnTertiaryContainerLight,
+    error = ErrorLight,
+    errorContainer = ErrorContainerLight,
+    onError = OnErrorLight,
+    onErrorContainer = OnErrorContainerLight,
+    background = BackgroundLight,
+    onBackground = OnBackgroundLight,
+    surface = SurfaceLight,
+    onSurface = OnSurfaceLight,
+    surfaceVariant = SurfaceVariantLight,
+    onSurfaceVariant = OnSurfaceVariantLight,
+    outline = OutlineLight,
+    inverseOnSurface = InverseOnSurfaceLight,
+    inverseSurface = InverseSurfaceLight,
+    inversePrimary = InversePrimaryLight,
+    surfaceTint = SurfaceTintLight,
+    outlineVariant = OutlineVariantLight,
+    scrim = ScrimLight
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+
+private val DarkColorScheme = darkColorScheme(
+    primary = PrimaryDark,
+    onPrimary = OnPrimaryDark,
+    primaryContainer = PrimaryContainerDark,
+    onPrimaryContainer = OnPrimaryContainerDark,
+    secondary = SecondaryDark,
+    onSecondary = OnSecondaryDark,
+    secondaryContainer = SecondaryContainerDark,
+    onSecondaryContainer = OnSecondaryContainerDark,
+    tertiary = TertiaryDark,
+    onTertiary = OnTertiaryDark,
+    tertiaryContainer = TertiaryContainerDark,
+    onTertiaryContainer = OnTertiaryContainerDark,
+    error = ErrorDark,
+    errorContainer = ErrorContainerDark,
+    onError = OnErrorDark,
+    onErrorContainer = OnErrorContainerDark,
+    background = BackgroundDark,
+    onBackground = OnBackgroundDark,
+    surface = SurfaceDark,
+    onSurface = OnSurfaceDark,
+    surfaceVariant = SurfaceVariantDark,
+    onSurfaceVariant = OnSurfaceVariantDark,
+    outline = OutlineDark,
+    inverseOnSurface = InverseOnSurfaceDark,
+    inverseSurface = InverseSurfaceDark,
+    inversePrimary = InversePrimaryDark,
+    surfaceTint = SurfaceTintDark,
+    outlineVariant = OutlineVariantDark,
+    scrim = Scrim
 )
 
 @Composable
 fun BathabilityTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
@@ -54,7 +105,6 @@ fun BathabilityTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
         content = content
     )
 }
