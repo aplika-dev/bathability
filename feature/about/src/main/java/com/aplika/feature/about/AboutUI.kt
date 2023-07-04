@@ -60,7 +60,7 @@ fun AboutUI(
             ) {
                 Image(
                     modifier = Modifier
-                        .fillMaxWidth(fraction = 0.8f)
+                        .fillMaxWidth(fraction = 0.6f)
                         .padding(top = 24.dp),
                     painter = painterResource(id = R.drawable.ic_aplika_white),
                     contentDescription = stringResource(id = R.string.ic_aplika_white_content_description),
