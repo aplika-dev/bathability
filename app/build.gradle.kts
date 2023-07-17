@@ -33,6 +33,15 @@ android {
         }
     }
 
+    flavorDimensions.add("env")
+    productFlavors {
+        create("dev") {
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+        }
+        create("prod")
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
