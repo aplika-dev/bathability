@@ -14,8 +14,8 @@ class BrBaMonitoringPointDtoToMonitoringPointMapper @Inject constructor() : Mapp
             latitude = input.latLng[0].toDouble(),
             longitude = input.latLng[1].toDouble(),
             bathabilitySituation = when (input.category) {
-                1 -> BathabilitySituation.APPROPRIATE
-                2 -> BathabilitySituation.INAPPROPRIATE
+                1 -> BathabilitySituation.INAPPROPRIATE
+                2 -> BathabilitySituation.APPROPRIATE
                 else -> BathabilitySituation.UNDETERMINED
             }
         )
