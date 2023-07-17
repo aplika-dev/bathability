@@ -1,22 +1,20 @@
 package dev.aplika.core.database.dao
 
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import dev.aplika.core.database.model.BeachWithCollectsEntity
+import dev.aplika.core.database.model.MonitoringPointWithCollectsEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface BeachWithCollectsDao {
+interface MonitoringPointWithCollectsDao {
 
     @Transaction
     @Query("SELECT * FROM `beach`")
-    fun getAll(): Flow<List<BeachWithCollectsEntity>>
+    fun getAll(): Flow<List<MonitoringPointWithCollectsEntity>>
 
     @Transaction
     @Query("SELECT * FROM `beach` WHERE id = :id")
-    fun getById(id: String): Flow<BeachWithCollectsEntity>
+    fun getById(id: String): Flow<MonitoringPointWithCollectsEntity>
 
 }

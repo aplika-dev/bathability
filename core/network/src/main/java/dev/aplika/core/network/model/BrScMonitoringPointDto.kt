@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BeachCollectDto(
+data class BrScMonitoringPointDto(
     @SerialName("CODIGO")
     val cityId: String,
     @SerialName("MUNICIPIO_COD_IBGE")
@@ -22,5 +22,5 @@ data class BeachCollectDto(
     @SerialName("LONGITUDE")
     val longitude: String,
     @SerialName("ANALISES")
-    val collects: List<CollectDto>
+    val collects: List<BrScMonitoringPointCollectDto>
 )

@@ -2,12 +2,9 @@ package dev.aplika.core.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
-import androidx.room.PrimaryKey
 
 @Entity(tableName = "collect", primaryKeys = ["beach_id", "date"])
-data class CollectEntity(
+data class MonitoringPointCollectEntity(
     @ColumnInfo("beach_id")
     val beachId: String,
     @ColumnInfo("date")

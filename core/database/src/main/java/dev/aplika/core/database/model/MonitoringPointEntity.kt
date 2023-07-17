@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "beach")
-data class BeachEntity(
+data class MonitoringPointEntity(
     @PrimaryKey
     val id: String,
     @ColumnInfo("city_ibge_id")

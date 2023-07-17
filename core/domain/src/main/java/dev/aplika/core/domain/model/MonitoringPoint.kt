@@ -1,6 +1,6 @@
 package dev.aplika.core.domain.model
 
-data class BeachCollect(
+data class MonitoringPoint(
     val id: String,
     val cityIbgeId: String,
     val city: String,
@@ -9,5 +9,5 @@ data class BeachCollect(
     val location: String,
     val latitude: Double,
     val longitude: Double,
-    val collects: List<Collect>
+    val monitoringPointCollects: List<MonitoringPointCollect>
 )

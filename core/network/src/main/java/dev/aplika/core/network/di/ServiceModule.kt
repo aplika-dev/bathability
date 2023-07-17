@@ -1,6 +1,6 @@
 package dev.aplika.core.network.di
 
-import dev.aplika.core.network.service.BathabilityService
+import dev.aplika.core.network.service.BrScService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +17,7 @@ internal class ServiceModule {
     @Provides
     fun providesService(
         @BrScRetrofit retrofit: Retrofit
-    ): BathabilityService =
-        retrofit.create(BathabilityService::class.java)
+    ): BrScService =
+        retrofit.create(BrScService::class.java)
 
 }

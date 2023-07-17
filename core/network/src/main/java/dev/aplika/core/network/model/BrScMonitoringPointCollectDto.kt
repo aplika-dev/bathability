@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CollectDto(
+data class BrScMonitoringPointCollectDto(
     @SerialName("DATA")
     val date: String,
     @SerialName("CONDICAO")
