@@ -5,7 +5,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.aplika.core.network.di.annotation.BrBaRetrofit
 import dev.aplika.core.network.di.annotation.BrScRetrofit
+import dev.aplika.core.network.service.BrBaService
 import javax.inject.Singleton
 import retrofit2.Retrofit
 
@@ -15,9 +17,16 @@ internal class ServiceModule {
 
     @Singleton
     @Provides
-    fun providesService(
+    fun providesBrScService(
         @BrScRetrofit retrofit: Retrofit
     ): BrScService =
         retrofit.create(BrScService::class.java)
+
+    @Singleton
+    @Provides
+    fun providesBrBaService(
+        @BrBaRetrofit retrofit: Retrofit
+    ): BrBaService =
+        retrofit.create(BrBaService::class.java)
 
 }
