@@ -8,6 +8,7 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import java.util.concurrent.TimeUnit
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -18,6 +19,13 @@ internal class OkHttpClientModule {
     fun providesOkHttpClient(): OkHttpClient =
         OkHttpClient.Builder()
             .apply { if (BuildConfig.DEBUG) addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)) }
+            .connectTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
             .build()
+
+    private companion object {
+        private const val TIMEOUT_IN_SECONDS = 60L
+    }
 
 }
