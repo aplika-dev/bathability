@@ -1,24 +1,24 @@
 package dev.aplika.core.data.mapper
 
 import dev.aplika.core.android.mapper.Mapper
+import dev.aplika.core.domain.model.BathabilitySituation
 import dev.aplika.core.domain.model.MonitoringPoint
 import dev.aplika.core.network.model.BrScMonitoringPointDto
 import javax.inject.Inject
 
-class BrScMonitoringPointDtoToMonitoringPointMapper @Inject constructor(
-    private val brScMonitoringPointCollectDtoToMonitoringPointCollectMapper: BrScMonitoringPointCollectDtoToMonitoringPointCollectMapper
-) : Mapper<BrScMonitoringPointDto, MonitoringPoint> {
+class BrScMonitoringPointDtoToMonitoringPointMapper @Inject constructor() : Mapper<BrScMonitoringPointDto, MonitoringPoint> {
     override fun map(input: BrScMonitoringPointDto): MonitoringPoint {
         return MonitoringPoint(
             id = input.cityId,
-            cityIbgeId = input.cityIbgeId,
-            city = input.city,
-            collectPoint = input.collectPoint,
-            beach = input.beach,
-            location = input.location,
+            name = input.beach,
+            description = "${input.location} (${input.collectPoint})",
             latitude = input.latitude.toDouble(),
             longitude = input.longitude.toDouble(),
-            monitoringPointCollects = input.collects.mapNotNull { brScMonitoringPointCollectDtoToMonitoringPointCollectMapper.map(input = it) }
+            bathabilitySituation = when (input.collects.firstOrNull()?.bathabilitySituation) {
+                "PRÓPRIO" -> BathabilitySituation.APPROPRIATE
+                "IMPRÓPRIO" -> BathabilitySituation.INAPPROPRIATE
+                else -> BathabilitySituation.UNDETERMINED
+            }
         )
     }
 }
