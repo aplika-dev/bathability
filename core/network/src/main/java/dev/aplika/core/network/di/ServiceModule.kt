@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.aplika.core.network.di.annotation.BrScRetrofit
 import javax.inject.Singleton
 import retrofit2.Retrofit
 
@@ -15,7 +16,7 @@ internal class ServiceModule {
     @Singleton
     @Provides
     fun providesService(
-        retrofit: Retrofit
+        @BrScRetrofit retrofit: Retrofit
     ): BathabilityService =
         retrofit.create(BathabilityService::class.java)
 

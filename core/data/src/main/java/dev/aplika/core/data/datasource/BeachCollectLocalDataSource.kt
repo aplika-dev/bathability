@@ -1,7 +1,7 @@
 package dev.aplika.core.data.datasource
 
-import dev.aplika.core.android.di.DefaultDispatcher
-import dev.aplika.core.android.di.IoDispatcher
+import dev.aplika.core.android.di.annotation.DefaultDispatcher
+import dev.aplika.core.android.di.annotation.IoDispatcher
 import dev.aplika.core.data.mapper.BeachCollectToBeachEntityMapper
 import dev.aplika.core.data.mapper.BeachWithCollectsEntityToBeachCollectMapper
 import dev.aplika.core.data.mapper.CollectWithBeachIdToCollectEntityMapper

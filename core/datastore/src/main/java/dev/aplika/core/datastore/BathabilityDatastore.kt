@@ -3,8 +3,8 @@ package dev.aplika.core.datastore
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
-import dev.aplika.core.android.di.DefaultDispatcher
-import dev.aplika.core.android.di.IoDispatcher
+import dev.aplika.core.android.di.annotation.DefaultDispatcher
+import dev.aplika.core.android.di.annotation.IoDispatcher
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton

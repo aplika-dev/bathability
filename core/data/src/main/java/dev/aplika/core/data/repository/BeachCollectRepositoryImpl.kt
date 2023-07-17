@@ -1,6 +1,6 @@
 package dev.aplika.core.data.repository
 
-import dev.aplika.core.android.di.DefaultDispatcher
+import dev.aplika.core.android.di.annotation.DefaultDispatcher
 import dev.aplika.core.data.datasource.BeachCollectLocalDataSource
 import dev.aplika.core.data.datasource.BeachCollectRemoteDataSource
 import dev.aplika.core.domain.model.BeachCollect

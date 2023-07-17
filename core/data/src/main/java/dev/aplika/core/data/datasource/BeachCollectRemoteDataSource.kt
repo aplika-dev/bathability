@@ -1,7 +1,7 @@
 package dev.aplika.core.data.datasource
 
-import dev.aplika.core.android.di.DefaultDispatcher
-import dev.aplika.core.android.di.IoDispatcher
+import dev.aplika.core.android.di.annotation.DefaultDispatcher
+import dev.aplika.core.android.di.annotation.IoDispatcher
 import dev.aplika.core.data.mapper.BeachCollectDtoToBeachCollectMapper
 import dev.aplika.core.domain.model.BeachCollect
 import dev.aplika.core.network.service.BathabilityService

@@ -3,7 +3,7 @@ package dev.aplika.feature.collect_point_details
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.aplika.core.android.di.DefaultDispatcher
+import dev.aplika.core.android.di.annotation.DefaultDispatcher
 import dev.aplika.core.domain.usecase.GetCollectPointDetailsUseCase
 import dev.aplika.core.navigation.destination.CollectPointDetailsDestination
 import dev.aplika.feature.collect_point_details.mapper.BeachCollectToUIStateMapper

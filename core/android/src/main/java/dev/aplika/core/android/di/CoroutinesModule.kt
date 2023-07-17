@@ -4,18 +4,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Qualifier
+import dev.aplika.core.android.di.annotation.DefaultDispatcher
+import dev.aplika.core.android.di.annotation.IoDispatcher
 import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class IoDispatcher
-
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class DefaultDispatcher
 
 @Module
 @InstallIn(SingletonComponent::class)

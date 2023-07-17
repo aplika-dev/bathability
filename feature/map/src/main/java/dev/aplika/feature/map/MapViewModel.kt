@@ -2,7 +2,7 @@ package dev.aplika.feature.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.aplika.core.android.di.DefaultDispatcher
+import dev.aplika.core.android.di.annotation.DefaultDispatcher
 import dev.aplika.core.domain.usecase.GetBeachCollectsUseCase
 import dev.aplika.core.domain.usecase.SyncBeachCollectsUseCase
 import dev.aplika.core.ui.extensions.asTaskFlow
