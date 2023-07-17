@@ -12,7 +12,7 @@ class GetMonitoringPointDetailsUseCase @Inject constructor(
 ) {
 
     operator fun invoke(id: String): Flow<MonitoringPoint> {
-        return monitoringPointRepository.getById(id = id)
+        TODO()
     }
 
 }

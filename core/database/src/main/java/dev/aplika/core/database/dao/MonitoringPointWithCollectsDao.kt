@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.Flow
 interface MonitoringPointWithCollectsDao {
 
     @Transaction
-    @Query("SELECT * FROM `beach`")
+    @Query("SELECT * FROM `monitoring_point`")
     fun getAll(): Flow<List<MonitoringPointWithCollectsEntity>>
 
     @Transaction
-    @Query("SELECT * FROM `beach` WHERE id = :id")
+    @Query("SELECT * FROM `monitoring_point` WHERE id = :id")
     fun getById(id: String): Flow<MonitoringPointWithCollectsEntity>
 
 }

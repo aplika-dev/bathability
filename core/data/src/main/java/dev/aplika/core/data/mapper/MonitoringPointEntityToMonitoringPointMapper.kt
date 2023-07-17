@@ -5,9 +5,9 @@ import dev.aplika.core.database.model.MonitoringPointEntity
 import dev.aplika.core.domain.model.MonitoringPoint
 import javax.inject.Inject
 
-class MonitoringPointToMonitoringPointEntityMapper @Inject constructor() : Mapper<MonitoringPoint, MonitoringPointEntity> {
-    override fun map(input: MonitoringPoint): MonitoringPointEntity {
-        return MonitoringPointEntity(
+class MonitoringPointEntityToMonitoringPointMapper @Inject constructor() : Mapper<MonitoringPointEntity, MonitoringPoint> {
+    override fun map(input: MonitoringPointEntity): MonitoringPoint {
+        return MonitoringPoint(
             id = input.id,
             latitude = input.latitude,
             longitude = input.longitude,

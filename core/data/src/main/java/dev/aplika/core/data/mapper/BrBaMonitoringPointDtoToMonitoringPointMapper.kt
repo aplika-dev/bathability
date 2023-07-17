@@ -11,8 +11,6 @@ class BrBaMonitoringPointDtoToMonitoringPointMapper @Inject constructor() : Mapp
     override fun map(input: BrBaMonitoringPointDto): MonitoringPoint {
         return MonitoringPoint(
             id = input.id.toString(),
-            name = input.beachName,
-            description = input.location,
             latitude = input.latLng[0].toDouble(),
             longitude = input.latLng[1].toDouble(),
             bathabilitySituation = when (input.category) {

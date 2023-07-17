@@ -9,18 +9,17 @@ import dev.aplika.feature.map.state.MarkerState
 import com.google.android.gms.maps.model.LatLng
 import javax.inject.Inject
 
-class BeachCollectsToUIStateMapper @Inject constructor() : Mapper<List<MonitoringPoint>, MapUIState> {
+class MonitoringPointsToUIStateMapper @Inject constructor() : Mapper<List<MonitoringPoint>, MapUIState> {
     override fun map(input: List<MonitoringPoint>): MapUIState {
         return MapUIState(
             isLoading = false,
             locationList = input.map { beachCollect ->
                 MarkerState(
                     id = beachCollect.id,
-                    iconResId = when (beachCollect.monitoringPointCollects.firstOrNull()?.bathabilitySituation) {
+                    iconResId = when (beachCollect.bathabilitySituation) {
                         BathabilitySituation.APPROPRIATE -> R.drawable.ic_marker_happy
                         BathabilitySituation.INAPPROPRIATE -> R.drawable.ic_marker_sad
                         BathabilitySituation.UNDETERMINED -> R.drawable.ic_marker_unknown
-                        null -> R.drawable.ic_marker_unknown
                     },
                     position = LatLng(beachCollect.latitude, beachCollect.longitude)
                 )

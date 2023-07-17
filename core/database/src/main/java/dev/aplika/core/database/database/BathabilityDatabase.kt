@@ -13,7 +13,7 @@ import dev.aplika.core.database.model.MonitoringPointCollectEntity
         MonitoringPointEntity::class,
         MonitoringPointCollectEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class BathabilityDatabase : RoomDatabase() {

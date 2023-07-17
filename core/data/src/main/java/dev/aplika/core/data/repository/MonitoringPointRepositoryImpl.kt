@@ -25,10 +25,6 @@ class MonitoringPointRepositoryImpl @Inject constructor(
         return localDataSource.getAll()
     }
 
-    override fun getById(id: String): Flow<MonitoringPoint> {
-        return localDataSource.getById(id = id)
-    }
-
     override fun sync(): Flow<Unit> {
         return flow { emit(remoteDataSource.getAll()) }
             .onEach { localDataSource.insertAll(monitoringPoints = it) }

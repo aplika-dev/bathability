@@ -6,7 +6,7 @@ import dev.aplika.core.android.di.annotation.DefaultDispatcher
 import dev.aplika.core.domain.usecase.GetMonitoringPointsUseCase
 import dev.aplika.core.domain.usecase.SyncMonitoringPointsUseCase
 import dev.aplika.core.ui.extensions.asTaskFlow
-import dev.aplika.feature.map.mapper.BeachCollectsToUIStateMapper
+import dev.aplika.feature.map.mapper.MonitoringPointsToUIStateMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,13 +21,13 @@ import javax.inject.Inject
 class MapViewModel @Inject constructor(
     getMonitoringPointsUseCase: GetMonitoringPointsUseCase,
     syncMonitoringPointsUseCase: SyncMonitoringPointsUseCase,
-    private val beachCollectsToUIStateMapper: BeachCollectsToUIStateMapper,
+    private val monitoringPointsToUIStateMapper: MonitoringPointsToUIStateMapper,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     val uiState: StateFlow<MapUIState> =
         getMonitoringPointsUseCase()
-            .map { beachCollectsToUIStateMapper.map(input = it) }
+            .map { monitoringPointsToUIStateMapper.map(input = it) }
             .flowOn(defaultDispatcher)
             .stateIn(
                 scope = viewModelScope,
