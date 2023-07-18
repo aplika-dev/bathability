@@ -36,9 +36,10 @@ dependencies {
     api(project(":core:android"))
     api(project(":core:domain"))
 
-    api(project(":core:network"))
-    api(project(":core:datastore"))
-    api(project(":core:database"))
+    implementation(project(":core:datastore"))
+    implementation(project(":core:database"))
+
+    implementation(project(":datasource:santacatarina"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

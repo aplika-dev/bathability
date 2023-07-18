@@ -1,7 +1,7 @@
 package dev.aplika.core.data.di
 
-import dev.aplika.core.data.repository.BeachCollectRepositoryImpl
-import dev.aplika.core.domain.repository.BeachCollectRepository
+import dev.aplika.core.data.repository.MonitoringPointRepositoryImpl
+import dev.aplika.core.domain.repository.MonitoringPointRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,6 +14,6 @@ abstract class DataModule {
 
     @Singleton
     @Binds
-    abstract fun beachCollectRepository(impl: BeachCollectRepositoryImpl): BeachCollectRepository
+    abstract fun monitoringPointRepository(impl: MonitoringPointRepositoryImpl): MonitoringPointRepository
 
 }

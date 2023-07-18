@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.aplika.core.network"
+    namespace = "dev.aplika.datasource.santacatarina"
     compileSdk = 33
 
     defaultConfig {
@@ -39,16 +39,7 @@ android {
 }
 
 dependencies {
-    api(project(":core:android"))
-    api(project(":core:domain"))
-
-    api(libs.retrofit)
-    api(libs.kotlinx.serialization)
-    api(libs.retrofit.kotlinx.serialization)
-
-    api(platform(libs.okhttp.bom))
-    api(libs.okhttp)
-    api(libs.okhttp.logging.interceptor)
+    implementation(project(":core:network"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
