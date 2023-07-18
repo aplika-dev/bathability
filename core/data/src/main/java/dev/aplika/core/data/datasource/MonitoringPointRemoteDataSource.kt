@@ -2,11 +2,11 @@ package dev.aplika.core.data.datasource
 
 import dev.aplika.core.android.di.annotation.DefaultDispatcher
 import dev.aplika.core.android.di.annotation.IoDispatcher
-import dev.aplika.core.data.mapper.BrBaMonitoringPointDtoToMonitoringPointMapper
-import dev.aplika.core.data.mapper.BrScMonitoringPointDtoToMonitoringPointMapper
+import dev.aplika.core.data.mapper.BahiaMonitoringPointDtoToMonitoringPointMapper
+import dev.aplika.core.data.mapper.SantaCatarinaMonitoringPointDtoToMonitoringPointMapper
 import dev.aplika.core.domain.model.MonitoringPoint
-import dev.aplika.core.network.service.BrBaService
-import dev.aplika.core.network.service.BrScService
+import dev.aplika.core.network.service.BahiaService
+import dev.aplika.core.network.service.SantaCatarinaService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -17,10 +17,10 @@ import javax.inject.Singleton
 
 @Singleton
 class MonitoringPointRemoteDataSource @Inject constructor(
-    private val brScService: BrScService,
-    private val brBaService: BrBaService,
-    private val brScMonitoringPointDtoToMonitoringPointMapper: BrScMonitoringPointDtoToMonitoringPointMapper,
-    private val brBaMonitoringPointDtoToMonitoringPointMapper: BrBaMonitoringPointDtoToMonitoringPointMapper,
+    private val santaCatarinaService: SantaCatarinaService,
+    private val bahiaService: BahiaService,
+    private val santaCatarinaMonitoringPointDtoToMonitoringPointMapper: SantaCatarinaMonitoringPointDtoToMonitoringPointMapper,
+    private val bahiaMonitoringPointDtoToMonitoringPointMapper: BahiaMonitoringPointDtoToMonitoringPointMapper,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
@@ -28,23 +28,23 @@ class MonitoringPointRemoteDataSource @Inject constructor(
     suspend fun getAll(): List<MonitoringPoint> {
         return coroutineScope {
             listOf(
-                async { getBrScMonitoringPoints() },
-                async { getBrBaMonitoringPoints() }
+                async { getSantaCatarinaMonitoringPoints() },
+                async { getBahiaMonitoringPoints() }
             ).awaitAll().flatten()
         }
     }
 
-    private suspend fun getBrScMonitoringPoints(): List<MonitoringPoint> {
+    private suspend fun getSantaCatarinaMonitoringPoints(): List<MonitoringPoint> {
         return withContext(defaultDispatcher) {
-            withContext(ioDispatcher) { brScService.getBeachCollects() }
-                .map { brScMonitoringPointDtoToMonitoringPointMapper.map(input = it) }
+            withContext(ioDispatcher) { santaCatarinaService.getBeachCollects() }
+                .map { santaCatarinaMonitoringPointDtoToMonitoringPointMapper.map(input = it) }
         }
     }
 
-    private suspend fun getBrBaMonitoringPoints(): List<MonitoringPoint> {
+    private suspend fun getBahiaMonitoringPoints(): List<MonitoringPoint> {
         return withContext(defaultDispatcher) {
-            withContext(ioDispatcher) { brBaService.getBeachCollects() }
-                .map { brBaMonitoringPointDtoToMonitoringPointMapper.map(input = it) }
+            withContext(ioDispatcher) { bahiaService.getBeachCollects() }
+                .map { bahiaMonitoringPointDtoToMonitoringPointMapper.map(input = it) }
         }
     }
 

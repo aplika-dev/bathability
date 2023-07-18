@@ -1,13 +1,13 @@
 package dev.aplika.core.network.di
 
-import dev.aplika.core.network.service.BrScService
+import dev.aplika.core.network.service.SantaCatarinaService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import dev.aplika.core.network.di.annotation.BrBaRetrofit
-import dev.aplika.core.network.di.annotation.BrScRetrofit
-import dev.aplika.core.network.service.BrBaService
+import dev.aplika.core.network.di.annotation.BahiaRetrofit
+import dev.aplika.core.network.di.annotation.SantaCatarinaRetrofit
+import dev.aplika.core.network.service.BahiaService
 import javax.inject.Singleton
 import retrofit2.Retrofit
 
@@ -18,15 +18,15 @@ internal class ServiceModule {
     @Singleton
     @Provides
     fun providesBrScService(
-        @BrScRetrofit retrofit: Retrofit
-    ): BrScService =
-        retrofit.create(BrScService::class.java)
+        @SantaCatarinaRetrofit retrofit: Retrofit
+    ): SantaCatarinaService =
+        retrofit.create(SantaCatarinaService::class.java)
 
     @Singleton
     @Provides
     fun providesBrBaService(
-        @BrBaRetrofit retrofit: Retrofit
-    ): BrBaService =
-        retrofit.create(BrBaService::class.java)
+        @BahiaRetrofit retrofit: Retrofit
+    ): BahiaService =
+        retrofit.create(BahiaService::class.java)
 
 }

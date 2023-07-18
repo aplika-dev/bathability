@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BrBaMonitoringPointDto(
+data class BahiaMonitoringPointDto(
     @SerialName("id")
     val id: Int,
     @SerialName("praia")

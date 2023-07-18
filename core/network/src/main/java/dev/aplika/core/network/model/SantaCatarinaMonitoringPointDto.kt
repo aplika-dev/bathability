@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BrScMonitoringPointDto(
+data class SantaCatarinaMonitoringPointDto(
     @SerialName("CODIGO")
     val cityId: String,
     @SerialName("MUNICIPIO_COD_IBGE")

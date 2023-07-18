@@ -3,11 +3,11 @@ package dev.aplika.core.data.mapper
 import dev.aplika.core.android.mapper.Mapper
 import dev.aplika.core.domain.model.BathabilitySituation
 import dev.aplika.core.domain.model.MonitoringPoint
-import dev.aplika.core.network.model.BrScMonitoringPointDto
+import dev.aplika.core.network.model.SantaCatarinaMonitoringPointDto
 import javax.inject.Inject
 
-class BrScMonitoringPointDtoToMonitoringPointMapper @Inject constructor() : Mapper<BrScMonitoringPointDto, MonitoringPoint> {
-    override fun map(input: BrScMonitoringPointDto): MonitoringPoint {
+class SantaCatarinaMonitoringPointDtoToMonitoringPointMapper @Inject constructor() : Mapper<SantaCatarinaMonitoringPointDto, MonitoringPoint> {
+    override fun map(input: SantaCatarinaMonitoringPointDto): MonitoringPoint {
         return MonitoringPoint(
             id = input.cityId,
             latitude = input.latitude.toDouble(),
