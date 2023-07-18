@@ -1,10 +1,10 @@
-package dev.aplika.core.network.model
+package dev.aplika.bathability.network.santacatarina.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SantaCatarinaMonitoringPointDto(
+data class MonitoringPointDto(
     @SerialName("CODIGO")
     val cityId: String,
     @SerialName("MUNICIPIO_COD_IBGE")
@@ -22,5 +22,5 @@ data class SantaCatarinaMonitoringPointDto(
     @SerialName("LONGITUDE")
     val longitude: String,
     @SerialName("ANALISES")
-    val collects: List<BrScMonitoringPointCollectDto>
+    val collects: List<MonitoringPointCollectDto>
 )

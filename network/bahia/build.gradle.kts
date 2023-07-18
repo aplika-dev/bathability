@@ -3,14 +3,19 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
-    namespace = "dev.aplika.core.data"
+    namespace = "dev.aplika.bathability.network.bahia"
     compileSdk = 33
 
     defaultConfig {
         minSdk = 24
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -40,14 +45,7 @@ android {
 }
 
 dependencies {
-    api(project(":core:android"))
-    api(project(":core:domain"))
-
-    implementation(project(":core:datastore"))
-    implementation(project(":core:database"))
-
-    implementation(project(":network:bahia"))
-    implementation(project(":network:santacatarina"))
+    implementation(project(":core:network"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

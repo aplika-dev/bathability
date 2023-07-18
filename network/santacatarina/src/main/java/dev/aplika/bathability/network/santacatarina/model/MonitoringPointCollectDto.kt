@@ -1,10 +1,10 @@
-package dev.aplika.core.network.model
+package dev.aplika.bathability.network.santacatarina.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BrScMonitoringPointCollectDto(
+data class MonitoringPointCollectDto(
     @SerialName("DATA")
     val date: String,
     @SerialName("CONDICAO")

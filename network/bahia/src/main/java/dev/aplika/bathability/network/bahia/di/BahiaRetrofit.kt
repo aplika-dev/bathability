@@ -1,4 +1,4 @@
-package dev.aplika.core.network.di.annotation
+package dev.aplika.bathability.network.bahia.di
 
 import javax.inject.Qualifier
 

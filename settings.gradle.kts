@@ -32,3 +32,6 @@ include(":feature:map")
 include(":feature:collect-point-details")
 include(":feature:menu")
 include(":feature:about")
+
+include(":network:bahia")
+include(":network:santacatarina")

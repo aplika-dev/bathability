@@ -48,13 +48,13 @@ dependencies {
     api(project(":core:android"))
     api(project(":core:domain"))
 
-    implementation(libs.retrofit)
-    implementation(libs.kotlinx.serialization)
-    implementation(libs.retrofit.kotlinx.serialization)
+    api(libs.retrofit)
+    api(libs.kotlinx.serialization)
+    api(libs.retrofit.kotlinx.serialization)
 
-    implementation(platform(libs.okhttp.bom))
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.logging.interceptor)
+    api(platform(libs.okhttp.bom))
+    api(libs.okhttp)
+    api(libs.okhttp.logging.interceptor)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
