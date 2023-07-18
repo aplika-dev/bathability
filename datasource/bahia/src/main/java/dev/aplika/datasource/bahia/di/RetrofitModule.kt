@@ -1,4 +1,4 @@
-package dev.aplika.datasource.santacatarina.di
+package dev.aplika.datasource.bahia.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.aplika.core.network.extensions.APPLICATION_JSON
-import dev.aplika.datasource.santacatarina.annotation.SantaCatarinaRetrofit
+import dev.aplika.datasource.bahia.annotation.BahiaRetrofit
 import javax.inject.Singleton
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -19,7 +19,7 @@ internal class RetrofitModule {
 
     @Singleton
     @Provides
-    @SantaCatarinaRetrofit
+    @BahiaRetrofit
     fun providesRetrofit(
         okHttpClient: OkHttpClient,
         json: Json
@@ -31,7 +31,7 @@ internal class RetrofitModule {
             .build()
 
     private companion object {
-        private const val BASE_URL = "https://balneabilidade.ima.sc.gov.br/"
+        private const val BASE_URL = "https://api-balneabilidade-homo.inema.ba.gov.br/"
     }
 
 }

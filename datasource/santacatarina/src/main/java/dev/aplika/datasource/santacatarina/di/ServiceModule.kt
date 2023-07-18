@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.aplika.datasource.santacatarina.annotation.SantaCatarinaRetrofit
 import dev.aplika.datasource.santacatarina.service.SantaCatarinaService
 import javax.inject.Singleton
 import retrofit2.Retrofit
@@ -15,7 +16,7 @@ internal class ServiceModule {
     @Singleton
     @Provides
     fun providesService(
-        retrofit: Retrofit
+        @SantaCatarinaRetrofit retrofit: Retrofit
     ): SantaCatarinaService =
         retrofit.create(SantaCatarinaService::class.java)
 

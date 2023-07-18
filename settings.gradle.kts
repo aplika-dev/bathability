@@ -34,3 +34,4 @@ include(":feature:menu")
 include(":feature:about")
 
 include(":datasource:santacatarina")
+include(":datasource:bahia")

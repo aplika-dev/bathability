@@ -3,14 +3,19 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
-    namespace = "dev.aplika.core.data"
+    namespace = "dev.aplika.datasource.bahia"
     compileSdk = 33
 
     defaultConfig {
         minSdk = 24
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -22,6 +27,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -33,14 +39,7 @@ android {
 }
 
 dependencies {
-    api(project(":core:android"))
-    api(project(":core:domain"))
-
-    implementation(project(":core:datastore"))
-    implementation(project(":core:database"))
-
-    implementation(project(":datasource:santacatarina"))
-    implementation(project(":datasource:bahia"))
+    implementation(project(":core:network"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
