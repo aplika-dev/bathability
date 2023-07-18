@@ -4,7 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GetDetailsResponseDto(
-    @SerialName("monitoramento")
-    val monitoringPoints: List<MonitoringPointDto>,
+data class CollectDto(
+    @SerialName("data")
+    val date: String,
+    @SerialName("categoria")
+    val category: Int
 )
