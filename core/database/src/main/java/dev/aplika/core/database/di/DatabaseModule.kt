@@ -2,9 +2,7 @@ package dev.aplika.core.database.di
 
 import android.content.Context
 import androidx.room.Room
-import dev.aplika.core.database.dao.BeachDao
-import dev.aplika.core.database.dao.BeachWithCollectsDao
-import dev.aplika.core.database.dao.CollectDao
+import dev.aplika.core.database.dao.MonitoringPointDao
 import dev.aplika.core.database.database.BathabilityDatabase
 import dagger.Module
 import dagger.Provides
@@ -31,26 +29,10 @@ internal class DatabaseModule {
 
     @Singleton
     @Provides
-    fun providesBeachCollectDao(
+    fun providesMonitoringPointDao(
         database: BathabilityDatabase
-    ): BeachWithCollectsDao {
-        return database.beachCollectDao()
-    }
-
-    @Singleton
-    @Provides
-    fun providesBeachDao(
-        database: BathabilityDatabase
-    ): BeachDao {
-        return database.beachDao()
-    }
-
-    @Singleton
-    @Provides
-    fun providesCollectDao(
-        database: BathabilityDatabase
-    ): CollectDao {
-        return database.collectDao()
+    ): MonitoringPointDao {
+        return database.monitoringPointDao()
     }
 
     companion object {

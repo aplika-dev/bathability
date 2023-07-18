@@ -16,8 +16,6 @@ internal fun MarkerUI(
     state: MarkerState,
     onMarkerClick: (marker: Marker) -> Unit
 ) {
-    val option = BitmapFactory.Options()
-    option.inPreferredConfig = Bitmap.Config.ARGB_8888
     Marker(
         state = rememberMarkerState(position = state.position),
         icon = BitmapDescriptorFactory.fromBitmap(LocalContext.current.resourceToBitmap(resId = state.iconResId)),
