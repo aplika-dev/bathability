@@ -4,9 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GetDetailsResponseDto(
+data class BeachDto(
+    @SerialName("id")
+    val id: Int,
+    @SerialName("nome")
+    val name: String,
     @SerialName("monitoramento")
-    val monitoringPoints: List<MonitoringPointDto>,
-    @SerialName("praias")
-    val cities: List<CityDto>
+    val locations: List<LocationDto>
 )
