@@ -26,7 +26,7 @@ class MonitoringPointRepositoryImpl @Inject constructor(
     }
 
     override fun sync(): Flow<Unit> {
-        return flow { emit(remoteDataSource.getAll()) }
+        return remoteDataSource.getAll()
             .onEach { localDataSource.insertAll(monitoringPoints = it) }
             .map {  }
             .flowOn(defaultDispatcher)

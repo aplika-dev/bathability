@@ -1,4 +1,4 @@
-package dev.aplika.core.data.mapper
+package dev.aplika.datasource.santacatarina.mapper
 
 import dev.aplika.core.android.mapper.Mapper
 import dev.aplika.core.domain.model.BathabilitySituation
