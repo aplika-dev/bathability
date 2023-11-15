@@ -9,14 +9,14 @@ plugins {
 
 android {
     namespace = "dev.aplika.bathability"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "dev.aplika.bathability"
         minSdk = 24
-        targetSdk = 33
-        versionCode = 2
-        versionName = "1.0.1"
+        targetSdk = 34
+        versionCode = 3
+        versionName = "1.0.2"
 
         vectorDrawables {
             useSupportLibrary = true
