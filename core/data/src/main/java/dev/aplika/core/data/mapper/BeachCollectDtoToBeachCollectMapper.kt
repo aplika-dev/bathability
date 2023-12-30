@@ -18,7 +18,7 @@ class BeachCollectDtoToBeachCollectMapper @Inject constructor(
             location = input.location,
             latitude = input.latitude.toDouble(),
             longitude = input.longitude.toDouble(),
-            collects = input.collects.mapNotNull { collectDtoToCollectMapper.map(input = it) }
+            collects = input.collects.orEmpty().mapNotNull { collectDtoToCollectMapper.map(input = it) }
         )
     }
 }
