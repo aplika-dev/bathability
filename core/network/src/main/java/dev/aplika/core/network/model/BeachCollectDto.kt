@@ -22,5 +22,5 @@ data class BeachCollectDto(
     @SerialName("LONGITUDE")
     val longitude: String,
     @SerialName("ANALISES")
-    val collects: List<CollectDto>
+    val collects: List<CollectDto>?
 )
