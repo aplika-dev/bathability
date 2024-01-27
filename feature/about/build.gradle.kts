@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "dev.aplika.feature.about"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24

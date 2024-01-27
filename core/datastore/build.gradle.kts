@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "dev.aplika.core.datastore"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24

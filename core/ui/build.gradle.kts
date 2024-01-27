@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "dev.aplika.core.ui"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
