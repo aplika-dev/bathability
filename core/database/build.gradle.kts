@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "dev.aplika.core.database"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
