@@ -10,6 +10,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -96,8 +97,8 @@ fun MapUI(
         )
     }
 
-    if (!cameraPermissionState.status.isGranted) {
-        SideEffect {
+    LaunchedEffect(key1 = cameraPermissionState) {
+        if (!cameraPermissionState.status.isGranted) {
             cameraPermissionState.launchPermissionRequest()
         }
     }
