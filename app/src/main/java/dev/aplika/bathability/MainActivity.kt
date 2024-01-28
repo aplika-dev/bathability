@@ -9,6 +9,7 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -63,8 +64,8 @@ class MainActivity : ComponentActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val notificationsPermissionState = rememberPermissionState(Manifest.permission.POST_NOTIFICATIONS)
-            if (!notificationsPermissionState.status.isGranted) {
-                SideEffect {
+            LaunchedEffect(key1 = notificationsPermissionState) {
+                if (!notificationsPermissionState.status.isGranted) {
                     notificationsPermissionState.launchPermissionRequest()
                 }
             }
