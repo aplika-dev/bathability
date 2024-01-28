@@ -4,20 +4,14 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "beach")
-data class BeachEntity(
+@Entity(tableName = "collect_point")
+data class CollectPointEntity(
     @PrimaryKey
     val id: String,
-    @ColumnInfo("city_ibge_id")
-    val cityIbgeId: String,
+    @ColumnInfo("name")
+    val name: String,
     @ColumnInfo("city")
     val city: String,
-    @ColumnInfo("collect_point")
-    val collectPoint: String,
-    @ColumnInfo("beach")
-    val beach: String,
-    @ColumnInfo("location")
-    val location: String,
     @ColumnInfo("latitude")
     val latitude: Double,
     @ColumnInfo("longitude")

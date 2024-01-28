@@ -1,14 +1,13 @@
 package dev.aplika.core.database.model
 
 import androidx.room.Embedded
-import androidx.room.Entity
 import androidx.room.Relation
 
-data class BeachWithCollectsEntity(
-    @Embedded val beach: BeachEntity,
+data class CollectPointWithCollectsEntity(
+    @Embedded val collectPoint: CollectPointEntity,
     @Relation(
         parentColumn = "id",
-        entityColumn = "beach_id"
+        entityColumn = "collect_point_id"
     )
     val collects: List<CollectEntity>
 )

@@ -1,14 +1,14 @@
 package dev.aplika.core.data.mapper
 
 import dev.aplika.core.android.mapper.Mapper
-import dev.aplika.core.database.model.BeachWithCollectsEntity
+import dev.aplika.core.database.model.CollectPointWithCollectsEntity
 import dev.aplika.core.domain.model.BeachCollect
 import javax.inject.Inject
 
 class BeachWithCollectsEntityToBeachCollectMapper @Inject constructor(
     private val collectEntityToCollectMapper: CollectEntityToCollectMapper
-) : Mapper<BeachWithCollectsEntity, BeachCollect> {
-    override fun map(input: BeachWithCollectsEntity): BeachCollect {
+) : Mapper<CollectPointWithCollectsEntity, BeachCollect> {
+    override fun map(input: CollectPointWithCollectsEntity): BeachCollect {
         return BeachCollect(
             id = input.beach.id,
             cityIbgeId = input.beach.cityIbgeId,
