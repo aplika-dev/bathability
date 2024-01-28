@@ -30,3 +30,5 @@ include(":feature:map")
 include(":feature:collect-point-details")
 include(":feature:menu")
 include(":feature:about")
+
+include(":data:santa_catarina")
