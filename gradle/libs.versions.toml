@@ -7,7 +7,7 @@ activity-compose = "1.8.2"
 compose-bom = "2023.06.01"
 coroutines = "1.7.1"
 javax-inject = "1"
-firebase-bom = "32.7.0"
+firebase-bom = "32.7.1"
 gms = "4.4.0"
 hilt = "2.48"
 datastore = "1.0.0"
@@ -21,10 +21,11 @@ androidx-hilt-navigation-compose = "1.1.0"
 navigation = "2.7.6"
 maps-secrets-gradle-plugin = "2.0.1"
 play-services-maps = "18.2.0"
-play-services-location = "21.0.1"
+play-services-location = "21.1.0"
 maps-compose = "2.8.0"
 maps-ktx = "3.2.1"
 accompanist = "0.30.1"
+inapp-review = "2.0.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -68,6 +69,8 @@ maps-utils-ktx = { group = "com.google.maps.android", name = "maps-utils-ktx", v
 accompanist-navigation-material = { group = "com.google.accompanist", name = "accompanist-navigation-material", version.ref = "accompanist" }
 accompanist-placeholder-material = { group = "com.google.accompanist", name = "accompanist-placeholder-material", version.ref = "accompanist" }
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
+inapp-review = { group = "com.google.android.play", name = "review", version.ref = "inapp-review" }
+inapp-review-ktx = { group = "com.google.android.play", name = "review-ktx", version.ref = "inapp-review" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -1,11 +1,8 @@
 package dev.aplika.feature.collect_point_details
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,11 +12,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import dev.aplika.feature.collect_point_details.ui.CollectUI
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.material.shimmer
+import dev.aplika.feature.collect_point_details.ui.InAppReviewUI
 
 @Composable
 fun CollectPointDetailsUI(
@@ -71,4 +68,5 @@ fun CollectPointDetailsUI(
         }
     }
 
+    InAppReviewUI()
 }
