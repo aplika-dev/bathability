@@ -1,12 +1,12 @@
 package dev.aplika.core.domain.repository
 
-import dev.aplika.core.domain.model.BeachCollect
+import dev.aplika.core.domain.model.CollectPoint
 import kotlinx.coroutines.flow.Flow
 
 interface BeachCollectRepository {
 
-    fun getAll(): Flow<List<BeachCollect>>
-    fun getById(id: String): Flow<BeachCollect>
+    fun getAll(): Flow<List<CollectPoint>>
+    fun getById(id: String): Flow<CollectPoint>
     fun sync(): Flow<Unit>
 
 }

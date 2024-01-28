@@ -3,7 +3,7 @@ package dev.aplika.core.data.datasource
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
 import dev.aplika.core.data.mapper.BeachCollectDtoToBeachCollectMapper
-import dev.aplika.core.domain.model.BeachCollect
+import dev.aplika.core.domain.model.CollectPoint
 import dev.aplika.core.network.service.BathabilityService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -18,7 +18,7 @@ class BeachCollectRemoteDataSource @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
-    suspend fun getAll(): List<BeachCollect> {
+    suspend fun getAll(): List<CollectPoint> {
         val cityListDto = withContext(ioDispatcher) {
             bathabilityService.getBeachCollects()
         }

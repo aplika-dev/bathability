@@ -8,7 +8,7 @@ import dev.aplika.core.data.mapper.CollectWithBeachIdToCollectEntityMapper
 import dev.aplika.core.database.dao.CollectPointDao
 import dev.aplika.core.database.dao.CollectPointWithCollectsDao
 import dev.aplika.core.database.dao.CollectDao
-import dev.aplika.core.domain.model.BeachCollect
+import dev.aplika.core.domain.model.CollectPoint
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -29,23 +29,23 @@ class BeachCollectLocalDataSource @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
-    fun getAll(): Flow<List<BeachCollect>> {
+    fun getAll(): Flow<List<CollectPoint>> {
         return collectPointWithCollectsDao.getAll()
             .flowOn(ioDispatcher)
             .map { list -> list.map { beachWithCollectsEntityToBeachCollectMapper.map(input = it) } }
             .flowOn(defaultDispatcher)
     }
 
-    fun getById(id: String): Flow<BeachCollect> {
+    fun getById(id: String): Flow<CollectPoint> {
         return collectPointWithCollectsDao.getById(id = id)
             .flowOn(ioDispatcher)
             .map { beachWithCollectsEntityToBeachCollectMapper.map(input = it) }
             .flowOn(defaultDispatcher)
     }
 
-    suspend fun insertAll(beachCollects: List<BeachCollect>) {
+    suspend fun insertAll(collectPoints: List<CollectPoint>) {
         val beachEntities = withContext(defaultDispatcher) {
-            beachCollects.map { beachCollectToBeachEntityMapper.map(input = it) }
+            collectPoints.map { beachCollectToBeachEntityMapper.map(input = it) }
         }
 
         withContext(ioDispatcher) {
@@ -53,7 +53,7 @@ class BeachCollectLocalDataSource @Inject constructor(
         }
 
         val collectEntities = withContext(defaultDispatcher) {
-            beachCollects.flatMap { beachCollect -> beachCollect.collects.map { collectWithBeachIdToCollectEntityMapper.map(input = it to beachCollect.id) } }
+            collectPoints.flatMap { beachCollect -> beachCollect.collects.map { collectWithBeachIdToCollectEntityMapper.map(input = it to beachCollect.id) } }
         }
 
         withContext(ioDispatcher) {
