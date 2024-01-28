@@ -14,6 +14,7 @@ import com.google.android.play.core.ktx.requestReview
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
+import dev.aplika.core.android.extensions.monitor
 import kotlinx.coroutines.delay
 
 private const val DELAY_TO_REQUEST_REVIEW_IN_MILLIS = 5000L
@@ -26,7 +27,10 @@ internal fun InAppReviewUI() {
 
     LaunchedEffect(key1 = reviewManager) {
         delay(DELAY_TO_REQUEST_REVIEW_IN_MILLIS)
-        val reviewInfo = reviewManager.requestReview()
-        reviewManager.launchReview(context as Activity, reviewInfo)
+        try {
+            reviewManager.launchReview(context as Activity, reviewManager.requestReview())
+        } catch (throwable: Throwable) {
+            throwable.monitor()
+        }
     }
 }
