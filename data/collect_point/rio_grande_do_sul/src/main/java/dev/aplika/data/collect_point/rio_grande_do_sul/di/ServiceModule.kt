@@ -1,10 +1,10 @@
-package dev.aplika.data.collect_point.santa_catarina.di
+package dev.aplika.data.collect_point.rio_grande_do_sul.di
 
-import dev.aplika.data.collect_point.santa_catarina.service.SantaCatarinaService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.aplika.data.collect_point.rio_grande_do_sul.service.RioGrandeDoSulService
 import javax.inject.Singleton
 import retrofit2.Retrofit
 
@@ -16,7 +16,7 @@ internal class ServiceModule {
     @Provides
     fun providesService(
         retrofit: Retrofit
-    ): SantaCatarinaService =
-        retrofit.create(SantaCatarinaService::class.java)
+    ): RioGrandeDoSulService =
+        retrofit.create(RioGrandeDoSulService::class.java)
 
 }

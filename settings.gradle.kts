@@ -31,3 +31,4 @@ include(":feature:menu")
 include(":feature:about")
 
 include(":data:collect_point:santa_catarina")
+include(":data:collect_point:rio_grande_do_sul")
