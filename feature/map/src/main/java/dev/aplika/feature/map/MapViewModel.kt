@@ -6,7 +6,7 @@ import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.domain.usecase.GetAllCollectPointsUseCase
 import dev.aplika.core.domain.usecase.FetchAllCollectPointsUseCase
 import dev.aplika.core.ui.extensions.asTaskFlow
-import dev.aplika.feature.map.mapper.BeachCollectsToUIStateMapper
+import dev.aplika.feature.map.mapper.SantaCatarinaCollectPointsToUIStateMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,13 +21,13 @@ import javax.inject.Inject
 class MapViewModel @Inject constructor(
     getAllCollectPointsUseCase: GetAllCollectPointsUseCase,
     fetchAllCollectPointsUseCase: FetchAllCollectPointsUseCase,
-    private val beachCollectsToUIStateMapper: BeachCollectsToUIStateMapper,
+    private val santaCatarinaCollectPointsToUIStateMapper: SantaCatarinaCollectPointsToUIStateMapper,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     val uiState: StateFlow<MapUIState> =
         getAllCollectPointsUseCase()
-            .map { beachCollectsToUIStateMapper.map(input = it) }
+            .map { santaCatarinaCollectPointsToUIStateMapper.map(input = it) }
             .flowOn(defaultDispatcher)
             .stateIn(
                 scope = viewModelScope,
