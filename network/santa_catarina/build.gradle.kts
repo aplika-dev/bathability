@@ -3,18 +3,15 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
-    namespace = "dev.aplika.core.network"
+    namespace = "dev.aplika.network.santa_catarina"
     compileSdk = 34
 
     defaultConfig {
         minSdk = 24
-    }
-
-    buildFeatures {
-        buildConfig = true
     }
 
     buildTypes {
@@ -26,7 +23,6 @@ android {
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -38,16 +34,10 @@ android {
 }
 
 dependencies {
-    api(project(":core:android"))
-    api(project(":core:domain"))
+    implementation(project(":core:android"))
+    implementation(project(":core:domain"))
 
-    api(libs.retrofit)
-    api(libs.kotlinx.serialization)
-    implementation(libs.retrofit.kotlinx.serialization)
-
-    implementation(platform(libs.okhttp.bom))
-    api(libs.okhttp)
-    implementation(libs.okhttp.logging.interceptor)
+    implementation(project(":core:network"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

@@ -1,17 +1,17 @@
 package dev.aplika.core.domain.usecase
 
-import dev.aplika.core.domain.model.CollectPoint
 import dev.aplika.core.domain.repository.CollectPointRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GetCollectPointDetailsUseCase @Inject constructor(
+class FetchAllCollectPointsUseCase @Inject constructor(
     private val collectPointRepository: CollectPointRepository
 ) {
 
-    operator fun invoke(id: String): Flow<CollectPoint> =
-        collectPointRepository.getById(id = id)
+    operator fun invoke(): Flow<Unit> {
+        return collectPointRepository.sync()
+    }
 
 }

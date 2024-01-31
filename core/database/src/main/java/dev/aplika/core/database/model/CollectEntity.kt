@@ -2,20 +2,17 @@ package dev.aplika.core.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Index
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "collect", primaryKeys = ["beach_id", "date"])
+@Entity(tableName = "collect", primaryKeys = ["collect_point_id", "date"])
 data class CollectEntity(
-    @ColumnInfo("beach_id")
-    val beachId: String,
+    @ColumnInfo("collect_point_id")
+    val collectPointId: String,
     @ColumnInfo("date")
     val date: Long,
-    @ColumnInfo("bathability_situation")
-    val bathabilitySituation: String?,
-    @ColumnInfo("rain_situation")
-    val rainSituation: String?,
+    @ColumnInfo("bathability_status")
+    val bathabilityStatus: BathabilityStatusEntity?,
+    @ColumnInfo("rain_status")
+    val rainStatus: RainStatusEntity?,
     @ColumnInfo("escherichia_coli_factor")
-    val escherichiaColiFactor: Int
+    val escherichiaColiFactor: Int?
 )

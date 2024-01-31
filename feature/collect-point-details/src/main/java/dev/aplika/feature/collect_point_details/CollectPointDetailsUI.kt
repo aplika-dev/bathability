@@ -50,17 +50,15 @@ fun CollectPointDetailsUI(
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold
             )
-            Text(
-                modifier = Modifier
-                    .padding(horizontal = 24.dp)
-                    .padding(bottom = 16.dp)
-                    .placeholder(
-                        visible = uiState.isLoading,
-                        highlight = PlaceholderHighlight.shimmer()
-                    ),
-                text = uiState.description,
-                style = MaterialTheme.typography.bodyMedium
-            )
+            uiState.description?.let {
+                Text(
+                    modifier = Modifier
+                        .padding(horizontal = 24.dp)
+                        .padding(bottom = 16.dp),
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
 
             uiState.collects.forEach {
                 CollectUI(state = it)
