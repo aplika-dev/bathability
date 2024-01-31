@@ -6,15 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "dev.aplika.core.network"
+    namespace = "dev.aplika.data.collect_point"
     compileSdk = 34
 
     defaultConfig {
         minSdk = 24
-    }
-
-    buildFeatures {
-        buildConfig = true
     }
 
     buildTypes {
@@ -26,7 +22,6 @@ android {
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -41,13 +36,10 @@ dependencies {
     api(project(":core:android"))
     api(project(":core:domain"))
 
-    api(libs.retrofit)
-    api(libs.kotlinx.serialization)
-    implementation(libs.retrofit.kotlinx.serialization)
+    api(project(":core:datastore"))
+    api(project(":core:database"))
 
-    implementation(platform(libs.okhttp.bom))
-    api(libs.okhttp)
-    implementation(libs.okhttp.logging.interceptor)
+    implementation(project(":network:santa_catarina"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

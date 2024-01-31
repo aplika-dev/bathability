@@ -17,7 +17,6 @@ include(":app")
 
 include(":core:network")
 include(":core:database")
-include(":core:data")
 include(":core:domain")
 include(":core:resources")
 include(":core:android")
@@ -31,4 +30,6 @@ include(":feature:collect-point-details")
 include(":feature:menu")
 include(":feature:about")
 
-include(":data:santa_catarina")
+include(":data:collect_point")
+
+include(":network:santa_catarina")

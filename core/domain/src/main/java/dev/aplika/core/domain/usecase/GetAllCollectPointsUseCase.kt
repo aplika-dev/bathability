@@ -7,11 +7,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GetCollectPointDetailsUseCase @Inject constructor(
+class GetAllCollectPointsUseCase @Inject constructor(
     private val collectPointRepository: CollectPointRepository
 ) {
 
-    operator fun invoke(id: String): Flow<CollectPoint> =
-        collectPointRepository.getById(id = id)
+    operator fun invoke(): Flow<List<CollectPoint>> {
+        return collectPointRepository.getAll()
+    }
 
 }
