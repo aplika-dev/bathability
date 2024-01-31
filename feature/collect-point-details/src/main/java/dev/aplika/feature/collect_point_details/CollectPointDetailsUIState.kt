@@ -7,6 +7,6 @@ data class CollectPointDetailsUIState(
     val isLoading: Boolean = true,
     val title: String = String.EMPTY,
     val subtitle: String = String.EMPTY,
-    val description: String? = null,
+    val description: String = String.EMPTY,
     val collects: List<CollectState> = emptyList()
 )

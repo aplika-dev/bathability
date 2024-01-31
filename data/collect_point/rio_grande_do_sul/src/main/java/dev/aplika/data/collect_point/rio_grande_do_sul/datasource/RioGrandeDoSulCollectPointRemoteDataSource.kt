@@ -1,18 +1,18 @@
-package dev.aplika.data.collect_point.santa_catarina.datasource
+package dev.aplika.data.collect_point.rio_grande_do_sul.datasource
 
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
 import dev.aplika.core.domain.model.santa_catarina.SantaCatarinaCollectPoint
+import dev.aplika.data.collect_point.rio_grande_do_sul.service.RioGrandeDoSulService
 import dev.aplika.data.collect_point.santa_catarina.mapper.CollectPointDtoToCollectPointMapper
-import dev.aplika.data.collect_point.santa_catarina.service.SantaCatarinaService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SantaCatarinaCollectPointRemoteDataSource @Inject constructor(
-    private val service: SantaCatarinaService,
+class RioGrandeDoSulCollectPointRemoteDataSource @Inject constructor(
+    private val service: RioGrandeDoSulService,
     private val collectPointDtoToCollectPointMapper: CollectPointDtoToCollectPointMapper,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher

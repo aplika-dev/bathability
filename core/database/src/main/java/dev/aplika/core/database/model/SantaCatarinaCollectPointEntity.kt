@@ -11,7 +11,7 @@ data class SantaCatarinaCollectPointEntity(
     @ColumnInfo("name")
     val name: String,
     @ColumnInfo("description")
-    val description: String?,
+    val description: String,
     @ColumnInfo("city")
     val city: String,
     @ColumnInfo("latitude")

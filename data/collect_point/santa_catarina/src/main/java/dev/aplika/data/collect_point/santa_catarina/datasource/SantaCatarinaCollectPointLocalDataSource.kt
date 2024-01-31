@@ -1,4 +1,4 @@
-package dev.aplika.data.collect_point.datasource
+package dev.aplika.data.collect_point.santa_catarina.datasource
 
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher

@@ -4,7 +4,7 @@ data class SantaCatarinaCollectPoint(
     val id: String,
     val city: String,
     val name: String,
-    val description: String?,
+    val description: String,
     val latitude: Double,
     val longitude: Double,
     val collects: List<SantaCatarinaCollect>
