@@ -11,5 +11,5 @@ data class CollectState(
     @StringRes val leadingContentDescription: Int = Int.ZERO,
     val headline: String = String.EMPTY,
     @StringRes val supportingResId: Int = Int.ZERO,
-    val trailingContent: Int = Int.ZERO
+    val trailingContent: Int? = null
 )

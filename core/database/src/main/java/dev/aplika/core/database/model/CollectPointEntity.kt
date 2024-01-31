@@ -10,6 +10,8 @@ data class CollectPointEntity(
     val id: String,
     @ColumnInfo("name")
     val name: String,
+    @ColumnInfo("description")
+    val description: String?,
     @ColumnInfo("city")
     val city: String,
     @ColumnInfo("latitude")

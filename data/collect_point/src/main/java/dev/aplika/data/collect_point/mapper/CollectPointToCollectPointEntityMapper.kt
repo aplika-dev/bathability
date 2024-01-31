@@ -11,6 +11,7 @@ class CollectPointToCollectPointEntityMapper @Inject constructor() : Mapper<Coll
             id = input.id,
             city = input.city,
             name = input.name,
+            description = input.description,
             latitude = input.latitude,
             longitude = input.longitude
         )

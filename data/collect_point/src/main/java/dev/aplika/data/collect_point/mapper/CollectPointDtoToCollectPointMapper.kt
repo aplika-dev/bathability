@@ -12,7 +12,8 @@ class CollectPointDtoToCollectPointMapper @Inject constructor(
         return CollectPoint(
             id = input.cityId,
             city = input.city,
-            name = "${input.beach} - ${input.location}",
+            name = input.beach,
+            description = "${input.location} (${input.collectPoint})",
             latitude = input.latitude.toDouble(),
             longitude = input.longitude.toDouble(),
             collects = input.collects.orEmpty().mapNotNull { collectDtoToCollectMapper.map(input = it) }

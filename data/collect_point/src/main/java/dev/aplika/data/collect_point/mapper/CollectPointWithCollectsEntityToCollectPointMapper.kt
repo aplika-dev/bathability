@@ -13,6 +13,7 @@ class CollectPointWithCollectsEntityToCollectPointMapper @Inject constructor(
             id = input.collectPoint.id,
             city = input.collectPoint.city,
             name = input.collectPoint.name,
+            description = input.collectPoint.description,
             latitude = input.collectPoint.latitude,
             longitude = input.collectPoint.longitude,
             collects = input.collects.map { collectEntityToCollectMapper.map(input = it) }.sortedByDescending { it.date }

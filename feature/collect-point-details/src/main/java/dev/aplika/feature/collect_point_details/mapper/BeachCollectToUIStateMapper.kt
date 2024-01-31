@@ -14,9 +14,9 @@ class BeachCollectToUIStateMapper @Inject constructor() : Mapper<CollectPoint, C
     override fun map(input: CollectPoint): CollectPointDetailsUIState {
         return CollectPointDetailsUIState(
             isLoading = false,
-            title = input.beach,
+            title = input.name,
             subtitle = input.city,
-            description = "${input.location} (${input.collectPoint})",
+            description = input.description,
             collects = input.collects.map {
                 CollectState(
                     isLoading = false,
@@ -36,6 +36,7 @@ class BeachCollectToUIStateMapper @Inject constructor() : Mapper<CollectPoint, C
                         RainStatus.WEAK -> R.string.weak_rain
                         RainStatus.MODERATE -> R.string.moderate_rain
                         RainStatus.UNKNOWN -> R.string.no_information
+                        null -> R.string.no_information
                     },
                     trailingContent = it.escherichiaColiFactor
                 )
