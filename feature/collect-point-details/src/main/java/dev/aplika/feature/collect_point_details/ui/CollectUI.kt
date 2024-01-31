@@ -57,12 +57,14 @@ internal fun CollectUI(
                 )
             },
             trailingContent = {
-                state.trailingContent?.let {
-                    Text(
-                        text = stringResource(id = R.string.escherichia_coli_factor_mask, formatArgs = arrayOf(it)),
-                        fontWeight = FontWeight.Light
-                    )
-                }
+                Text(
+                    modifier = Modifier.placeholder(
+                        visible = state.isLoading,
+                        highlight = PlaceholderHighlight.shimmer()
+                    ),
+                    text = stringResource(id = R.string.escherichia_coli_factor_mask, formatArgs = arrayOf(state.trailingContent)),
+                    fontWeight = FontWeight.Light
+                )
             }
         )
         Divider()

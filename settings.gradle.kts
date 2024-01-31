@@ -30,6 +30,4 @@ include(":feature:collect-point-details")
 include(":feature:menu")
 include(":feature:about")
 
-include(":data:collect_point")
-
-include(":network:santa_catarina")
+include(":data:collect_point:santa_catarina")

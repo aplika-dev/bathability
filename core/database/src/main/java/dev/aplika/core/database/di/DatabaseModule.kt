@@ -2,9 +2,9 @@ package dev.aplika.core.database.di
 
 import android.content.Context
 import androidx.room.Room
-import dev.aplika.core.database.dao.CollectPointDao
-import dev.aplika.core.database.dao.CollectPointWithCollectsDao
-import dev.aplika.core.database.dao.CollectDao
+import dev.aplika.core.database.dao.SantaCatarinaCollectPointDao
+import dev.aplika.core.database.dao.SantaCatarinaCollectPointWithCollectsDao
+import dev.aplika.core.database.dao.SantaCatarinaCollectDao
 import dev.aplika.core.database.database.BathabilityDatabase
 import dagger.Module
 import dagger.Provides
@@ -31,26 +31,26 @@ internal class DatabaseModule {
 
     @Singleton
     @Provides
-    fun providesCollectPointWithCollectsDao(
+    fun providesSantaCatarinaCollectPointWithCollectsDao(
         database: BathabilityDatabase
-    ): CollectPointWithCollectsDao {
-        return database.collectPointWithCollectsDao()
+    ): SantaCatarinaCollectPointWithCollectsDao {
+        return database.santaCatarinaCollectPointWithCollectsDao()
     }
 
     @Singleton
     @Provides
-    fun providesCollectPointDao(
+    fun providesSantaCatarinaCollectPointDao(
         database: BathabilityDatabase
-    ): CollectPointDao {
-        return database.collectPointDao()
+    ): SantaCatarinaCollectPointDao {
+        return database.santaCatarinaCollectPointDao()
     }
 
     @Singleton
     @Provides
-    fun providesCollectDao(
+    fun providesSantaCatarinaCollectDao(
         database: BathabilityDatabase
-    ): CollectDao {
-        return database.collectDao()
+    ): SantaCatarinaCollectDao {
+        return database.santaCatarinaCollectDao()
     }
 
     companion object {
