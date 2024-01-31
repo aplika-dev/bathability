@@ -1,4 +1,4 @@
-package dev.aplika.network.santa_catarina.mapper
+package dev.aplika.data.collect_point.mapper
 
 import dev.aplika.core.android.mapper.Mapper
 import dev.aplika.core.domain.model.BathabilityStatus

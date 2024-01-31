@@ -4,7 +4,7 @@ import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.data.collect_point.datasource.CollectPointLocalDataSource
 import dev.aplika.core.domain.model.CollectPoint
 import dev.aplika.core.domain.repository.CollectPointRepository
-import dev.aplika.network.santa_catarina.datasource.CollectPointRemoteDataSource
+import dev.aplika.data.collect_point.datasource.CollectPointRemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

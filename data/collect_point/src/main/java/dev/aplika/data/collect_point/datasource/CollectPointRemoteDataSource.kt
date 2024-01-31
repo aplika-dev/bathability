@@ -1,9 +1,9 @@
-package dev.aplika.network.santa_catarina.datasource
+package dev.aplika.data.collect_point.datasource
 
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
 import dev.aplika.core.domain.model.CollectPoint
-import dev.aplika.network.santa_catarina.mapper.CollectPointDtoToCollectPointMapper
+import dev.aplika.data.collect_point.mapper.CollectPointDtoToCollectPointMapper
 import dev.aplika.network.santa_catarina.service.SantaCatarinaService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
