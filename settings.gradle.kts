@@ -30,5 +30,9 @@ include(":feature:collect-point-details")
 include(":feature:menu")
 include(":feature:about")
 
-include(":data:collect_point:santa_catarina")
-include(":data:collect_point:rio_grande_do_sul")
+include(":network:santa_catarina")
+include(":network:rio_grande_do_sul")
+
+include(":data:old:santa_catarina")
+include(":data:old:rio_grande_do_sul")
+include(":data:collect_point")
