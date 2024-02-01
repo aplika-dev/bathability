@@ -5,9 +5,9 @@ import dev.aplika.core.android.di.IoDispatcher
 import dev.aplika.data.collect_point.santa_catarina.mapper.CollectPointToCollectPointEntityMapper
 import dev.aplika.data.collect_point.santa_catarina.mapper.CollectPointWithCollectsEntityToCollectPointMapper
 import dev.aplika.data.collect_point.santa_catarina.mapper.CollectWithBeachIdToCollectEntityMapper
-import dev.aplika.core.database.dao.SantaCatarinaCollectPointDao
-import dev.aplika.core.database.dao.SantaCatarinaCollectPointWithCollectsDao
-import dev.aplika.core.database.dao.SantaCatarinaCollectDao
+import dev.aplika.core.database.dao.CollectPointDao
+import dev.aplika.core.database.dao.CollectPointDetailedDao
+import dev.aplika.core.database.dao.CollectDao
 import dev.aplika.core.domain.model.santa_catarina.SantaCatarinaCollectPoint
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -19,9 +19,9 @@ import javax.inject.Singleton
 
 @Singleton
 class SantaCatarinaCollectPointLocalDataSource @Inject constructor(
-    private val santaCatarinaCollectPointWithCollectsDao: SantaCatarinaCollectPointWithCollectsDao,
-    private val santaCatarinaCollectPointDao: SantaCatarinaCollectPointDao,
-    private val santaCatarinaCollectDao: SantaCatarinaCollectDao,
+    private val collectPointDetailedDao: CollectPointDetailedDao,
+    private val collectPointDao: CollectPointDao,
+    private val collectDao: CollectDao,
     private val collectPointWithCollectsEntityToCollectPointMapper: CollectPointWithCollectsEntityToCollectPointMapper,
     private val collectWithBeachIdToCollectEntityMapper: CollectWithBeachIdToCollectEntityMapper,
     private val collectPointToCollectPointEntityMapper: CollectPointToCollectPointEntityMapper,
@@ -30,14 +30,14 @@ class SantaCatarinaCollectPointLocalDataSource @Inject constructor(
 ) {
 
     fun getAll(): Flow<List<SantaCatarinaCollectPoint>> {
-        return santaCatarinaCollectPointWithCollectsDao.getAll()
+        return collectPointDetailedDao.getAll()
             .flowOn(ioDispatcher)
             .map { list -> list.map { collectPointWithCollectsEntityToCollectPointMapper.map(input = it) } }
             .flowOn(defaultDispatcher)
     }
 
     fun getById(id: String): Flow<SantaCatarinaCollectPoint> {
-        return santaCatarinaCollectPointWithCollectsDao.getById(id = id)
+        return collectPointDetailedDao.getById(id = id)
             .flowOn(ioDispatcher)
             .map { collectPointWithCollectsEntityToCollectPointMapper.map(input = it) }
             .flowOn(defaultDispatcher)
@@ -49,7 +49,7 @@ class SantaCatarinaCollectPointLocalDataSource @Inject constructor(
         }
 
         withContext(ioDispatcher) {
-            santaCatarinaCollectPointDao.insertAll(list = beachEntities)
+            collectPointDao.insertAll(list = beachEntities)
         }
 
         val collectEntities = withContext(defaultDispatcher) {
@@ -57,7 +57,7 @@ class SantaCatarinaCollectPointLocalDataSource @Inject constructor(
         }
 
         withContext(ioDispatcher) {
-            santaCatarinaCollectDao.insertAll(list = collectEntities)
+            collectDao.insertAll(list = collectEntities)
         }
     }
 

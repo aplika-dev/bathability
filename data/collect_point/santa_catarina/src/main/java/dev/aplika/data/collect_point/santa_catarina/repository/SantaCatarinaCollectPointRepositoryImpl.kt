@@ -3,7 +3,6 @@ package dev.aplika.data.collect_point.santa_catarina.repository
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.data.collect_point.santa_catarina.datasource.SantaCatarinaCollectPointLocalDataSource
 import dev.aplika.core.domain.model.santa_catarina.SantaCatarinaCollectPoint
-import dev.aplika.core.domain.repository.SantaCatarinaCollectPointRepository
 import dev.aplika.data.collect_point.santa_catarina.datasource.SantaCatarinaCollectPointRemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

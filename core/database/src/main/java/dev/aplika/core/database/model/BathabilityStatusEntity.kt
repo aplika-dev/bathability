@@ -1,6 +1,6 @@
 package dev.aplika.core.database.model
 
-enum class SantaCatarinaBathabilityStatusEntity {
+enum class BathabilityStatusEntity {
     APPROPRIATE,
     INAPPROPRIATE,
     UNDETERMINED
