@@ -33,11 +33,7 @@ android {
 }
 
 dependencies {
-    api(project(":core:android"))
-    api(project(":core:domain"))
-
-    api(project(":core:datastore"))
-    api(project(":core:database"))
+    implementation(project(":core:data"))
 
     implementation(project(":network:santa_catarina"))
     implementation(project(":network:rio_grande_do_sul"))

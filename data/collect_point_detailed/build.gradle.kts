@@ -1,10 +1,12 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlinKapt)
 }
 
 android {
-    namespace = "dev.aplika.core.navigation"
+    namespace = "dev.aplika.data.collect_point_detailed"
     compileSdk = 34
 
     defaultConfig {
@@ -20,7 +22,6 @@ android {
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -32,6 +33,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:android"))
-    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+
+    implementation(project(":network:santa_catarina"))
+    implementation(project(":network:rio_grande_do_sul"))
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

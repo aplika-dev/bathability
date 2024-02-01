@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.domain.usecase.GetCollectPointDetailedByIdUseCase
 import dev.aplika.core.navigation.destination.CollectPointDetailsDestination
-import dev.aplika.feature.collect_point_details.mapper.SantaCatarinaCollectPointToUIStateMapper
+import dev.aplika.feature.collect_point_details.mapper.CollectPointDetailedToUIStateMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.aplika.core.domain.model.CollectPointId
+import dev.aplika.core.domain.model.LocalityGroup
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -20,13 +22,18 @@ import javax.inject.Inject
 class CollectPointDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getCollectPointDetailedByIdUseCase: GetCollectPointDetailedByIdUseCase,
-    private val santaCatarinaCollectPointToUIStateMapper: SantaCatarinaCollectPointToUIStateMapper,
+    private val collectPointDetailedToUIStateMapper: CollectPointDetailedToUIStateMapper,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
+    private val collectPointId = CollectPointId(
+        id = savedStateHandle.get<String>(CollectPointDetailsDestination.Arguments.ID).orEmpty(),
+        localityGroup = LocalityGroup.valueOf(savedStateHandle.get<String>(CollectPointDetailsDestination.Arguments.LOCALITY_GROUP).orEmpty())
+    )
+
     val uiState: StateFlow<CollectPointDetailsUIState> =
-        getCollectPointDetailedByIdUseCase(id = savedStateHandle.get<String?>(CollectPointDetailsDestination.Arguments.ID).orEmpty())
-            .map { santaCatarinaCollectPointToUIStateMapper.map(input = it) }
+        getCollectPointDetailedByIdUseCase(id = collectPointId)
+            .map { collectPointDetailedToUIStateMapper.map(input = it) }
             .flowOn(defaultDispatcher)
             .stateIn(
                 scope = viewModelScope,

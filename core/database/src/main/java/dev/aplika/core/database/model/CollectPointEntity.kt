@@ -9,6 +9,7 @@ import dev.aplika.core.domain.model.CollectPointId
 @Entity(tableName = "collect_point")
 data class CollectPointEntity(
     @PrimaryKey
+    @Embedded
     val id: CollectPointIdEntity,
     @ColumnInfo("latitude")
     val latitude: Double,

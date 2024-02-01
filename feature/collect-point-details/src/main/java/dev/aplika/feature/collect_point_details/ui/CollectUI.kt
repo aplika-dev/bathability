@@ -62,7 +62,7 @@ internal fun CollectUI(
                         visible = state.isLoading,
                         highlight = PlaceholderHighlight.shimmer()
                     ),
-                    text = stringResource(id = R.string.escherichia_coli_factor_mask, formatArgs = arrayOf(state.trailingContent)),
+                    text = state.trailingContent?.let { stringResource(id = R.string.escherichia_coli_factor_mask, formatArgs = arrayOf(it)) }.orEmpty(),
                     fontWeight = FontWeight.Light
                 )
             }

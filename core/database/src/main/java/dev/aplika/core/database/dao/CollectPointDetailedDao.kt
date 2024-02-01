@@ -19,6 +19,6 @@ interface CollectPointDetailedDao {
 
     @Transaction
     @Query("SELECT * FROM `collect_point_detailed` WHERE id = :id")
-    fun getById(id: CollectPointIdEntity): Flow<CollectPointDetailedWithCollectsEntity>
+    fun getById(id: CollectPointIdEntity): Flow<CollectPointDetailedWithCollectsEntity?>
 
 }

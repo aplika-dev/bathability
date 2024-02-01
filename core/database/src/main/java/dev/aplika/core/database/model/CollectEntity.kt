@@ -1,11 +1,12 @@
 package dev.aplika.core.database.model
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 
 @Entity(tableName = "collect", primaryKeys = ["collect_point_id", "date"])
 data class CollectEntity(
-    @ColumnInfo("collect_point_id")
+    @Embedded
     val collectPointId: CollectPointIdEntity,
     @ColumnInfo("date")
     val date: Long,
