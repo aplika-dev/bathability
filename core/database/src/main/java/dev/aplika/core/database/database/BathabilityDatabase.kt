@@ -7,11 +7,13 @@ import dev.aplika.core.database.dao.CollectPointDetailedDao
 import dev.aplika.core.database.dao.CollectDao
 import dev.aplika.core.database.model.CollectPointEntity
 import dev.aplika.core.database.model.CollectEntity
+import dev.aplika.core.database.model.CollectPointDetailedEntity
 
 @Database(
     entities = [
+        CollectEntity::class,
         CollectPointEntity::class,
-        CollectEntity::class
+        CollectPointDetailedEntity::class
     ],
     version = 2,
     exportSchema = false

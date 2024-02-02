@@ -4,21 +4,20 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
-import dev.aplika.core.database.model.CollectPointDetailedWithCollectsEntity
-import dev.aplika.core.database.model.CollectPointEntity
-import dev.aplika.core.database.model.CollectPointIdEntity
-import dev.aplika.core.domain.model.CollectPointId
+import androidx.room.Upsert
+import dev.aplika.core.database.model.CollectEntity
+import dev.aplika.core.database.model.CollectPointDetailedEntity
+import dev.aplika.core.domain.model.LocalityGroup
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 
 @Dao
 interface CollectPointDetailedDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(item: CollectPointDetailedWithCollectsEntity)
+    @Upsert
+    suspend fun insert(item: CollectPointDetailedEntity)
 
-    @Transaction
-    @Query("SELECT * FROM `collect_point_detailed` WHERE id = :id")
-    fun getById(id: CollectPointIdEntity): Flow<CollectPointDetailedWithCollectsEntity?>
+    @Query("SELECT * FROM `collect_point_detailed` WHERE id = :id AND locality_group = :localityGroup")
+    fun getCollectPointDetailsById(id: String, localityGroup: LocalityGroup): Flow<CollectPointDetailedEntity?>
 
 }

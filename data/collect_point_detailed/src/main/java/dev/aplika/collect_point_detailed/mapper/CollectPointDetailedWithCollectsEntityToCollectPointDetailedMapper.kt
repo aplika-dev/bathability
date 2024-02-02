@@ -2,7 +2,6 @@ package dev.aplika.collect_point_detailed.mapper
 
 import dev.aplika.core.android.mapper.Mapper
 import dev.aplika.core.data.mapper.CollectPointIdEntityToCollectPointIdMapper
-import dev.aplika.core.database.model.CollectPointDetailedWithCollectsEntity
 import dev.aplika.core.domain.model.CollectPointDetailed
 import javax.inject.Inject
 
