@@ -79,7 +79,7 @@ fun MapUI(
                                     )
                                 )
                             }
-                            navController.navigate(CollectPointDetailsDestination(id = state.id))
+                            navController.navigate(CollectPointDetailsDestination(localityGroup = state.localityGroup, id = state.id))
                         })
                 }
             }

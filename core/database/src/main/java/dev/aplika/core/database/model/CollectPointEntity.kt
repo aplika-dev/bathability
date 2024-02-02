@@ -1,11 +1,8 @@
 package dev.aplika.core.database.model
 
 import androidx.room.ColumnInfo
-import androidx.room.Embedded
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import dev.aplika.core.domain.model.BathabilityStatus
-import dev.aplika.core.domain.model.CollectPointId
 import dev.aplika.core.domain.model.LocalityGroup
 
 @Entity(tableName = "collect_point", primaryKeys = ["id", "locality_group"])

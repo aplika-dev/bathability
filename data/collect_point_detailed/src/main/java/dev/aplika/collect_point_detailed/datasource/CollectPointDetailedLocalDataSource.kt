@@ -1,39 +1,54 @@
 package dev.aplika.collect_point_detailed.datasource
 
-import dev.aplika.collect_point_detailed.mapper.CollectPointDetailedWithCollectsEntityToCollectPointDetailedMapper
+import dev.aplika.collect_point_detailed.mapper.CollectPointDetailedEntityWithCollectsEntityToCollectPointDetailedMapper
+import dev.aplika.collect_point_detailed.model.CollectPointDetailedEntityWithCollectsEntity
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
-import dev.aplika.core.data.mapper.CollectPointIdToCollectPointIdEntityMapper
+import dev.aplika.core.database.dao.CollectDao
 import dev.aplika.core.database.dao.CollectPointDetailedDao
+import dev.aplika.core.database.model.CollectEntity
+import dev.aplika.core.database.model.CollectPointDetailedEntity
 import dev.aplika.core.domain.model.CollectPointDetailed
-import dev.aplika.core.domain.model.CollectPointId
+import dev.aplika.core.domain.model.LocalityGroup
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.combine
 
 @Singleton
 class CollectPointDetailedLocalDataSource @Inject constructor(
+    private val collectDao: CollectDao,
     private val collectPointDetailedDao: CollectPointDetailedDao,
-    private val collectPointIdToCollectPointIdEntityMapper: CollectPointIdToCollectPointIdEntityMapper,
-    private val collectPointDetailedWithCollectsEntityToCollectPointDetailedMapper: CollectPointDetailedWithCollectsEntityToCollectPointDetailedMapper,
+    private val collectPointDetailedEntityWithCollectsEntityToCollectPointDetailedMapper: CollectPointDetailedEntityWithCollectsEntityToCollectPointDetailedMapper,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    fun getById(id: CollectPointId): Flow<CollectPointDetailed?> {
-        return flowOf(collectPointIdToCollectPointIdEntityMapper.map(input = id))
+    fun getById(id: String, localityGroup: LocalityGroup): Flow<CollectPointDetailed?> {
+        return getCollectPointDetailedEntityById(id = id, localityGroup = localityGroup)
+            .combine(getAllByCollectPointIdAndLocalityGroup(id = id, localityGroup = localityGroup)) { collectPointDetailed, collects ->
+                collectPointDetailed?.let {
+                    collectPointDetailedEntityWithCollectsEntityToCollectPointDetailedMapper.map(
+                        input = CollectPointDetailedEntityWithCollectsEntity(
+                            collectPointDetailed = it,
+                            collects = collects
+                        )
+                    )
+                }
+            }
             .flowOn(defaultDispatcher)
-            .flatMapLatest { collectPointDetailedDao.getById(id = it) }
+    }
+
+    private fun getCollectPointDetailedEntityById(id: String, localityGroup: LocalityGroup): Flow<CollectPointDetailedEntity?> {
+        return collectPointDetailedDao.getCollectPointDetailedById(id = id, localityGroup = localityGroup)
             .flowOn(ioDispatcher)
-            .map { entity -> entity?.let { collectPointDetailedWithCollectsEntityToCollectPointDetailedMapper.map(input = entity) } }
-            .flowOn(defaultDispatcher)
+    }
+
+    private fun getAllByCollectPointIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<List<CollectEntity>> {
+        return collectDao.getAllByCollectPointIdAndLocalityGroup(id = id, localityGroup = localityGroup)
+            .flowOn(ioDispatcher)
     }
 
 }

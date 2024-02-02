@@ -15,7 +15,7 @@ internal class ServiceModule {
     @Singleton
     @Provides
     fun providesService(
-        retrofit: Retrofit
+        @SantaCatarinaRetrofit retrofit: Retrofit
     ): SantaCatarinaService =
         retrofit.create(SantaCatarinaService::class.java)
 

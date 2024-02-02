@@ -1,7 +1,8 @@
 package dev.aplika.core.domain.model
 
 data class CollectPointDetailed(
-    val id: CollectPointId,
+    val id: String,
+    val localityGroup: LocalityGroup,
     val name: String,
     val city: String,
     val latitude: Double,

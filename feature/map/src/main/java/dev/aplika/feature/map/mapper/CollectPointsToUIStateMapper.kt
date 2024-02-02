@@ -16,6 +16,7 @@ class CollectPointsToUIStateMapper @Inject constructor() : Mapper<List<CollectPo
             locationList = input.map { collectPoint ->
                 MarkerState(
                     id = collectPoint.id,
+                    localityGroup = collectPoint.localityGroup,
                     iconResId = when (collectPoint.latestBathabilityStatus) {
                         BathabilityStatus.APPROPRIATE -> R.drawable.ic_marker_happy
                         BathabilityStatus.INAPPROPRIATE -> R.drawable.ic_marker_sad
