@@ -7,5 +7,6 @@ import kotlinx.coroutines.flow.Flow
 interface CollectPointDetailedRepository {
 
     fun getByIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<CollectPointDetailed>
+    fun insertAll(items: List<CollectPointDetailed>): Flow<Unit>
 
 }

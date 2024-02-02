@@ -16,7 +16,7 @@ class CollectPointDetailedEntityWithCollectsEntityToCollectPointDetailedMapper @
             city = input.collectPointDetailed.city,
             latitude = input.collectPointDetailed.latitude,
             longitude = input.collectPointDetailed.longitude,
-            latestCollects = input.collects.map { collectEntityToCollectMapper.map(input = it) }
+            latestCollects = input.collects.map { collectEntityToCollectMapper.map(input = it) }.sortedByDescending { it.date }
         )
     }
 }

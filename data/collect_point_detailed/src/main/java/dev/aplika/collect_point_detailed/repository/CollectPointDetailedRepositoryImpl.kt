@@ -25,4 +25,8 @@ class CollectPointDetailedRepositoryImpl @Inject constructor(
             .filterNotNull() //TODO
             .flowOn(defaultDispatcher)
     }
+
+    override fun insertAll(items: List<CollectPointDetailed>): Flow<Unit> {
+        return localDataSource.insertAll(items = items)
+    }
 }

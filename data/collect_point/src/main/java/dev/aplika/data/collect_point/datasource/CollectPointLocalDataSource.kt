@@ -13,6 +13,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.onEach
 
 @Singleton
 class CollectPointLocalDataSource @Inject constructor(
@@ -30,14 +32,12 @@ class CollectPointLocalDataSource @Inject constructor(
             .flowOn(defaultDispatcher)
     }
 
-    suspend fun insertAll(collectPoints: List<CollectPoint>) {
-        val collectPointEntities = withContext(defaultDispatcher) {
-            collectPoints.map { collectPointToCollectPointEntityMapper.map(input = it) }
-        }
-
-        withContext(ioDispatcher) {
-            collectPointDao.insertAll(list = collectPointEntities)
-        }
+    fun insertAll(collectPoints: List<CollectPoint>): Flow<Unit> {
+        return flowOf(collectPoints)
+            .map { list -> list.map { collectPointToCollectPointEntityMapper.map(input = it) } }
+            .flowOn(defaultDispatcher)
+            .map { collectPointDao.insertAll(list = it) }
+            .flowOn(ioDispatcher)
     }
 
 }

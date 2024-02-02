@@ -1,6 +1,8 @@
 package dev.aplika.collect_point_detailed.datasource
 
 import dev.aplika.collect_point_detailed.mapper.CollectPointDetailedEntityWithCollectsEntityToCollectPointDetailedMapper
+import dev.aplika.collect_point_detailed.mapper.CollectPointDetailedToCollectEntityListMapper
+import dev.aplika.collect_point_detailed.mapper.CollectPointDetailedToCollectPointDetailedEntityMapper
 import dev.aplika.collect_point_detailed.model.CollectPointDetailedEntityWithCollectsEntity
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
@@ -16,15 +18,42 @@ import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 @Singleton
 class CollectPointDetailedLocalDataSource @Inject constructor(
     private val collectDao: CollectDao,
     private val collectPointDetailedDao: CollectPointDetailedDao,
     private val collectPointDetailedEntityWithCollectsEntityToCollectPointDetailedMapper: CollectPointDetailedEntityWithCollectsEntityToCollectPointDetailedMapper,
+    private val collectPointDetailedToCollectPointDetailedEntityMapper: CollectPointDetailedToCollectPointDetailedEntityMapper,
+    private val collectPointDetailedToCollectEntityListMapper: CollectPointDetailedToCollectEntityListMapper,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
+
+    fun insertAll(items: List<CollectPointDetailed>): Flow<Unit> {
+        return combine(
+            insertAllCollect(items = items),
+            insertAllCollectPointDetailed(items = items),
+        ) { _, _ -> }
+    }
+
+    private fun insertAllCollect(items: List<CollectPointDetailed>): Flow<Unit> {
+        return flowOf(items)
+            .map { list -> list.flatMap { collectPointDetailedToCollectEntityListMapper.map(input = it) } }
+            .flowOn(defaultDispatcher)
+            .map { collectDao.insertAll(list = it) }
+            .flowOn(ioDispatcher)
+    }
+
+    private fun insertAllCollectPointDetailed(items: List<CollectPointDetailed>): Flow<Unit> {
+        return flowOf(items)
+            .map { list -> list.map { collectPointDetailedToCollectPointDetailedEntityMapper.map(input = it) } }
+            .flowOn(defaultDispatcher)
+            .map { collectPointDetailedDao.insertAll(list = it) }
+            .flowOn(ioDispatcher)
+    }
 
     fun getById(id: String, localityGroup: LocalityGroup): Flow<CollectPointDetailed?> {
         return getCollectPointDetailedEntityById(id = id, localityGroup = localityGroup)
