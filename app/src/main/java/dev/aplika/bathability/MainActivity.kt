@@ -10,7 +10,6 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,7 +18,7 @@ import dev.aplika.core.navigation.destination.AboutDestination
 import dev.aplika.core.navigation.destination.CollectPointDetailsDestination
 import dev.aplika.core.navigation.destination.MapDestination
 import dev.aplika.feature.about.AboutUI
-import dev.aplika.feature.collect_point_details.CollectPointDetailsUI
+import dev.aplika.feature.collect_point_detailed.CollectPointDetailsUI
 import dev.aplika.feature.map.MapUI
 import dev.aplika.feature.menu.MenuUI
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi

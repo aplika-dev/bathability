@@ -13,7 +13,7 @@ class RioGrandeDoSulCollectDtoToCollectMapper @Inject constructor(
 ) : Mapper<CollectDto, Collect?> {
     override fun map(input: CollectDto): Collect? {
         return Collect(
-            date = SimpleDateFormat("dd/MM/yyyy", Locale("pt", "BR")).parse(input.date) ?: return null,
+            date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale("pt", "BR")).parse(input.date) ?: return null,
             bathabilityStatus = rioGrandeDoSulBathabilityStatusCodeDtoToBathabilityStatusMapper.map(input = input.status),
             rainStatus = null,
             escherichiaColiFactor = null

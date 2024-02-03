@@ -1,4 +1,4 @@
-package dev.aplika.feature.collect_point_details
+package dev.aplika.feature.collect_point_detailed
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.domain.usecase.GetCollectPointWithCollectsByIdAndLocalityGroupUseCase
 import dev.aplika.core.navigation.destination.CollectPointDetailsDestination
-import dev.aplika.feature.collect_point_details.mapper.CollectPointDetailedToUIStateMapper
+import dev.aplika.feature.collect_point_detailed.mapper.CollectPointWithCollectsToUIStateMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.aplika.core.domain.model.LocalityGroup
 import kotlinx.coroutines.CoroutineDispatcher
@@ -18,24 +18,24 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class CollectPointDetailsViewModel @Inject constructor(
+class CollectPointDetailedViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getCollectPointWithCollectsByIdAndLocalityGroupUseCase: GetCollectPointWithCollectsByIdAndLocalityGroupUseCase,
-    private val collectPointDetailedToUIStateMapper: CollectPointDetailedToUIStateMapper,
+    private val collectPointWithCollectsToUIStateMapper: CollectPointWithCollectsToUIStateMapper,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val id by lazy { checkNotNull(savedStateHandle.get<String>(CollectPointDetailsDestination.Arguments.ID)) }
     private val localityGroup by lazy { LocalityGroup.valueOf(checkNotNull(savedStateHandle.get<String>(CollectPointDetailsDestination.Arguments.LOCALITY_GROUP))) }
 
-    val uiState: StateFlow<CollectPointDetailsUIState> =
+    val uiState: StateFlow<CollectPointDetailedUIState> =
         getCollectPointWithCollectsByIdAndLocalityGroupUseCase(id = id, localityGroup = localityGroup)
-            .map { collectPointDetailedToUIStateMapper.map(input = it) }
+            .map { collectPointWithCollectsToUIStateMapper.map(input = it) }
             .flowOn(defaultDispatcher)
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = CollectPointDetailsUIState()
+                initialValue = CollectPointDetailedUIState()
             )
 
 }

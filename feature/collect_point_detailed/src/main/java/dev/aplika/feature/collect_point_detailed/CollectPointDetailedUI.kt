@@ -1,4 +1,4 @@
-package dev.aplika.feature.collect_point_details
+package dev.aplika.feature.collect_point_detailed
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -12,15 +12,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import dev.aplika.feature.collect_point_details.ui.CollectUI
+import dev.aplika.feature.collect_point_detailed.ui.CollectUI
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.material.shimmer
-import dev.aplika.feature.collect_point_details.ui.InAppReviewUI
+import dev.aplika.feature.collect_point_detailed.ui.InAppReviewUI
 
 @Composable
 fun CollectPointDetailsUI(
-    viewModel: CollectPointDetailsViewModel = hiltViewModel()
+    viewModel: CollectPointDetailedViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

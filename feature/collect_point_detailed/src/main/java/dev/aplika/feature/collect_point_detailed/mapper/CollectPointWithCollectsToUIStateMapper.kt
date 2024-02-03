@@ -1,21 +1,22 @@
-package dev.aplika.feature.collect_point_details.mapper
+package dev.aplika.feature.collect_point_detailed.mapper
 
 import dev.aplika.core.android.mapper.Mapper
 import dev.aplika.core.domain.model.BathabilityStatus
+import dev.aplika.core.domain.model.CollectPointWithCollects
 import dev.aplika.core.domain.model.RainStatus
 import dev.aplika.core.kotlin.extensions.formatToString
 import dev.aplika.core.resources.R
-import dev.aplika.feature.collect_point_details.CollectPointDetailsUIState
-import dev.aplika.feature.collect_point_details.state.CollectState
+import dev.aplika.feature.collect_point_detailed.CollectPointDetailedUIState
+import dev.aplika.feature.collect_point_detailed.state.CollectState
 import javax.inject.Inject
 
-class CollectPointDetailedToUIStateMapper @Inject constructor() : Mapper<CollectPointDetailed, CollectPointDetailsUIState> {
-    override fun map(input: CollectPointDetailed): CollectPointDetailsUIState {
-        return CollectPointDetailsUIState(
+class CollectPointWithCollectsToUIStateMapper @Inject constructor() : Mapper<CollectPointWithCollects, CollectPointDetailedUIState> {
+    override fun map(input: CollectPointWithCollects): CollectPointDetailedUIState {
+        return CollectPointDetailedUIState(
             isLoading = false,
-            title = input.name,
-            subtitle = input.city,
-            collects = input.latestCollects.map {
+            title = input.collectPoint.name,
+            subtitle = input.collectPoint.city,
+            collects = input.collects.map {
                 CollectState(
                     isLoading = false,
                     leadingIcon = when (it.bathabilityStatus) {

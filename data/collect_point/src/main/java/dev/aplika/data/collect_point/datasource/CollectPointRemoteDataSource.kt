@@ -7,12 +7,13 @@ import dev.aplika.core.domain.repository.CollectRepository
 import dev.aplika.data.collect_point.mapper.RioGrandeDoSulCollectPointDtoToCollectPointMapper
 import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectDtoToCollectMapper
 import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectPointDtoToCollectPointMapper
+import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectPointDtoToCollectPointWithCollectsMapper
 import dev.aplika.network.rio_grande_do_sul.service.RioGrandeDoSulService
 import dev.aplika.network.santa_catarina.model.CollectPointDto
 import dev.aplika.network.santa_catarina.service.SantaCatarinaService
-import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -30,7 +31,7 @@ class CollectPointRemoteDataSource @Inject constructor(
     private val rioGrandeDoSulService: RioGrandeDoSulService,
     private val santaCatarinaCollectPointDtoToCollectPointMapper: SantaCatarinaCollectPointDtoToCollectPointMapper,
     private val rioGrandeDoSulCollectPointDtoToCollectPointMapper: RioGrandeDoSulCollectPointDtoToCollectPointMapper,
-    private val santaCatarinaCollectDtoToCollectMapper: SantaCatarinaCollectDtoToCollectMapper,
+    private val santaCatarinaCollectPointDtoToCollectPointWithCollectsMapper: SantaCatarinaCollectPointDtoToCollectPointWithCollectsMapper,
     private val collectRepository: CollectRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
@@ -48,7 +49,13 @@ class CollectPointRemoteDataSource @Inject constructor(
     private fun getAllFromRioGrandeDoSul(): Flow<List<CollectPoint>> {
         return flow { emit(rioGrandeDoSulService.getCollectPoints()) }
             .flowOn(ioDispatcher)
-            .map { collectPoints -> collectPoints.map { rioGrandeDoSulCollectPointDtoToCollectPointMapper.map(input = it) } }
+            .map { collectPoints ->
+                collectPoints.map {
+                    rioGrandeDoSulCollectPointDtoToCollectPointMapper.map(
+                        input = it
+                    )
+                }
+            }
             .flowOn(defaultDispatcher)
     }
 
@@ -56,14 +63,19 @@ class CollectPointRemoteDataSource @Inject constructor(
         return flow { emit(santaCatarinaService.getCollectPoints()) }
             .flowOn(ioDispatcher)
             .onEach { insertAllSantaCatarinaCollects(collectPoints = it) }
-            .map { collectPoints -> collectPoints.map { santaCatarinaCollectPointDtoToCollectPointMapper.map(input = it) } }
+            .map { collectPoints ->
+                collectPoints.map {
+                    santaCatarinaCollectPointDtoToCollectPointMapper.map(
+                        input = it
+                    )
+                }
+            }
             .flowOn(defaultDispatcher)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private suspend fun insertAllSantaCatarinaCollects(collectPoints: List<CollectPointDto>) {
         return flowOf(collectPoints)
-            .map { list -> list.flatMap { collectPoint -> collectPoint.collects.orEmpty().mapNotNull { santaCatarinaCollectDtoToCollectMapper.map(input = it) } } }
+            .map { list -> list.map { santaCatarinaCollectPointDtoToCollectPointWithCollectsMapper.map(input = it) } }
             .flowOn(defaultDispatcher)
             .flatMapConcat { collectRepository.insertAll(items = it) }
             .collect()

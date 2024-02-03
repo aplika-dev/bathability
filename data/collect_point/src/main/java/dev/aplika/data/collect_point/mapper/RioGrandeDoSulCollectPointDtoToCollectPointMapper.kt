@@ -14,6 +14,8 @@ class RioGrandeDoSulCollectPointDtoToCollectPointMapper @Inject constructor(
         return CollectPoint(
             id = input.id.toString(),
             localityGroup = LocalityGroup.RIO_GRANDE_DO_SUL,
+            name = input.name,
+            city = input.cityName,
             latitude = input.latitude.toDouble(),
             longitude = input.longitude.toDouble(),
             latestBathabilityStatus = rioGrandeDoSulBathabilityStatusCodeDtoToBathabilityStatusMapper.map(input = input.status)

@@ -2,6 +2,7 @@ package dev.aplika.data.collect.repository
 
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.domain.model.Collect
+import dev.aplika.core.domain.model.CollectPointWithCollects
 import dev.aplika.core.domain.model.LocalityGroup
 import dev.aplika.core.domain.repository.CollectRepository
 import dev.aplika.data.collect.datasource.CollectLocalDataSource
@@ -27,7 +28,7 @@ class CollectRepositoryImpl @Inject constructor(
             .flowOn(defaultDispatcher)
     }
 
-    override fun insertAll(items: List<Collect>, collectPointId: String, localityGroup: LocalityGroup): Flow<Unit> {
-        return localDataSource.insertAll(items = items, collectPointId = collectPointId, localityGroup = localityGroup)
+    override fun insertAll(items: List<CollectPointWithCollects>): Flow<Unit> {
+        return localDataSource.insertAll(items = items)
     }
 }

@@ -10,6 +10,8 @@ class CollectPointToCollectPointEntityMapper @Inject constructor() : Mapper<Coll
         return CollectPointEntity(
             id = input.id,
             localityGroup = input.localityGroup,
+            name = input.name,
+            city = input.city,
             latitude = input.latitude,
             longitude = input.longitude,
             latestBathabilityStatus = input.latestBathabilityStatus

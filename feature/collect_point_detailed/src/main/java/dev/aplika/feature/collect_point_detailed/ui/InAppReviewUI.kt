@@ -1,18 +1,12 @@
-package dev.aplika.feature.collect_point_details.ui
+package dev.aplika.feature.collect_point_detailed.ui
 
 import android.app.Activity
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import com.google.android.play.core.ktx.launchReview
 import com.google.android.play.core.ktx.requestReview
-import com.google.android.play.core.review.ReviewInfo
-import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
 import dev.aplika.core.android.extensions.monitor
 import kotlinx.coroutines.delay

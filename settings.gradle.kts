@@ -27,7 +27,7 @@ include(":core:datastore")
 include(":core:ui")
 
 include(":feature:map")
-include(":feature:collect-point-details")
+include(":feature:collect_point_detailed")
 include(":feature:menu")
 include(":feature:about")
 

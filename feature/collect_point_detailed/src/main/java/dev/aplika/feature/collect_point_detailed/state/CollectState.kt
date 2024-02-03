@@ -1,4 +1,4 @@
-package dev.aplika.feature.collect_point_details.state
+package dev.aplika.feature.collect_point_detailed.state
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
