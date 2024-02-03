@@ -11,7 +11,7 @@ class SantaCatarinaCollectPointDtoToCollectPointMapper @Inject constructor(
 ) : Mapper<CollectPointDto, CollectPoint> {
     override fun map(input: CollectPointDto): CollectPoint {
         return CollectPoint(
-            id = input.cityId,
+            id = input.id,
             localityGroup = LocalityGroup.SANTA_CATARINA,
             latitude = input.latitude.toDouble(),
             longitude = input.longitude.toDouble(),

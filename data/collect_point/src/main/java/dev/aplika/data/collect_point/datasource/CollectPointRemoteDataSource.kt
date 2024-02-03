@@ -4,8 +4,10 @@ import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
 import dev.aplika.core.domain.model.CollectPoint
 import dev.aplika.core.domain.repository.CollectPointDetailedRepository
+import dev.aplika.data.collect_point.mapper.RioGrandeDoSulCollectPointDtoToCollectPointMapper
 import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectPointDtoToCollectPointDetailedMapper
 import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectPointDtoToCollectPointMapper
+import dev.aplika.network.rio_grande_do_sul.service.RioGrandeDoSulService
 import dev.aplika.network.santa_catarina.model.CollectPointDto
 import dev.aplika.network.santa_catarina.service.SantaCatarinaService
 import kotlinx.coroutines.CoroutineDispatcher
@@ -14,6 +16,7 @@ import javax.inject.Singleton
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
@@ -24,15 +27,29 @@ import kotlinx.coroutines.flow.onEach
 @Singleton
 class CollectPointRemoteDataSource @Inject constructor(
     private val santaCatarinaService: SantaCatarinaService,
+    private val rioGrandeDoSulService: RioGrandeDoSulService,
     private val santaCatarinaCollectPointDtoToCollectPointMapper: SantaCatarinaCollectPointDtoToCollectPointMapper,
     private val santaCatarinaCollectPointDtoToCollectPointDetailedMapper: SantaCatarinaCollectPointDtoToCollectPointDetailedMapper,
+    private val rioGrandeDoSulCollectPointDtoToCollectPointMapper: RioGrandeDoSulCollectPointDtoToCollectPointMapper,
     private val collectPointDetailedRepository: CollectPointDetailedRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
     fun getAll(): Flow<List<CollectPoint>> {
-        return getAllFromSantaCatarina()
+        return combine(
+            flows = listOf(
+                getAllFromSantaCatarina(),
+                getAllFromRioGrandeDoSul()
+            )
+        ) { it.toList().flatten() }
+    }
+
+    private fun getAllFromRioGrandeDoSul(): Flow<List<CollectPoint>> {
+        return flow { emit(rioGrandeDoSulService.getCollectPoints()) }
+            .flowOn(ioDispatcher)
+            .map { collectPoints -> collectPoints.map { rioGrandeDoSulCollectPointDtoToCollectPointMapper.map(input = it) } }
+            .flowOn(defaultDispatcher)
     }
 
     private fun getAllFromSantaCatarina(): Flow<List<CollectPoint>> {

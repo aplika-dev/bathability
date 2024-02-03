@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CollectPointDto(
     @SerialName("CODIGO")
-    val cityId: String,
+    val id: String,
     @SerialName("MUNICIPIO_COD_IBGE")
     val cityIbgeId: String,
     @SerialName("MUNICIPIO")
