@@ -3,9 +3,9 @@ package dev.aplika.data.collect_point.datasource
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
 import dev.aplika.core.domain.model.CollectPoint
-import dev.aplika.core.domain.repository.CollectPointDetailedRepository
+import dev.aplika.core.domain.repository.CollectRepository
 import dev.aplika.data.collect_point.mapper.RioGrandeDoSulCollectPointDtoToCollectPointMapper
-import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectPointDtoToCollectPointDetailedMapper
+import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectDtoToCollectMapper
 import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectPointDtoToCollectPointMapper
 import dev.aplika.network.rio_grande_do_sul.service.RioGrandeDoSulService
 import dev.aplika.network.santa_catarina.model.CollectPointDto
@@ -29,9 +29,9 @@ class CollectPointRemoteDataSource @Inject constructor(
     private val santaCatarinaService: SantaCatarinaService,
     private val rioGrandeDoSulService: RioGrandeDoSulService,
     private val santaCatarinaCollectPointDtoToCollectPointMapper: SantaCatarinaCollectPointDtoToCollectPointMapper,
-    private val santaCatarinaCollectPointDtoToCollectPointDetailedMapper: SantaCatarinaCollectPointDtoToCollectPointDetailedMapper,
     private val rioGrandeDoSulCollectPointDtoToCollectPointMapper: RioGrandeDoSulCollectPointDtoToCollectPointMapper,
-    private val collectPointDetailedRepository: CollectPointDetailedRepository,
+    private val santaCatarinaCollectDtoToCollectMapper: SantaCatarinaCollectDtoToCollectMapper,
+    private val collectRepository: CollectRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
@@ -55,17 +55,17 @@ class CollectPointRemoteDataSource @Inject constructor(
     private fun getAllFromSantaCatarina(): Flow<List<CollectPoint>> {
         return flow { emit(santaCatarinaService.getCollectPoints()) }
             .flowOn(ioDispatcher)
-            .onEach { insertAllFromSantaCatarinaOnCollectPointDetailed(collectPoints = it) }
+            .onEach { insertAllSantaCatarinaCollects(collectPoints = it) }
             .map { collectPoints -> collectPoints.map { santaCatarinaCollectPointDtoToCollectPointMapper.map(input = it) } }
             .flowOn(defaultDispatcher)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private suspend fun insertAllFromSantaCatarinaOnCollectPointDetailed(collectPoints: List<CollectPointDto>) {
+    private suspend fun insertAllSantaCatarinaCollects(collectPoints: List<CollectPointDto>) {
         return flowOf(collectPoints)
-            .map { list -> list.map { santaCatarinaCollectPointDtoToCollectPointDetailedMapper.map(input = it) } }
+            .map { list -> list.flatMap { collectPoint -> collectPoint.collects.orEmpty().mapNotNull { santaCatarinaCollectDtoToCollectMapper.map(input = it) } } }
             .flowOn(defaultDispatcher)
-            .flatMapConcat { collectPointDetailedRepository.insertAll(items = it) }
+            .flatMapConcat { collectRepository.insertAll(items = it) }
             .collect()
     }
 

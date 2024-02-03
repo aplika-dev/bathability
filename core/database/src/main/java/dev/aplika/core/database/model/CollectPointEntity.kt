@@ -11,6 +11,10 @@ data class CollectPointEntity(
     val id: String,
     @ColumnInfo("locality_group")
     val localityGroup: LocalityGroup,
+    @ColumnInfo("name")
+    val name: String,
+    @ColumnInfo("city")
+    val city: String,
     @ColumnInfo("latitude")
     val latitude: Double,
     @ColumnInfo("longitude")

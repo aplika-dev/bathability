@@ -3,7 +3,6 @@ package dev.aplika.core.database.di
 import android.content.Context
 import androidx.room.Room
 import dev.aplika.core.database.dao.CollectPointDao
-import dev.aplika.core.database.dao.CollectPointDetailedDao
 import dev.aplika.core.database.dao.CollectDao
 import dev.aplika.core.database.database.BathabilityDatabase
 import dagger.Module
@@ -27,14 +26,6 @@ internal class DatabaseModule {
             BathabilityDatabase::class.java,
             DATABASE_NAME
         ).fallbackToDestructiveMigration().build()
-    }
-
-    @Singleton
-    @Provides
-    fun providesCollectPointDetailedDao(
-        database: BathabilityDatabase
-    ): CollectPointDetailedDao {
-        return database.collectPointDetailedDao()
     }
 
     @Singleton

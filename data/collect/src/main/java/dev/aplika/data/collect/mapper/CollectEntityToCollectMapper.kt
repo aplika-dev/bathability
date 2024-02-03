@@ -1,4 +1,4 @@
-package dev.aplika.collect_point_detailed.mapper
+package dev.aplika.data.collect.mapper
 
 import dev.aplika.core.android.mapper.Mapper
 import dev.aplika.core.database.model.CollectEntity

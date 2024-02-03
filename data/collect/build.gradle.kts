@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.aplika.data.collect_point_detailed"
+    namespace = "dev.aplika.data.collect"
     compileSdk = 34
 
     defaultConfig {

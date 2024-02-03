@@ -2,7 +2,6 @@ package dev.aplika.feature.collect_point_details.mapper
 
 import dev.aplika.core.android.mapper.Mapper
 import dev.aplika.core.domain.model.BathabilityStatus
-import dev.aplika.core.domain.model.CollectPointDetailed
 import dev.aplika.core.domain.model.RainStatus
 import dev.aplika.core.kotlin.extensions.formatToString
 import dev.aplika.core.resources.R

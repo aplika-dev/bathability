@@ -13,6 +13,8 @@ class SantaCatarinaCollectPointDtoToCollectPointMapper @Inject constructor(
         return CollectPoint(
             id = input.id,
             localityGroup = LocalityGroup.SANTA_CATARINA,
+            name = "${input.beach} - ${input.location}",
+            city = input.city,
             latitude = input.latitude.toDouble(),
             longitude = input.longitude.toDouble(),
             latestBathabilityStatus = santaCatarinaBathabilityStatusStringDtoToBathabilityStatusMapper.map(input = input.collects?.firstOrNull()?.bathabilityStatus)

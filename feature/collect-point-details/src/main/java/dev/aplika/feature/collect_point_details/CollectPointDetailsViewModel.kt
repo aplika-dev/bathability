@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.aplika.core.android.di.DefaultDispatcher
-import dev.aplika.core.domain.usecase.GetCollectPointDetailedByIdAndLocalityGroupUseCase
+import dev.aplika.core.domain.usecase.GetCollectPointWithCollectsByIdAndLocalityGroupUseCase
 import dev.aplika.core.navigation.destination.CollectPointDetailsDestination
 import dev.aplika.feature.collect_point_details.mapper.CollectPointDetailedToUIStateMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CollectPointDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    getCollectPointDetailedByIdAndLocalityGroupUseCase: GetCollectPointDetailedByIdAndLocalityGroupUseCase,
+    getCollectPointWithCollectsByIdAndLocalityGroupUseCase: GetCollectPointWithCollectsByIdAndLocalityGroupUseCase,
     private val collectPointDetailedToUIStateMapper: CollectPointDetailedToUIStateMapper,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
@@ -29,7 +29,7 @@ class CollectPointDetailsViewModel @Inject constructor(
     private val localityGroup by lazy { LocalityGroup.valueOf(checkNotNull(savedStateHandle.get<String>(CollectPointDetailsDestination.Arguments.LOCALITY_GROUP))) }
 
     val uiState: StateFlow<CollectPointDetailsUIState> =
-        getCollectPointDetailedByIdAndLocalityGroupUseCase(id = id, localityGroup = localityGroup)
+        getCollectPointWithCollectsByIdAndLocalityGroupUseCase(id = id, localityGroup = localityGroup)
             .map { collectPointDetailedToUIStateMapper.map(input = it) }
             .flowOn(defaultDispatcher)
             .stateIn(

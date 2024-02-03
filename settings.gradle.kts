@@ -35,4 +35,4 @@ include(":network:santa_catarina")
 include(":network:rio_grande_do_sul")
 
 include(":data:collect_point")
-include(":data:collect_point_detailed")
+include(":data:collect")

@@ -4,6 +4,7 @@ import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
 import dev.aplika.core.database.dao.CollectPointDao
 import dev.aplika.core.domain.model.CollectPoint
+import dev.aplika.core.domain.model.LocalityGroup
 import dev.aplika.data.collect_point.mapper.CollectPointEntityToCollectPointMapper
 import dev.aplika.data.collect_point.mapper.CollectPointToCollectPointEntityMapper
 import kotlinx.coroutines.CoroutineDispatcher
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.onEach
 
@@ -24,6 +26,14 @@ class CollectPointLocalDataSource @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
+
+    fun getByIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<CollectPoint> {
+        return collectPointDao.getByIdAndLocalityGroup(id = id, localityGroup = localityGroup)
+            .flowOn(ioDispatcher)
+            .map { it ?: throw IllegalStateException("Should never have null collect point and this time") }
+            .map { collectPointEntityToCollectPointMapper.map(input = it) }
+            .flowOn(defaultDispatcher)
+    }
 
     fun getAll(): Flow<List<CollectPoint>> {
         return collectPointDao.getAll()
