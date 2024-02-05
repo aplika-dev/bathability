@@ -3,27 +3,19 @@ package dev.aplika.data.collect_point.datasource
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
 import dev.aplika.core.domain.model.CollectPoint
+import dev.aplika.core.domain.model.CollectPointWithCollects
 import dev.aplika.core.domain.repository.CollectRepository
 import dev.aplika.data.collect_point.mapper.RioGrandeDoSulCollectPointDtoToCollectPointMapper
-import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectDtoToCollectMapper
 import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectPointDtoToCollectPointMapper
 import dev.aplika.data.collect_point.mapper.SantaCatarinaCollectPointDtoToCollectPointWithCollectsMapper
 import dev.aplika.network.rio_grande_do_sul.service.RioGrandeDoSulService
-import dev.aplika.network.santa_catarina.model.CollectPointDto
+import dev.aplika.network.rio_grande_do_sul.model.CollectPointDto as RioGrandeDoSulCollectPointDto
+import dev.aplika.network.santa_catarina.model.CollectPointDto as SantaCatarinaCollectPointDto
 import dev.aplika.network.santa_catarina.service.SantaCatarinaService
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.withContext
 
 @Singleton
 class CollectPointRemoteDataSource @Inject constructor(
@@ -37,48 +29,58 @@ class CollectPointRemoteDataSource @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
-    fun getAll(): Flow<List<CollectPoint>> {
-        return combine(
-            flows = listOf(
-                getAllFromSantaCatarina(),
-                getAllFromRioGrandeDoSul()
-            )
-        ) { it.toList().flatten() }
+    suspend fun getAll(): List<CollectPoint> {
+        return getAllFromRioGrandeDoSul() + getAllFromSantaCatarina()
     }
 
-    private fun getAllFromRioGrandeDoSul(): Flow<List<CollectPoint>> {
-        return flow { emit(rioGrandeDoSulService.getCollectPoints()) }
-            .flowOn(ioDispatcher)
-            .map { collectPoints ->
-                collectPoints.map {
-                    rioGrandeDoSulCollectPointDtoToCollectPointMapper.map(
-                        input = it
-                    )
-                }
-            }
-            .flowOn(defaultDispatcher)
+    private suspend fun getAllFromRioGrandeDoSul(): List<CollectPoint> {
+        val collectPointDtoList = getAllFromRioGrandeDoSulRequest()
+        val collectPointList = mapRioGrandeDoSulCollectPointDtoToCollectPoint(items = collectPointDtoList)
+
+        return collectPointList
     }
 
-    private fun getAllFromSantaCatarina(): Flow<List<CollectPoint>> {
-        return flow { emit(santaCatarinaService.getCollectPoints()) }
-            .flowOn(ioDispatcher)
-            .onEach { insertAllSantaCatarinaCollects(collectPoints = it) }
-            .map { collectPoints ->
-                collectPoints.map {
-                    santaCatarinaCollectPointDtoToCollectPointMapper.map(
-                        input = it
-                    )
-                }
-            }
-            .flowOn(defaultDispatcher)
+    private suspend fun getAllFromRioGrandeDoSulRequest(): List<RioGrandeDoSulCollectPointDto> {
+        return withContext(ioDispatcher) {
+            rioGrandeDoSulService.getCollectPoints()
+        }
     }
 
-    private suspend fun insertAllSantaCatarinaCollects(collectPoints: List<CollectPointDto>) {
-        return flowOf(collectPoints)
-            .map { list -> list.map { santaCatarinaCollectPointDtoToCollectPointWithCollectsMapper.map(input = it) } }
-            .flowOn(defaultDispatcher)
-            .flatMapConcat { collectRepository.insertAll(items = it) }
-            .collect()
+    private suspend fun mapRioGrandeDoSulCollectPointDtoToCollectPoint(items: List<RioGrandeDoSulCollectPointDto>): List<CollectPoint> {
+        return withContext(defaultDispatcher) {
+            items.map { rioGrandeDoSulCollectPointDtoToCollectPointMapper.map(input = it) }
+        }
+    }
+
+    private suspend fun getAllFromSantaCatarina(): List<CollectPoint> {
+        val collectPointDtoList = getAllFromSantaCatarinaRequest()
+        insertAllSantaCatarinaCollects(collectPoints = collectPointDtoList)
+        val collectPointList = mapSantaCatarinaCollectPointDtoToCollectPoint(items = collectPointDtoList)
+
+        return collectPointList
+    }
+
+    private suspend fun getAllFromSantaCatarinaRequest(): List<SantaCatarinaCollectPointDto> {
+        return withContext(ioDispatcher) {
+            santaCatarinaService.getCollectPoints()
+        }
+    }
+
+    private suspend fun mapSantaCatarinaCollectPointDtoToCollectPoint(items: List<SantaCatarinaCollectPointDto>): List<CollectPoint> {
+        return withContext(defaultDispatcher) {
+            items.map { santaCatarinaCollectPointDtoToCollectPointMapper.map(input = it) }
+        }
+    }
+
+    private suspend fun insertAllSantaCatarinaCollects(collectPoints: List<SantaCatarinaCollectPointDto>) {
+        val collectPointWithCollectsList = mapSantaCatarinaCollectPointDtoToCollectPointWithCollects(items = collectPoints)
+        collectRepository.insertAll(items = collectPointWithCollectsList)
+    }
+
+    private suspend fun mapSantaCatarinaCollectPointDtoToCollectPointWithCollects(items: List<SantaCatarinaCollectPointDto>): List<CollectPointWithCollects> {
+        return withContext(defaultDispatcher) {
+            items.map { santaCatarinaCollectPointDtoToCollectPointWithCollectsMapper.map(input = it) }
+        }
     }
 
 }

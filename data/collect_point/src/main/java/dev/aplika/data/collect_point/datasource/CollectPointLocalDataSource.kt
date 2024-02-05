@@ -3,6 +3,7 @@ package dev.aplika.data.collect_point.datasource
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
 import dev.aplika.core.database.dao.CollectPointDao
+import dev.aplika.core.database.model.CollectPointEntity
 import dev.aplika.core.domain.model.CollectPoint
 import dev.aplika.core.domain.model.LocalityGroup
 import dev.aplika.data.collect_point.mapper.CollectPointEntityToCollectPointMapper
@@ -42,12 +43,21 @@ class CollectPointLocalDataSource @Inject constructor(
             .flowOn(defaultDispatcher)
     }
 
-    fun insertAll(collectPoints: List<CollectPoint>): Flow<Unit> {
-        return flowOf(collectPoints)
-            .map { list -> list.map { collectPointToCollectPointEntityMapper.map(input = it) } }
-            .flowOn(defaultDispatcher)
-            .map { collectPointDao.insertAll(list = it) }
-            .flowOn(ioDispatcher)
+    suspend fun insertAll(items: List<CollectPoint>) {
+        val collectPointEntities = mapCollectPointListToCollectPointEntities(items = items)
+        insertAllOnDatabase(items = collectPointEntities)
+    }
+
+    private suspend fun mapCollectPointListToCollectPointEntities(items: List<CollectPoint>): List<CollectPointEntity> {
+        return withContext(defaultDispatcher) {
+            items.map { collectPointToCollectPointEntityMapper.map(input = it) }
+        }
+    }
+
+    private suspend fun insertAllOnDatabase(items: List<CollectPointEntity>) {
+        withContext(ioDispatcher) {
+            collectPointDao.insertAll(list = items)
+        }
     }
 
 }

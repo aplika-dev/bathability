@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface CollectRepository {
 
     fun getByIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<List<Collect>>
-    fun insertAll(items: List<CollectPointWithCollects>): Flow<Unit>
+    suspend fun insertAll(items: List<CollectPointWithCollects>)
 
 }

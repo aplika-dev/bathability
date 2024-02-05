@@ -8,6 +8,6 @@ interface CollectPointRepository {
 
     fun getAll(): Flow<List<CollectPoint>>
     fun getByIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<CollectPoint>
-    fun fetch(): Flow<Unit>
+    suspend fun fetch()
 
 }
