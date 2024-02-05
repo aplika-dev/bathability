@@ -17,51 +17,20 @@ import dev.aplika.feature.collect_point_detailed.state.HeaderState
 internal fun HeaderUI(
     state: HeaderState
 ) {
-    when (state) {
-        is HeaderState.HasContent -> {
-            Text(
-                modifier = Modifier
-                    .padding(horizontal = 24.dp)
-                    .padding(top = 24.dp),
-                text = state.title,
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.ExtraBold
-            )
-            Text(
-                modifier = Modifier
-                    .padding(vertical = 16.dp)
-                    .padding(horizontal = 24.dp),
-                text = state.subtitle,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold
-            )
-        }
-        HeaderState.IsLoading -> {
-            Text(
-                modifier = Modifier
-                    .padding(horizontal = 24.dp)
-                    .padding(top = 24.dp)
-                    .placeholder(
-                        visible = true,
-                        highlight = PlaceholderHighlight.shimmer()
-                    ),
-                text = String.EMPTY,
-                style = MaterialTheme.typography.headlineSmall,
-                fontWeight = FontWeight.ExtraBold
-            )
-            Text(
-                modifier = Modifier
-                    .padding(vertical = 16.dp)
-                    .padding(horizontal = 24.dp)
-                    .placeholder(
-                        visible = true,
-                        highlight = PlaceholderHighlight.shimmer()
-                    ),
-                text = String.EMPTY,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold
-            )
-        }
-    }
-
+    Text(
+        modifier = Modifier
+            .padding(horizontal = 24.dp)
+            .padding(top = 24.dp),
+        text = state.title,
+        style = MaterialTheme.typography.headlineSmall,
+        fontWeight = FontWeight.ExtraBold
+    )
+    Text(
+        modifier = Modifier
+            .padding(vertical = 16.dp)
+            .padding(horizontal = 24.dp),
+        text = state.subtitle,
+        style = MaterialTheme.typography.bodyMedium,
+        fontWeight = FontWeight.Bold
+    )
 }

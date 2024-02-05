@@ -16,27 +16,19 @@ class CollectPointWithCollectsTaskToUIStateMapper @Inject constructor() : Mapper
     override fun map(input: Task<CollectPointWithCollects?>): CollectPointDetailedUIState {
         return when (input) {
             is Task.Error -> CollectPointDetailedUIState.IsError
-            Task.Loading -> CollectPointDetailedUIState.HasContent(
-                headerState = HeaderState.IsLoading,
-                collects = listOf(
-                    CollectState.IsLoading,
-                    CollectState.IsLoading,
-                    CollectState.IsLoading
-                ),
-                shouldShowInAppReview = false
-            )
+            Task.Loading -> CollectPointDetailedUIState.IsLoading
             is Task.Success -> input.data?.mapSuccess() ?: CollectPointDetailedUIState.IsError
         }
     }
 
     private fun CollectPointWithCollects.mapSuccess(): CollectPointDetailedUIState.HasContent {
         return CollectPointDetailedUIState.HasContent(
-            headerState = HeaderState.HasContent(
+            headerState = HeaderState(
                 title = collectPoint.name,
                 subtitle = collectPoint.city
             ),
             collects = collects.map {
-                CollectState.HasContent(
+                CollectState(
                     leadingIcon = when (it.bathabilityStatus) {
                         BathabilityStatus.APPROPRIATE -> R.drawable.ic_swim
                         BathabilityStatus.INAPPROPRIATE -> R.drawable.ic_forbidden
@@ -52,13 +44,13 @@ class CollectPointWithCollectsTaskToUIStateMapper @Inject constructor() : Mapper
                         RainStatus.ABSENT -> R.string.no_rain
                         RainStatus.WEAK -> R.string.weak_rain
                         RainStatus.MODERATE -> R.string.moderate_rain
+                        RainStatus.INTENSE -> R.string.intense_rain
                         RainStatus.UNKNOWN -> null
                         null -> null
                     },
                     trailingContent = it.escherichiaColiFactor
                 )
-            },
-            shouldShowInAppReview = true
+            }
         )
     }
 }

@@ -4,5 +4,6 @@ enum class RainStatus {
     ABSENT,
     WEAK,
     MODERATE,
+    INTENSE,
     UNKNOWN;
 }

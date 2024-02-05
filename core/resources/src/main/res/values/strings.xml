@@ -3,6 +3,7 @@
     <string name="no_rain">Sem chuva</string>
     <string name="weak_rain">Chuva fraca</string>
     <string name="moderate_rain">Chuva moderada</string>
+    <string name="intense_rain">Chuva intensa</string>
     <string name="no_information">Sem informação</string>
     <string name="escherichia_coli_factor_mask">%d NMP/100mL</string>
     <string name="map">Mapa</string>

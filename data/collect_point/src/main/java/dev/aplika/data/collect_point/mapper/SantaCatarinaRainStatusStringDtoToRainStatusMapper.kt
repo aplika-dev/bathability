@@ -11,6 +11,7 @@ class SantaCatarinaRainStatusStringDtoToRainStatusMapper @Inject constructor() :
             ABSENT_CODE -> RainStatus.ABSENT
             WEAK_CODE -> RainStatus.WEAK
             MODERATE_CODE -> RainStatus.MODERATE
+            INTENSE_CODE -> RainStatus.INTENSE
             else -> RainStatus.UNKNOWN
         }
     }
@@ -19,5 +20,6 @@ class SantaCatarinaRainStatusStringDtoToRainStatusMapper @Inject constructor() :
         private const val ABSENT_CODE = "Ausente"
         private const val WEAK_CODE = "Fraca"
         private const val MODERATE_CODE = "Moderada"
+        private const val INTENSE_CODE = "Intensa"
     }
 }
