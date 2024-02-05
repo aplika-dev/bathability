@@ -6,9 +6,10 @@ import androidx.lifecycle.viewModelScope
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.domain.usecase.GetCollectPointWithCollectsByIdAndLocalityGroupUseCase
 import dev.aplika.core.navigation.destination.CollectPointDetailsDestination
-import dev.aplika.feature.collect_point_detailed.mapper.CollectPointWithCollectsToUIStateMapper
+import dev.aplika.feature.collect_point_detailed.mapper.CollectPointWithCollectsTaskToUIStateMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.aplika.core.domain.model.LocalityGroup
+import dev.aplika.core.ui.extensions.asTaskFlow
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +22,7 @@ import javax.inject.Inject
 class CollectPointDetailedViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     getCollectPointWithCollectsByIdAndLocalityGroupUseCase: GetCollectPointWithCollectsByIdAndLocalityGroupUseCase,
-    private val collectPointWithCollectsToUIStateMapper: CollectPointWithCollectsToUIStateMapper,
+    private val collectPointWithCollectsTaskToUIStateMapper: CollectPointWithCollectsTaskToUIStateMapper,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -30,12 +31,13 @@ class CollectPointDetailedViewModel @Inject constructor(
 
     val uiState: StateFlow<CollectPointDetailedUIState> =
         getCollectPointWithCollectsByIdAndLocalityGroupUseCase(id = id, localityGroup = localityGroup)
-            .map { collectPointWithCollectsToUIStateMapper.map(input = it) }
+            .asTaskFlow()
+            .map { collectPointWithCollectsTaskToUIStateMapper.map(input = it) }
             .flowOn(defaultDispatcher)
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = CollectPointDetailedUIState()
+                initialValue = CollectPointDetailedUIState.Loading
             )
 
 }

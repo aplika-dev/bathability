@@ -18,7 +18,7 @@ import dev.aplika.core.navigation.destination.AboutDestination
 import dev.aplika.core.navigation.destination.CollectPointDetailsDestination
 import dev.aplika.core.navigation.destination.MapDestination
 import dev.aplika.feature.about.AboutUI
-import dev.aplika.feature.collect_point_detailed.CollectPointDetailsUI
+import dev.aplika.feature.collect_point_detailed.CollectPointDetailedUI
 import dev.aplika.feature.map.MapUI
 import dev.aplika.feature.menu.MenuUI
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = MapDestination.route
                     ) {
                         composable(route = MapDestination.route) { MapUI(navController = navController, drawerState = drawerState) }
-                        bottomSheet(route = CollectPointDetailsDestination.route) { CollectPointDetailsUI() }
+                        bottomSheet(route = CollectPointDetailsDestination.route) { CollectPointDetailedUI() }
                         composable(route = AboutDestination.route) { AboutUI(navController = navController, versionName = BuildConfig.VERSION_NAME) }
                     }
                 }

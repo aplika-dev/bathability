@@ -7,7 +7,6 @@ import dev.aplika.core.domain.usecase.GetAllCollectPointsUseCase
 import dev.aplika.core.domain.usecase.FetchAllCollectPointsUseCase
 import dev.aplika.feature.map.mapper.CollectPointsToUIStateMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dev.aplika.core.android.extensions.suspendRunCatching
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -37,7 +36,7 @@ class MapViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            suspendRunCatching { fetchAllCollectPointsUseCase() }
+            fetchAllCollectPointsUseCase()
         }
     }
 
