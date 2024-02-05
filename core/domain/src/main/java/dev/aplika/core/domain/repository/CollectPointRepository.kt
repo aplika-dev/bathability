@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface CollectPointRepository {
 
     fun getAll(): Flow<List<CollectPoint>>
-    fun getByIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<CollectPoint>
-    suspend fun fetch()
+    fun getByIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<CollectPoint?>
+    suspend fun fetchAllCatching()
 
 }

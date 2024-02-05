@@ -15,10 +15,12 @@ class GetCollectPointWithCollectsByIdAndLocalityGroupUseCase @Inject constructor
     private val collectRepository: CollectRepository
 ) {
 
-    operator fun invoke(id: String, localityGroup: LocalityGroup): Flow<CollectPointWithCollects> =
+    operator fun invoke(id: String, localityGroup: LocalityGroup): Flow<CollectPointWithCollects?> =
         combine(
             collectPointRepository.getByIdAndLocalityGroup(id = id, localityGroup = localityGroup),
             collectRepository.getByIdAndLocalityGroup(id = id, localityGroup = localityGroup)
-        ) { collectPoint, collects -> CollectPointWithCollects(collectPoint = collectPoint, collects = collects) }
+        ) { collectPoint, collects ->
+            collectPoint?.let { CollectPointWithCollects(collectPoint = it, collects = collects) }
+        }
 
 }

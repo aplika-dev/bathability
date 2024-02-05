@@ -28,11 +28,10 @@ class CollectPointLocalDataSource @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
-    fun getByIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<CollectPoint> {
+    fun getByIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<CollectPoint?> {
         return collectPointDao.getByIdAndLocalityGroup(id = id, localityGroup = localityGroup)
             .flowOn(ioDispatcher)
-            .map { it ?: throw IllegalStateException("Should never have null collect point and this time") }
-            .map { collectPointEntityToCollectPointMapper.map(input = it) }
+            .map { collectPointEntity -> collectPointEntity?.let { collectPointEntityToCollectPointMapper.map(input = it) } }
             .flowOn(defaultDispatcher)
     }
 

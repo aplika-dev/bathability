@@ -19,12 +19,12 @@ class CollectPointRepositoryImpl @Inject constructor(
         return localDataSource.getAll()
     }
 
-    override fun getByIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<CollectPoint> {
+    override fun getByIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<CollectPoint?> {
         return localDataSource.getByIdAndLocalityGroup(id = id, localityGroup = localityGroup)
     }
 
-    override suspend fun fetch() {
-        val collectPoints = remoteDataSource.getAll()
+    override suspend fun fetchAllCatching() {
+        val collectPoints = remoteDataSource.fetchAllCatching()
         localDataSource.insertAll(items = collectPoints)
     }
 }

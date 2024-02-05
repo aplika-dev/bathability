@@ -2,6 +2,7 @@ package dev.aplika.data.collect_point.datasource
 
 import dev.aplika.core.android.di.DefaultDispatcher
 import dev.aplika.core.android.di.IoDispatcher
+import dev.aplika.core.android.extensions.suspendRunCatching
 import dev.aplika.core.domain.model.CollectPoint
 import dev.aplika.core.domain.model.CollectPointWithCollects
 import dev.aplika.core.domain.repository.CollectRepository
@@ -29,12 +30,12 @@ class CollectPointRemoteDataSource @Inject constructor(
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) {
 
-    suspend fun getAll(): List<CollectPoint> {
+    suspend fun fetchAllCatching(): List<CollectPoint> {
         return getAllFromRioGrandeDoSul() + getAllFromSantaCatarina()
     }
 
     private suspend fun getAllFromRioGrandeDoSul(): List<CollectPoint> {
-        val collectPointDtoList = getAllFromRioGrandeDoSulRequest()
+        val collectPointDtoList = suspendRunCatching { getAllFromRioGrandeDoSulRequest() }.orEmpty()
         val collectPointList = mapRioGrandeDoSulCollectPointDtoToCollectPoint(items = collectPointDtoList)
 
         return collectPointList
@@ -53,7 +54,7 @@ class CollectPointRemoteDataSource @Inject constructor(
     }
 
     private suspend fun getAllFromSantaCatarina(): List<CollectPoint> {
-        val collectPointDtoList = getAllFromSantaCatarinaRequest()
+        val collectPointDtoList = suspendRunCatching { getAllFromSantaCatarinaRequest() }.orEmpty()
         insertAllSantaCatarinaCollects(collectPoints = collectPointDtoList)
         val collectPointList = mapSantaCatarinaCollectPointDtoToCollectPoint(items = collectPointDtoList)
 
