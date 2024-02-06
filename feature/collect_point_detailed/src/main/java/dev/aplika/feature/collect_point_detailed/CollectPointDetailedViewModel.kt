@@ -17,11 +17,15 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 
 @HiltViewModel
 class CollectPointDetailedViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    getCollectPointWithCollectsByIdAndLocalityGroupUseCase: GetCollectPointWithCollectsByIdAndLocalityGroupUseCase,
+    private val getCollectPointWithCollectsByIdAndLocalityGroupUseCase: GetCollectPointWithCollectsByIdAndLocalityGroupUseCase,
     private val collectPointWithCollectsTaskToUIStateMapper: CollectPointWithCollectsTaskToUIStateMapper,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
@@ -29,15 +33,25 @@ class CollectPointDetailedViewModel @Inject constructor(
     private val id by lazy { checkNotNull(savedStateHandle.get<String>(CollectPointDetailsDestination.Arguments.ID)) }
     private val localityGroup by lazy { LocalityGroup.valueOf(checkNotNull(savedStateHandle.get<String>(CollectPointDetailsDestination.Arguments.LOCALITY_GROUP))) }
 
-    val uiState: StateFlow<CollectPointDetailedUIState> =
+    private val _uiState = MutableStateFlow<CollectPointDetailedUIState>(value = CollectPointDetailedUIState.IsLoading)
+    val uiState: StateFlow<CollectPointDetailedUIState> = _uiState
+
+    init {
+        loadCollectPointDetails()
+    }
+
+    private fun loadCollectPointDetails() {
         getCollectPointWithCollectsByIdAndLocalityGroupUseCase(id = id, localityGroup = localityGroup)
             .asTaskFlow()
             .map { collectPointWithCollectsTaskToUIStateMapper.map(input = it) }
             .flowOn(defaultDispatcher)
-            .stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = CollectPointDetailedUIState.IsLoading
-            )
+            .onEach { state -> _uiState.update { state } }
+            .launchIn(viewModelScope)
+
+    }
+
+    fun reloadCollectPointDetails() {
+        loadCollectPointDetails()
+    }
 
 }
