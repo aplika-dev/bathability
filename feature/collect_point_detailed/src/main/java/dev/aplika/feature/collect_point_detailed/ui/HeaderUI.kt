@@ -7,10 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material.placeholder
-import com.google.accompanist.placeholder.material.shimmer
-import dev.aplika.core.kotlin.extensions.EMPTY
 import dev.aplika.feature.collect_point_detailed.state.HeaderState
 
 @Composable
