@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    api(project(":core:android"))
     api(project(":core:navigation"))
     api(project(":core:resources"))
     api(project(":core:domain"))

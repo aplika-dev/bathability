@@ -32,5 +32,6 @@ android {
 }
 
 dependencies {
-    api(project(":core:android"))
+    implementation(project(":core:android"))
+    implementation(project(":core:domain"))
 }

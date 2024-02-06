@@ -3,12 +3,16 @@
     <string name="no_rain">Sem chuva</string>
     <string name="weak_rain">Chuva fraca</string>
     <string name="moderate_rain">Chuva moderada</string>
+    <string name="intense_rain">Chuva intensa</string>
     <string name="no_information">Sem informação</string>
     <string name="escherichia_coli_factor_mask">%d NMP/100mL</string>
     <string name="map">Mapa</string>
     <string name="about_the_app">Sobre o app</string>
     <string name="developed_by_aplika">Desenvolvido com ❤ por Aplika®</string>
     <string name="app_version_mask">versão %s</string>
+    <string name="error_title">Oops, algo de errado aconteceu</string>
+    <string name="error_message">Por favor, verifique sua conexão e tente novamente</string>
+    <string name="error_button">Recarregar</string>
 
     <string name="ic_swim_content_description">Ícone de um nadador</string>
     <string name="ic_forbidden_content_description">Ícone de uma negação</string>

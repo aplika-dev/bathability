@@ -1,18 +1,18 @@
 package dev.aplika.core.domain.usecase
 
-import dev.aplika.core.domain.model.santa_catarina.SantaCatarinaCollectPoint
-import dev.aplika.core.domain.repository.SantaCatarinaCollectPointRepository
+import dev.aplika.core.domain.model.CollectPoint
+import dev.aplika.core.domain.repository.CollectPointRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class GetAllCollectPointsUseCase @Inject constructor(
-    private val repository: SantaCatarinaCollectPointRepository
+    private val collectPointRepository: CollectPointRepository
 ) {
 
-    operator fun invoke(): Flow<List<SantaCatarinaCollectPoint>> {
-        return repository.getAll()
+    operator fun invoke(): Flow<List<CollectPoint>> {
+        return collectPointRepository.getAll()
     }
 
 }

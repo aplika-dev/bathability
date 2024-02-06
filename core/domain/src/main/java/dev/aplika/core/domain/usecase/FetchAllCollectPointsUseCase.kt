@@ -1,17 +1,16 @@
 package dev.aplika.core.domain.usecase
 
-import dev.aplika.core.domain.repository.SantaCatarinaCollectPointRepository
-import kotlinx.coroutines.flow.Flow
+import dev.aplika.core.domain.repository.CollectPointRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class FetchAllCollectPointsUseCase @Inject constructor(
-    private val santaCatarinaCollectPointRepository: SantaCatarinaCollectPointRepository
+    private val collectPointRepository: CollectPointRepository
 ) {
 
-    operator fun invoke(): Flow<Unit> {
-        return santaCatarinaCollectPointRepository.fetch()
+    suspend operator fun invoke() {
+        collectPointRepository.fetchAllCatching()
     }
 
 }
