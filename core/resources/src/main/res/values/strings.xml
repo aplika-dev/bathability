@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Balneabilidade SC</string>
+    <string name="app_name">Balneabilidade</string>
     <string name="no_rain">Sem chuva</string>
     <string name="weak_rain">Chuva fraca</string>
     <string name="moderate_rain">Chuva moderada</string>

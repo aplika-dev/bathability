@@ -12,7 +12,7 @@ class OnboardingRepositoryImpl @Inject constructor(
 ) : OnboardingRepository {
 
     override suspend fun getAndUpdateIsFirstAccess(): Boolean {
-        val isFirstAccess = localDataSource.getIsFirstAccess().firstOrNull() == true
+        val isFirstAccess = localDataSource.getIsFirstAccess().firstOrNull() != false
         if (isFirstAccess) localDataSource.setIsFirstAccess(value = false)
         return isFirstAccess
     }
