@@ -103,7 +103,8 @@ fun MapUI(
         }
     }
 
-    if (uiState.shouldShowInAppReview) {
+    val shouldShowInAppReview by viewModel.shouldShowInAppReview.collectAsStateWithLifecycle()
+    if (shouldShowInAppReview) {
         InAppReviewUI()
     }
 }
