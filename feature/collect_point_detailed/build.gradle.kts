@@ -44,9 +44,6 @@ android {
 dependencies {
     api(project(":core:ui"))
 
-    implementation(libs.inapp.review)
-    implementation(libs.inapp.review.ktx)
-
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 }

@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.maps.compose)
     implementation(libs.maps.ktx)
     implementation(libs.maps.utils.ktx)
+    implementation(libs.inapp.review.ktx)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

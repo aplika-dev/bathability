@@ -7,13 +7,14 @@ import dev.aplika.feature.map.state.MarkerState
 import com.google.android.gms.maps.model.LatLng
 import dev.aplika.core.domain.model.BathabilityStatus
 import dev.aplika.core.domain.model.CollectPoint
+import dev.aplika.feature.map.model.MapUIStateMapperArgs
 import javax.inject.Inject
 
-class CollectPointsToUIStateMapper @Inject constructor() : Mapper<List<CollectPoint>, MapUIState> {
-    override fun map(input: List<CollectPoint>): MapUIState {
+class MapUIStateMapperArgsToUIStateMapper @Inject constructor() : Mapper<MapUIStateMapperArgs, MapUIState> {
+    override fun map(input: MapUIStateMapperArgs): MapUIState {
         return MapUIState(
             isLoading = false,
-            locationList = input.map { collectPoint ->
+            locationList = input.collectPoints.map { collectPoint ->
                 MarkerState(
                     id = collectPoint.id,
                     localityGroup = collectPoint.localityGroup,
@@ -24,7 +25,8 @@ class CollectPointsToUIStateMapper @Inject constructor() : Mapper<List<CollectPo
                     },
                     position = LatLng(collectPoint.latitude, collectPoint.longitude)
                 )
-            }
+            },
+            shouldShowInAppReview = input.shouldShowInAppReview
         )
     }
 }
