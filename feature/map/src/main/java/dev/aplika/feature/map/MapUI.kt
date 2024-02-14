@@ -108,6 +108,6 @@ fun MapUI(
     }
 }
 
-private const val LATITUDE = -27.695045265166847
-private const val LONGITUDE = -49.0310188382864
-private const val ZOOM = 7.975901F
+private const val LATITUDE = -29.082949890878332
+private const val LONGITUDE = -52.4694823846221
+private const val ZOOM = 5.8766937F
