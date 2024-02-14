@@ -13,6 +13,8 @@ dependencyResolutionManagement {
     }
 }
 
+rootProject.name = "Bathability"
+
 include(":app")
 
 include(":core:network")
@@ -36,3 +38,4 @@ include(":network:rio_grande_do_sul")
 
 include(":data:collect_point")
 include(":data:collect")
+include(":data:onboarding")

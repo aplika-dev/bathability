@@ -11,7 +11,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -33,6 +32,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
+import dev.aplika.feature.map.ui.InAppReviewUI
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -44,7 +44,7 @@ fun MapUI(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
-    val cameraPermissionState = rememberPermissionState(
+    val locationPermissionState = rememberPermissionState(
         android.Manifest.permission.ACCESS_FINE_LOCATION
     )
 
@@ -61,7 +61,7 @@ fun MapUI(
             GoogleMap(
                 modifier = Modifier.fillMaxSize(),
                 properties = MapProperties(
-                    isMyLocationEnabled = cameraPermissionState.status.isGranted
+                    isMyLocationEnabled = locationPermissionState.status.isGranted
                 ),
                 cameraPositionState = cameraPositionState
             ) {
@@ -97,13 +97,18 @@ fun MapUI(
         )
     }
 
-    LaunchedEffect(key1 = cameraPermissionState) {
-        if (!cameraPermissionState.status.isGranted) {
-            cameraPermissionState.launchPermissionRequest()
+    LaunchedEffect(key1 = locationPermissionState) {
+        if (!locationPermissionState.status.isGranted) {
+            locationPermissionState.launchPermissionRequest()
         }
+    }
+
+    val shouldShowInAppReview by viewModel.shouldShowInAppReview.collectAsStateWithLifecycle()
+    if (shouldShowInAppReview) {
+        InAppReviewUI()
     }
 }
 
-private const val LATITUDE = -27.695045265166847
-private const val LONGITUDE = -49.0310188382864
-private const val ZOOM = 7.975901F
+private const val LATITUDE = -29.082949890878332
+private const val LONGITUDE = -52.4694823846221
+private const val ZOOM = 5.8766937F

@@ -7,19 +7,23 @@ import dev.aplika.core.domain.usecase.GetAllCollectPointsUseCase
 import dev.aplika.core.domain.usecase.FetchAllCollectPointsUseCase
 import dev.aplika.feature.map.mapper.CollectPointsToUIStateMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.aplika.core.domain.usecase.ShouldShowInAppReviewUseCase
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class MapViewModel @Inject constructor(
     getAllCollectPointsUseCase: GetAllCollectPointsUseCase,
-    fetchAllCollectPointsUseCase: FetchAllCollectPointsUseCase,
+    private val fetchAllCollectPointsUseCase: FetchAllCollectPointsUseCase,
+    private val shouldShowInAppReviewUseCase: ShouldShowInAppReviewUseCase,
     private val collectPointsToUIStateMapper: CollectPointsToUIStateMapper,
     @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel() {
@@ -34,7 +38,21 @@ class MapViewModel @Inject constructor(
                 initialValue = MapUIState()
             )
 
+    private val _shouldShowInAppReview = MutableStateFlow(value = false)
+    val shouldShowInAppReview: StateFlow<Boolean> = _shouldShowInAppReview
+
     init {
+        fetchAllCollectPoints()
+        checkShouldShowInAppReview()
+    }
+
+    private fun checkShouldShowInAppReview() {
+        viewModelScope.launch {
+            _shouldShowInAppReview.update { shouldShowInAppReviewUseCase() }
+        }
+    }
+
+    private fun fetchAllCollectPoints() {
         viewModelScope.launch {
             fetchAllCollectPointsUseCase()
         }

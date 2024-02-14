@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "dev.aplika.feature.collect_point_details"
+    namespace = "dev.aplika.data.onboarding"
     compileSdk = 34
 
     defaultConfig {
@@ -22,7 +22,6 @@ android {
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -31,18 +30,10 @@ android {
     kotlin {
         jvmToolchain(17)
     }
-
-    buildFeatures {
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
-    }
 }
 
 dependencies {
-    api(project(":core:ui"))
+    implementation(project(":core:data"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)

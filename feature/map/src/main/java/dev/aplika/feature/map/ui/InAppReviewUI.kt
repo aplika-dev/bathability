@@ -1,4 +1,4 @@
-package dev.aplika.feature.collect_point_detailed.ui
+package dev.aplika.feature.map.ui
 
 import android.app.Activity
 import androidx.compose.runtime.Composable
@@ -11,8 +11,6 @@ import com.google.android.play.core.review.ReviewManagerFactory
 import dev.aplika.core.android.extensions.monitor
 import kotlinx.coroutines.delay
 
-private const val DELAY_TO_REQUEST_REVIEW_IN_MILLIS = 5000L
-
 @Composable
 internal fun InAppReviewUI() {
     val context = LocalContext.current
@@ -20,7 +18,6 @@ internal fun InAppReviewUI() {
     val reviewManager = remember { ReviewManagerFactory.create(context) }
 
     LaunchedEffect(key1 = reviewManager) {
-        delay(DELAY_TO_REQUEST_REVIEW_IN_MILLIS)
         try {
             reviewManager.launchReview(context as Activity, reviewManager.requestReview())
         } catch (throwable: Throwable) {

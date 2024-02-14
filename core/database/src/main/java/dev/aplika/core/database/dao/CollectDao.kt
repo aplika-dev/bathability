@@ -15,7 +15,7 @@ interface CollectDao {
     @Upsert
     suspend fun insertAll(list: List<CollectEntity>)
 
-    @Query("SELECT * FROM `collect` WHERE collect_point_id = :id AND locality_group = :localityGroup")
+    @Query("SELECT * FROM `collect` WHERE collect_point_id = :id AND locality_group = :localityGroup ORDER BY date DESC")
     fun getAllByCollectPointIdAndLocalityGroup(id: String, localityGroup: LocalityGroup): Flow<List<CollectEntity>>
 
 }
